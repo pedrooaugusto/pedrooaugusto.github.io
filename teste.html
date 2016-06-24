@@ -27,7 +27,7 @@
 		}
 		div[role="main"]
 		{
-		 	height: 500px;
+		 	//height: 500px;
 		 	//margin-bottom: 20px;
 		}
 		.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a{
@@ -61,7 +61,7 @@
 		{
 			//height: 50px;
 			margin-top: 5px;
-			background: #2d2c2c; 
+			background: black;//#2d2c2c; 
 		}
 		.rodape div
 		{
@@ -75,6 +75,19 @@
 		{
 			height: 100%;
 			width: 100%;
+			font-weight: bold;
+			font-size: 15px;
+		}
+		.container .jumbotron
+		{
+			border: none;
+			border-radius: 0cm;
+			margin-top: 5px;
+			padding: 5px;
+		}
+		.painelBoasVindas
+		{
+			background: red;
 		}
 	</style>
 </head>
@@ -107,10 +120,19 @@
    		</header>
    		<div class="row">
        		<div role="main" class="col-md-12">
-       		
+       			<div class="col-md-8 col-md-offset-2 jumbotron">
+       				<img src="alluka.jpg" width="200" height="200">
+       				<h3>Pedro Augusto</h3>
+       				<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+       				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+       				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+       				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+       				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+       				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      			</div>
        		</div>
    		</div>
-   		<footer class="row rodape">
+   		<footer class="row footer rodape">
    			<div class="col-md-2 col-md-offset-1">
    				<button type="button" class="btn btn-md btn-primary">Download</button>
    			</div>
