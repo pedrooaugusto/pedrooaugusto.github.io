@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap-3.3.6/bootstrap-3.3.6/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<title>Bootstrap!</title>
+	<style type="text/css">
+		.container, .container-fluid 
+		{
+		 	//padding-right: 15px;
+		 	//padding-left: 15px;
+		 	//background-color: red;
+		}
+		[class*="col-"], footer, aside, section, div[role="main"] {
+		 /*padding-top: 15px;
+		 padding-bottom: 15px;*/
+		 background-color: #f5f5f5;
+		 background-color: rgba(86,61,124,.15);
+		 border: 1px solid #ddd;
+		 border: 1px solid rgba(86,61,124,.2);
+		 text-align: center;
+		}
+		div[role="main"], .aside {
+		 background-color: #fff;
+		}
+		div[role="main"]
+		{
+		 	height: 500px;
+		 	//margin-bottom: 20px;
+		}
+		.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a{
+			color: white;
+		}
+		.navbar-default .navbar-brand
+		{
+			color:yellow;
+		}
+		.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover
+		{
+			color: gold;
+    		background-color: transparent;
+		}
+		.navbar-default .navbar-brand:hover, 
+		.navbar-default .navbar-brand:active, 
+		.navbar-default .navbar-brand:focus
+		{
+			color: gold;
+		}
+		.navbar
+		{
+			border-radius: 0; 
+			background: black;
+		}
+		header
+		{
+			height: 60px;
+		}
+		.rodape
+		{
+			//height: 50px;
+			margin-top: 5px;
+			background: #2d2c2c; 
+		}
+		.rodape div
+		{
+			height: 40px;
+			background: transparent;
+			margin-top: 5px;
+			margin-bottom: 5px;
+			border: none;
+		}
+		.btn
+		{
+			height: 100%;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+   		<header class="row">
+   			<nav class="col-md-12 navbar navbar-default navbar-fixed-top">
+  				<div class="container-fluid">
+    				<div class="navbar-header">
+    					 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" 		aria-controls="navbar">
+            				<span class="sr-only">Toggle navigation</span>
+            				<span class="icon-bar"></span>
+            				<span class="icon-bar"></span>
+            				<span class="icon-bar"></span>
+          				</button>
+      					<a class="navbar-brand" href="#">Pedro, o augusto</a>
+    				</div>
+    				<div id="navbar" class="navbar-collapse collapse">
+	    				<ul class="nav navbar-nav">
+	      					<li class="active"><a href="#">Home</a></li>
+	      					<li><a href="#">Bolinha</a></li>
+	      					<li><a href="#">Jogo Da Velha</a></li> 
+	      					<li><a href="#">Jogo Da Memória</a></li>
+	      					<li><a href="#">Jogo Da Cobrinha</a></li> 
+	      					<li><a href="#">Quebra-Cabeça</a></li 
+	    				</ul>
+	    			</div>
+  				</div>
+			</nav>
+   		</header>
+   		<div class="row">
+       		<div role="main" class="col-md-12">
+       		
+       		</div>
+   		</div>
+   		<footer class="row rodape">
+   			<div class="col-md-2 col-md-offset-1">
+   				<button type="button" class="btn btn-md btn-primary">Download</button>
+   			</div>
+   			<div class="col-md-2 col-md-offset-2">
+   				<button type="button" class="btn btn-md btn-primary">Source</button>
+   			</div>
+   			<div class="col-md-2 col-md-offset-2">
+   				<button type="button" class="btn btn-md btn-primary">Wiki</button>
+   			</div>
+   		</footer>
+	</div>
+</body>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="bootstrap-3.3.6/bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
+</html>
