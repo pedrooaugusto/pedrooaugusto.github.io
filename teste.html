@@ -85,6 +85,7 @@
 			margin-top: 5px;
 			padding: 5px;
 			background: white;
+			//text-align: left;
 		}
 		.painelBoasVindas
 		{
@@ -154,7 +155,7 @@
        			<div class="col-md-8 col-md-offset-2 jumbotron">
        				<img src="alluka.jpg" width="200" height="200">
        				<h3>Pedro Augusto</h3>
-       				<p class="lead">'Blog' de um mlk maneiro que tava entediado mas precisa aprender o mínimo de
+       				<p class="lead">'Blog' de um cara maneiro que tava entediado mas precisa aprender o mínimo de
        				bootstrap e github, pois não da pra usar position:absolute e dropbox pra sempre, né?
        				Aqui encontra-se alguns projetos interessantes, mas talvez não tão utéis, relacionados a programação
        				que eu e meu amigo, stackOverJoão, fizemos ao longo do ensino médio.
@@ -206,22 +207,22 @@
     				          "Nice</span>, <span class='t'>Funny</span>, <span class='t'>NERD</span>, <span class='t'>"+
     				          "Procrastinator</span><br>"+
     						  "{<br>"+
-    						  "<span class='tab'><span class='n'>public static</span> <span class='t'>void</span> main("+
+    						  "<span class='tab'><span class='n'>public static</span> <span class='t'>void</span> <b>main</b>("+
     						  "<span class='t'>String</span>[] args){<br></span>"+
     						  "<span class='tab2'><span class='t'>Pedro</span> eu = <span class='n'>new</span> <span "+
     						  "class='t'>Pedro()</span>;</span><br>"+
 						  	  "<span class='tab2'><span class='n'>while</span>(!<span class='t'>false</span> && "+
-						  	  "eu.isAlive())<br></span>"+
+						  	  "eu.<b>isAlive</b>())<br></span>"+
 					  	  	  "<span class='tab2'>{<br></span>"+
 					  	  	  "<span class='tab3'><span class='n'>try</span><br></span>"+
 					  	  	  "<span class='tab3'>{<br></span>"+
-					  	  	  "<span class='tab4'>eu.doSomething();<br></span>"+
+					  	  	  "<span class='tab4'>eu.<b>doSomething</b>();<br></span>"+
 					  	  	  "<span class='tab3'>}<span class='n'>catch</span>(<span class='t'>OtherPeopleException"+
 					  	  	  "</span> ex){<br></span>"+
-					  	  	  "<span class='tab4'>ex.tryAgain();<br></span>"+
+					  	  	  "<span class='tab4'>ex.<b>tryAgain</b>();<br></span>"+
 					  	  	  "<span class='tab3'>}<br></span>"+
 					  	  	  "<span class='tab2'>}<br></span>"+
-					  	  	  "<span class='tab2'>eu.RIP();<br></span>"+
+					  	  	  "<span class='tab2'>eu.<b>RIP</b>();<span style='color:green;'>//and now my watch has ended</span><br></span>"+
 					  	  	  "<span class='tab'>}<br></span>"+
 					  	  	  "}";	  	  	  
     				buttons = {};
@@ -229,7 +230,10 @@
 
     			case 3:
     				title = "<b>Wiki</b>";
-    				message = "Hello";
+    				message = "<h4><span style='color:orange'>Pedro Augusto</span></h4>"+
+    						  "<h4>pedro42augusto@gmail.com</h4>"+
+    						  "<p>Não tem muito pra ler aqui u.u.<br>"+
+    						  "Mas um dia eu irei fazer um texto grande sobre mim e colocarei aqui...</p>";
     				buttons = {};
     		}
     		bootbox.dialog({
