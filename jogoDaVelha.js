@@ -16,6 +16,23 @@ function Game()
 		document.getElementById("2p").checked = false;
 		document.getElementById("1p").checked = true;
 	};
+	this.doAnimationSuaVez = function (who) 
+	{
+		if(who=="#j1")
+		{
+        	$("#j2").css({"background" : "rgb(242, 242, 242)"});
+        	$("#j2").css({"color" : "#716f6f"});
+        	$("#j1").css({"background" : "white"});
+        	$("#j1").css({"color" : "black"});
+		}
+		else
+		{
+        	$("#j1").css({"background" : "rgb(242, 242, 242)"});
+        	$("#j1").css({"color" : "#716f6f"});
+        	$("#j2").css({"background" : "white"});
+        	$("#j2").css({"color" : "black"});
+		}
+	}
 	/*
 		Ação de clicar em um dos quadrados
 	*/
@@ -30,13 +47,16 @@ function Game()
 				game.gameLoop();
 				if(bot.playWithBot == true)
 				{
-					game.jogador = 88;
-					bot.vezDoBot();
-					game.gameLoop();
+					if(!quadro.isFull())
+					{
+						game.jogador = 88;
+						bot.vezDoBot();
+						game.gameLoop();
+					}
 				}
 				else
 				{
-					game.doAnimationSuaVez(pontaRight);
+					game.doAnimationSuaVez('#j2');
 				}
 			}
 			else
@@ -44,7 +64,7 @@ function Game()
 				this.value = "o";
 				game.jogador = 88;
 				game.gameLoop();
-				game.doAnimationSuaVez(pontaLeft);
+				game.doAnimationSuaVez('#j1');
 			}
 		}
 	};
@@ -54,7 +74,7 @@ function Game()
 	*/
 	this.gameLoop = function()
 	{
-		if(quadro.anyVictory())
+		if(!quadro.noClicks && quadro.anyVictory())
 		{
 			if(game.jogador == 79)
 			{
@@ -146,12 +166,15 @@ function Quadro()
 		$("#next").animate({opacity: "0"}, 500, function() {
 				$("#next").css({"visibility": "hidden"})
 		});
-		quadro.noClicks = false;
+		bot.numJogadas = 0;
 		if(bot.playWithBot && quadro.rodada.valor % 2 != 0)
 		{
 			quadro.all[4].value = "o";
-			game.gameLoop();	
+			bot.numJogadas+=1;
+			game.gameLoop();
+			game.jogador = 88;
 		}
+		quadro.noClicks = false;
 	};
 	this.isFull = function()
 	{
@@ -175,6 +198,7 @@ function Quadro()
 			if(texto == "ooo" || texto == "xxx")
 			{
 				oque = true;
+				quadro.noClicks = true;
 				game.doAnimationFocus(i);
 				break;
 			}
@@ -185,11 +209,13 @@ function Quadro()
 function Bot() 
 {
 	this.playWithBot = false;
+	this.numJogadas = 0;
 	this.vezDoBot = function()
 	{
 		var possiveis = new Array();
 		var num = bot.possivelVitoria();
 		if(!quadro.noClicks)
+		{
 			if(num != null)
 			{
 				num.style.color = "black";
@@ -197,19 +223,76 @@ function Bot()
 			}
 			else
 			{
-				for(var j = 0; j < quadro.all.length; j++)
+				//alert(bot.userMarcouCentro());
+				if(!bot.analisarPrimeiroMovimento())
 				{
-					if(quadro.all[j].value.length == 0)
+					if(!bot.analisarSegundoMovimento())
 					{
-						possiveis.push(quadro.all[j]);
+						for(var j = 0; j < quadro.all.length; j++)
+						{
+							if(quadro.all[j].value.length == 0)
+							{
+								possiveis.push(quadro.all[j]);
+							}
+						}
+						var total = possiveis.length;
+						var qual =  Math.floor(Math.random() * total);
+						possiveis[qual].value = "o";
 					}
 				}
-				var total = possiveis.length;
-				var qual =  Math.floor(Math.random() * total);
-				possiveis[qual].value = "o";
+				this.numJogadas+=1;
 			}
+		}
 	};
+	this.analisarPrimeiroMovimento = function() 
+	{
+		if(this.numJogadas == 0 && quadro.all[4].value.length == 1)
+		{
+			quadro.all[0].value = "o";
+			return true;
+		}
+		else if(this.numJogadas == 0 && quadro.all[4].value.length == 0)
+		{
+			quadro.all[4].value = "o";
+			return true;	
+		}
+		return false;
+	};
+	this.analisarSegundoMovimento = function() 
+	{
+		if(this.numJogadas == 1)
+		{
+			var i = -1;
+			if(quadro.all[2].value.length == 0)
+				i = 2;
+			else if(quadro.all[6].value.length == 0)
+				i = 6;
+			else if(quadro.all[8].value.length == 0)
+				i = 8;
+			if (i == -1)
+			{
+				return false;
+			}
+			else
+			{
+				if( quadro.all[0].value == "x" && quadro.all[8].value == "x"
+						|| 
+				    quadro.all[2].value == "x" && quadro.all[6].value == "x")
+				{
 
+					quadro.all[3].value = "o";	
+				}
+				else
+				{
+					if(i == 2 && quadro.all[0].value == "x" && quadro.all[7].value == "x")
+						i = 6;
+					quadro.all[i].value = "o";
+				}
+				return true;
+			}
+		}
+		return false;
+	};
 	this.possivelVitoria = function() 
 	{
 		var onde = 42;
@@ -261,6 +344,10 @@ function Player(idObjName, idObjPonto, nome, ponto)
 }
 function menu() 
 {
+            	/*player1 = new Player('nomeJogador1', 'pontoJogador1', 'nome1', 0);
+            	player2 = new Player('nomeJogador2', 'pontoJogador2', 'nome2', 0);
+            		bot.playWithBot = true;
+            	game.initComponents();*/
 	var title = "Menu";
 	var message = "";
 	var buttons =  
@@ -278,6 +365,7 @@ function menu()
             	{
             		bot.playWithBot = true;
             	}
+            	game.doAnimationSuaVez("#j1");
             	game.initComponents();
             }
         }
@@ -298,13 +386,13 @@ function menu()
                 + "Multplayer"
                 + "</label>"
                 + "</div>"
-                + "<div class='col-md-6 noBorder'>"
+                + "<div class='col-md-6 col-xs-6 noBorder'>"
                 + "<input type='text' placeholder='Jogador 1' "
-                + "class='form-control input-md' id='player1'>"
+                + "class='form-control input-md' id='player1' maxlength='8'>"
                 + "</div>"
-                + "<div class='col-md-6 noBorder'>"
+                + "<div class='col-md-6 col-xs-6 noBorder'>"
                 + "<input type='text' placeholder='Jogador 2' "
-                + "class='form-control input-md' id='player2'>"
+                + "class='form-control input-md' id='player2' maxlength='8'>"
                 + "</div>"
                 + "</div>";
 

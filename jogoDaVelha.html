@@ -48,23 +48,45 @@
 		}
 		.placar
 		{
-			padding: 15px;
+			padding: 5px;
 			padding-bottom:0; 
 			//background: white;
 			border: none;
-			//background: red;
+			background: rgb(242, 242, 242);
 		}
 		.celulaPlacar
 		{
 			//margin-top: 2px;
-			margin-bottom: 2px;
+			//margin-bottom: 2px;
 			border: none;
 			//font-family: 'Segoe UI';
-			font-size: 20px;
+			font-size: 17px;
 			//background: white;
-			border: solid 1px lightgray;
     		color: #716f6f;
+    		border: none;
+    		text-align: left;
     		//text-shadow: 0px 1px 0px black;
+		}
+		.butRight
+		{
+			text-align: right;
+		}
+		@media (min-width: 992px) 
+		{
+			.celulaPlacar
+			{
+				font-size: 20px;
+				//border: solid 1px lightgray;
+				text-align: center;
+			}
+			.placar
+			{
+				padding: 15px;
+			}
+			.butRight
+			{
+				text-align: center;
+			}
 		}
 		.game
 		{
@@ -93,7 +115,7 @@
     		text-align: center;
     		color: black;
     		//background: red;
-    		font-size: 50px;
+    		font-size: 35px;
 		}
 		td
 		{
@@ -109,6 +131,10 @@
 			{
 				height: 120px;
 				//width: 140px;
+			}
+			.inputBox
+			{
+				font-size: 50px;
 			}
 		}
 		.noBorder
@@ -140,16 +166,24 @@
 			color: white;
     		text-shadow: 0px 1px gray;
     		font-family: 'Segoe UI';
-    		font-weight: bold;
+    		//font-weight: bold;
     		background: #1aaf1a;
     		box-shadow: 0px 1px 1px gray;
-    		cursor: hand;
+    		cursor: pointer;
     		font-size: 20px;
     		padding: 5px;
     		margin-top: 5px;
     		margin-bottom: 5px;
     		visibility: hidden;
     		opacity: 0.0;
+		}
+		#rodada
+		{
+			font-size: 40px;
+		}
+		#j1, #j2
+		{
+			-webkit-transition-duration: 0.7s;
 		}
 	</style>
 </head>
@@ -183,20 +217,20 @@
    		<div class="row">
        		<div role="main" class="col-md-12">
        			<div class="row placar">
-       				<div class="col-md-4 celulaPlacar">
+       				<div class="col-md-4 col-xs-5 celulaPlacar" id="j1">
        					<span id="nomeJogador1">
        						Pedro Augusto
-       					</span> (X)
-       					<br>Vitórias: <span id="pontoJogador1">5</span>
+       					</span>(X)
+       					<br>wins: <span id="pontoJogador1">5</span>
        				</div>
-       				 <div class="col-md-2 col-md-offset-1 celulaPlacar">
-       					Rodada Nº<br><span id="rodada">0</span>
+       				 <div class="col-md-2 col-md-offset-1 col-xs-2 celulaPlacar" style="text-align:center;">
+       					<span id="rodada">0</span>
        				</div>
-       				<div class="col-md-4 col-md-offset-1 celulaPlacar">
+       				<div class="col-md-4 col-md-offset-1 col-xs-5 celulaPlacar butRight" id="j2">
        					<span id="nomeJogador2">
        						The Walrus
-       					</span> (O)
-       					<br>Vitórias: <span id="pontoJogador2">6</span>
+       					</span>(O)
+       					<br>wins: <span id="pontoJogador2">6</span>
        				</div>
        			</div>
        			<div class="row game">
