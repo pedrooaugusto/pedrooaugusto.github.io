@@ -32,7 +32,16 @@ function Game()
         	$("#j2").css({"background" : "white"});
         	$("#j2").css({"color" : "black"});
 		}
-	}
+	};
+	this.formatName = function(nome)
+	{
+		if(nome.length > 8 && $("#j1").css("width").replace("px", "") < 230)
+			return nome.substring(0, 1).toUpperCase()+
+				nome.substring(1, 5).toLowerCase()+"...";
+		
+		return nome.substring(0, 1).toUpperCase()+
+				nome.substring(1, nome.length).toLowerCase();
+	};
 	/*
 		Ação de clicar em um dos quadrados
 	*/
@@ -45,7 +54,7 @@ function Game()
 				this.value = "x";
 				game.jogador = 79;
 				game.gameLoop();
-				player1.primeiroMovimentoDoJogador();
+				player1.addMovimento(this);
 				if(bot.playWithBot == true)
 				{
 					if(!quadro.isFull())
@@ -82,6 +91,8 @@ function Game()
 				player1.pontos.valor +=1;
 				player1.pontos.obj.innerText = player1.pontos.valor;
 				game.doAnimationWin();
+				bootbox.alert("<span style='font-size:20px;'>PQP!<br>Envia esse lixo pra mim:"+
+					"<br>"+bot.historicoMovimento+"<br>"+player1.historicoMovimento+"</span>");
 			}
 			else
 			{
@@ -101,7 +112,7 @@ function Game()
 
 	this.initComponents = function ()
 	{
-		quadro.all = document.getElementsByClassName("inputBox");
+		quadro.all.push.apply(quadro.all, document.getElementsByClassName("inputBox"));
 		for(var i = 0; i < quadro.all.length; i++) 
 		{
 			quadro.all[i].onclick = game.marcar;
@@ -150,7 +161,7 @@ function Game()
 function Quadro() 
 {
 	this.noClicks = false;
-	this.all = null;
+	this.all = new Array();
 	this.rodada = {obj: document.getElementById("rodada"), valor: -1};
 	this.winAll = [[], [], [], [], [], [], [], []];
 	this.clear = function()
@@ -168,6 +179,9 @@ function Quadro()
 				$("#next").css({"visibility": "hidden"})
 		});
 		bot.numJogadas = 0;
+		player1.numJogadas = 0;
+		player1.historicoMovimento = [];
+		bot.historicoMovimento = [];
 		quadro.noClicks = false;
 		player1.primeiroMove = -1;
 		if(bot.playWithBot && quadro.rodada.valor % 2 == 0)
@@ -175,7 +189,12 @@ function Quadro()
 			bot.vezDoBot();
 			game.gameLoop();
 			game.jogador = 88;
+			//player1.jogarSozinho();
 		}
+		/*else if(bot.playWithBot)
+		{
+			player1.jogarSozinho();
+		}*/
 	};
 	this.isFull = function()
 	{
@@ -211,6 +230,7 @@ function Bot()
 {
 	this.playWithBot = false;
 	this.numJogadas = 0;
+	this.historicoMovimento = new Array();
 	this.vezDoBot = function()
 	{
 		if(!quadro.noClicks)
@@ -219,81 +239,39 @@ function Bot()
 			{
 				switch(bot.numJogadas)
 				{
-					case 0://Caso seja o primeiro movimento do bot ( este é sempre no centro )
-						if(quadro.all[4].value == "x")
-							bot.jogarEmLugarDisponivelAleatorio([1, 3, 5, 7]);
-						else
-							quadro.all[4].value = "o";
-					break;
-					case 1://Aqui na segunda vez que o bot for jogar, decidi-se o final do jogo
-						if(quadro.rodada.valor % 2 == 0)//Caso o bot tenha começado jogando
-							switch(player1.primeiroMove)
-							{
-								case 'E'://Esquina
-									/*
-										Nesse caso não há vitória aparente da prudende
-										por isso o 42 ela pode jogar em qualquer lugar n importa...
-									*/
-									bot.jogarEmLugarDisponivelAleatorio([42]);
-								break;
-								case 'C'://Centro-centro
-									/*
-										Ela pode jogar em qualquer lugar com execeção daqueles
-										passados em parâmetros que ela ganha...
-										(na verdade tem que não...)
-									*/
-									//alert(33);
-									bot.jogarEmLugarDisponivelAleatorio([1, 3, 5, 7]);
-								break;
-							}
-						else
+					case 0://Primeira jogada do bot
+						if(quadro.all[4].value == "x")//Se o centro estiver ocupado
+							bot.jogarEmLugarDisponivelAleatorio([1, 3, 5, 7]);//jogar na diagonal
+						else//centro livre
 						{
-							bot.jogarEmLugarDisponivelAleatorio([1, 3, 5, 7]);
+							quadro.all[4].value = "o";//jogar no centro
+							this.addMovimento(quadro.all[4]);
 						}
-						//alert(player1.primeiroMove);
 					break;
-					default:
-						bot.jogarEmLugarDisponivelAleatorio([42]);
+					case 1://Segunda jogada do bot (dicide-se o jogo)
+						if(quadro.rodada.valor % 2 == 0)//Caso o bot tenha começado jogando
+							if(player1.historicoMovimento[0][0] == 'E')//E o user tenha marcado uma esquina
+								bot.jogarEmLugarDisponivelAleatorio([1, 3, 5, 7]);//Não importa, sem chances de ganhar
+							else//E o user marcou um dos cantos-centro
+								bot.jogarEmLugarDisponivelAleatorio([1, 3, 5, 7]);//Jogue um uma esquina e o jogo acabou
+						else//Caso o humano tenha começado jogando
+							if(player1.historicoMovimento[0][0] == 'E' && player1.historicoMovimento[1][0] == 'E')
+								//E tenha marcado em uma esquina 2 vezes seguidas
+								bot.jogarEmLugarDisponivelAleatorio([0, 2, 6, 8]);//Jogar em um dos cantos-centro que é gg
+							else if(player1.historicoMovimento[0][0] == 'M')//Caso tenha roubado nosso centro
+								bot.jogarEmLugarDisponivelAleatorio([1, 3, 5, 7]);//vamos para as esquinas
+							else if(player1.historicoMovimento[0][0] == 'E' && player1.historicoMovimento[1][0] == 'C')
+								bot.jogarIntercecaoDeDoisWins(1);
+							else if(!bot.jogarIntercecaoDeDoisWins(0))
+								bot.jogarEmLugarDisponivelAleatorio([1, 3, 5, 7]);
+					break;
+					default://O jogo acaba na segunda vez em que o bot acaba por isso, não importa
+						bot.jogarEmLugarDisponivelAleatorio([42]);//não importa, vc não vai nãi vai ganhar
 				}
 			}
 			this.numJogadas+=1;
 		}
 	};
-	this.analisarPrimeiroMovimento = function() 
-	{
-		if(bot.numJogadas == 1)
-		{
-			bot.buscarIntercecao();
-			return true;
-		}
-		else if(bot.numJogadas == 0)
-		{
-			quadro.all[4].value = "o";
-			return true;
-		}
-		return false;
-	};
-	this.buscarIntercecao = function()
-	{
-		var ponto1 = 42, ponto2 = 43;//wins que possuem um x e tem um ponto em comum;
-		for (var i = 0; i < quadro.winAll.length; i++) 
-		{
-			var texto = quadro.winAll[i][0].value + quadro.winAll[i][1].value + quadro.winAll[i][2].value;
-			if(texto == "x")
-			{
-				if(ponto1 == 42)
-					ponto1 = quadro.winAll[i];
-				else
-					ponto2 = quadro.winAll[i];
-			}	
-		}
-		for (var i = 0; i < ponto1.length; i++) {
-			for (var j = 0; j < ponto2.length; j++) {
-				if(ponto1[i] == ponto2[j])
-					ponto1[i].value = "o";
-			};
-		};
-	}
 	this.jogarEmLugarDisponivelAleatorio = function(excluidos)
 	{
 		var possiveis = new Array();
@@ -303,13 +281,7 @@ function Bot()
 		var total = possiveis.length;
 		var qual =  Math.floor(Math.random() * total);
 		possiveis[qual].value = "o";
-	};
-	this.jogarEmLugarDisponivelAleatorioPermitidosOnly = function(permitido)
-	{
-		var possiveis = new Array();
-		var total = possiveis.length;
-		var qual =  Math.floor(Math.random() * per);
-		possiveis[qual].value = "o";
+		this.addMovimento(possiveis[qual]);
 	};
 	this.possivelVitoria = function() 
 	{
@@ -336,10 +308,54 @@ function Bot()
 	{
 		for(var i = 0; i < argument.length; i++) 
 			if(argument[i].value == "")
-				argument[i].value = "o";	
-	}
+			{
+				argument[i].value = "o";
+				this.addMovimento(argument[i]);
+			}
+	};
+	this.jogarIntercecaoDeDoisWins = function(n)
+	{
+		var winsVazios = [];
+		var winUserMarcouPorUltimo;
+		for (var i = 0; i < quadro.winAll.length; i++) {
+			var texto = quadro.winAll[i][0].value + quadro.winAll[i][1].value + quadro.winAll[i][2].value;
+			if(texto == "x" && quadro.winAll[i].indexOf(quadro.all[player1.historicoMovimento[n][1]]) != -1)
+				winUserMarcouPorUltimo = quadro.winAll[i];
+			else if(texto == "x")
+			{
+				winsVazios.push(quadro.winAll[i]);
+			}
+		}
+		for (var i = 0; i < winUserMarcouPorUltimo.length; i++) {
+			for (var j = 0; j < winsVazios.length; j++) {
+				for (var k = 0; k < winsVazios[j].length; k++) {
+					if(winUserMarcouPorUltimo.indexOf(winsVazios[j][k]) != -1)
+					{
+						winsVazios[j][k].value = "o";
+						this.addMovimento(winsVazios[j][k]);
+						return true;
+					}
+				};
+			}
+		}
+		return false;
+	};
+	this.addMovimento = function(lugar)
+	{
+		//E = esquinas(like 0), C = centro reta (like 1), M = meio
+		switch(quadro.all.indexOf(lugar))
+		{
+			case 0: case 2: case 6: case 8:
+				this.historicoMovimento.push(['E', quadro.all.indexOf(lugar)]);
+			break;
+			case 4:
+				this.historicoMovimento.push(['M', quadro.all.indexOf(lugar)]);
+			break;
+			default:
+				this.historicoMovimento.push(['C', quadro.all.indexOf(lugar)]);
+		}	
+	};
 }
-
 function Player(idObjName, idObjPonto, nome, ponto) 
 {
 	if(nome=="")
@@ -347,32 +363,149 @@ function Player(idObjName, idObjPonto, nome, ponto)
 		nome = "The Doctor";
 	}
 	this.objNome = document.getElementById(idObjName);
-	this.objNome.innerText = nome;
+	this.objNome.innerText = game.formatName(nome);
 	this.pontos = {obj: document.getElementById(idObjPonto), valor: ponto};
 	this.pontos.obj.innerText = this.pontos.valor;
-	this.primeiroMove = -1;
-	this.primeiroMovimentoDoJogador = function()
+	this.historicoMovimento = new Array();
+	this.numJogadas = 0;
+	/*
+		Aqui eu não guardo onde ele jogou em si, mas em que
+		classe se enquadra o lugar onde el jogou (E, M, C);
+	*/
+	this.addMovimento = function(lugar)
 	{
-		if(this.primeiroMove == -1)
+		//E = esquinas(like 0), C = centro reta (like 1), M = meio
+		switch(quadro.all.indexOf(lugar))
 		{
-			var index = -1;
-			var onde = 'C';//E = esquinas(like 0), C = centro reta (like 1), M = meio
-			for (var i = 0; i < quadro.all.length; i++)
-				if(quadro.all[i].value == "x")
-					index = i;
-				switch(index)
-				{
-					case 0: case 2: case 6: case 8:
-						this.primeiroMove = 'E';
-					break;
-					case 4:
-						this.primeiroMove = 'M';
-					break;
-					default:
-						this.primeiroMove = 'C';//Nem precisa
-				}	
+			case 0: case 2: case 6: case 8:
+				this.historicoMovimento.push(['E', quadro.all.indexOf(lugar)]);
+			break;
+			case 4:
+				this.historicoMovimento.push(['M', quadro.all.indexOf(lugar)]);
+			break;
+			default:
+				this.historicoMovimento.push(['C', quadro.all.indexOf(lugar)]);
+		}	
+	};
+	this.jogarSozinho = function()
+	{
+		while(!quadro.noClicks && !quadro.anyVictory())
+		{
+			this.jogarEmLugarDisponivelAleatoriod([23]);
+			//game.gameLoop();
+			//alert(33);
 		}
-	}
+		//alert(11);
+	};
+	this.jogarEmLugarDisponivelAleatoriod = function(excluidos)
+	{
+		/*var possiveis = new Array();
+		for(var j = 0; j < quadro.all.length; j++)
+			if(quadro.all[j].value.length == 0 && excluidos.indexOf(j) == -1)
+				possiveis.push(quadro.all[j]);
+		var total = possiveis.length;
+		var qual =  Math.floor(Math.random() * total);
+		if(!this.possivelVitoria())
+			possiveis[qual].onclick();*/
+		if(!this.possivelVitoria())//Caso ninguém esteja prestes a ganhar
+		{
+			switch(this.numJogadas)
+			{
+					case 0://Primeira jogada do this
+						if(quadro.all[4].value == "o")//Se o centro estiver ocupado
+							this.jogarEmLugarDisponivelAleatorio([1, 3, 5, 7]);//jogar na diagonal
+						else//centro livre
+						{
+							quadro.all[4].onclick();
+						}
+					break;
+					case 1://Segunda jogada do this (dicide-se o jogo)
+						if(quadro.rodada.valor % 2 != 0)//Caso o this tenha começado jogando
+							if(bot.historicoMovimento[0][0] == 'E')//E o user tenha marcado uma esquina
+								this.jogarEmLugarDisponivelAleatorio([1, 3, 5, 7]);//Não importa, sem chances de ganhar
+							else//E o user marcou um dos cantos-centro
+								this.jogarEmLugarDisponivelAleatorio([1, 3, 5, 7]);//Jogue um uma esquina e o jogo acabou
+						else//Caso o humano tenha começado jogando
+							if(bot.historicoMovimento[0][0] == 'E' && bot.historicoMovimento[1][0] == 'E')
+								//E tenha marcado em uma esquina 2 vezes seguidas
+								this.jogarEmLugarDisponivelAleatorio([0, 2, 6, 8]);//Jogar em um dos cantos-centro que é gg
+							else if(bot.historicoMovimento[0][0] == 'M')//Caso tenha roubado nosso centro
+								this.jogarEmLugarDisponivelAleatorio([1, 3, 5, 7]);//vamos para as esquinas
+							else if(bot.historicoMovimento[0][0] == 'E' && bot.historicoMovimento[1][0] == 'C')
+								this.jogarIntercecaoDeDoisWins(1);
+							else if(!this.jogarIntercecaoDeDoisWins(0))
+								this.jogarEmLugarDisponivelAleatorio([1, 3, 5, 7]);
+					break;
+					default://O jogo acaba na segunda vez em que o this acaba por isso, não importa
+						this.jogarEmLugarDisponivelAleatorio([42]);//não importa, vc não vai nãi vai ganhar
+			}
+			this.numJogadas+=1;
+		}
+	};
+	this.possivelVitoria = function() 
+	{
+		var who = null;
+		for (var i = 0; i < quadro.winAll.length; i++) 
+		{
+			var texto = quadro.winAll[i][0].value + quadro.winAll[i][1].value + quadro.winAll[i][2].value;
+			if(texto == "xx")
+			{
+				this.quemTaVazio(quadro.winAll[i]);
+				return true;
+			}
+			else if(texto == "oo")
+				who = quadro.winAll[i];
+		}
+		if(who != null)
+		{
+			this.quemTaVazio(who);
+			return true;
+		} 
+		return false;
+	};
+	this.quemTaVazio = function(argument) 
+	{
+		for(var i = 0; i < argument.length; i++) 
+			if(argument[i].value == "")
+				argument[i].onclick();	
+	};
+
+	this.jogarIntercecaoDeDoisWins = function(n)
+	{
+		var winsVazios = [];
+		var winUserMarcouPorUltimo;
+		for (var i = 0; i < quadro.winAll.length; i++) {
+			var texto = quadro.winAll[i][0].value + quadro.winAll[i][1].value + quadro.winAll[i][2].value;
+			if(texto == "o" && quadro.winAll[i].indexOf(quadro.all[player1.historicoMovimento[n][1]]) != -1)
+				winUserMarcouPorUltimo = quadro.winAll[i];
+			else if(texto == "o")
+			{
+				winsVazios.push(quadro.winAll[i]);
+			}
+		}
+		for (var i = 0; i < winUserMarcouPorUltimo.length; i++) {
+			for (var j = 0; j < winsVazios.length; j++) {
+				for (var k = 0; k < winsVazios[j].length; k++) {
+					if(winUserMarcouPorUltimo.indexOf(winsVazios[j][k]) != -1)
+					{
+						winsVazios[j][k].onclick();
+						return true;
+					}
+				};
+			}
+		}
+		return false;
+	};
+	this.jogarEmLugarDisponivelAleatorio = function(excluidos)
+	{
+		var possiveis = new Array();
+		for(var j = 0; j < quadro.all.length; j++)
+			if(quadro.all[j].value.length == 0 && excluidos.indexOf(j) == -1)
+				possiveis.push(quadro.all[j]);
+		var total = possiveis.length;
+		var qual =  Math.floor(Math.random() * total);
+		possiveis[qual].onclick();
+	};
 }
 function menu() 
 {
@@ -417,11 +550,11 @@ function menu()
                 + "</div>"
                 + "<div class='col-md-6 col-xs-6 noBorder'>"
                 + "<input type='text' placeholder='Jogador 1' "
-                + "class='form-control input-md' id='player1' maxlength='8'>"
+                + "class='form-control input-md' id='player1' maxlength='10'>"
                 + "</div>"
                 + "<div class='col-md-6 col-xs-6 noBorder'>"
                 + "<input type='text' placeholder='Jogador 2' "
-                + "class='form-control input-md' id='player2' maxlength='8'>"
+                + "class='form-control input-md' id='player2' maxlength='10'>"
                 + "</div>"
                 + "</div>";
 
