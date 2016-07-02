@@ -125,7 +125,7 @@ function Barra()
 			ctx.fillRect(this.posicao.x, this.posicao.y, this.dimensao.x, this.dimensao.y);
 			ctx.fillStyle = "lightgray";
 			ctx.font = "16px Segoe UI Light";
-			ctx.fillText("Criado por Pedro Augusto", canvas.width - 190, canvas.height - 10);
+			//ctx.fillText("Criado por Pedro Augusto", canvas.width - 190, canvas.height - 10);
 			/*ctx.fillRect(this.posicao.x, this.posicao.y, this.dimensao.x * 0.35, this.dimensao.y);
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.posicao.x + this.dimensao.x*0.35, this.posicao.y, this.dimensao.x * 0.3,
@@ -545,8 +545,8 @@ function initComponents(w, h)
 	ctx = canvas.objeto.getContext("2d");
 	bola = new Bola();
 	barra = new Barra();
-	botao1 = new Botao("left", W*0.005, H*0.82);
-	botao2 = new Botao("left", W*0.85, H*0.82);
+	botao1 = new Botao("←", W*0.005, H*0.82);
+	botao2 = new Botao("→", W*0.85, H*0.82);
 	tratarColisoes = new ColisaoComUnidades();
 	gerarObstaculos();
 	canvas.drawCoordenadas();
@@ -658,14 +658,19 @@ function Botao(texto, lx, ly)
 	this.texto = texto;
 	this.dimensao = {x: W/7, y: H*0.16};
 	this.posicao = {x: lx, y: ly};
-	this.cor = "red";
+	this.cor = "rgba(31, 32, 33, 0.85)";
 	this.draw = function()
 	{
 		ctx.beginPath();
-			ctx.shadowBlur = 0;
-			ctx.shadowColor = "";
+			ctx.shadowBlur = 0.5;
+			ctx.shadowColor = "white";
 			ctx.fillStyle = this.cor;
 			ctx.fillRect(this.posicao.x, this.posicao.y, this.dimensao.x, this.dimensao.y);
+			ctx.shadowBlur = 0;
+			ctx.shadowColor = "blue";
+			ctx.font = W*0.1+"px Segoe UI Light";
+			ctx.fillStyle = "white";
+			ctx.fillText(this.texto, this.posicao.x+(this.dimensao.x/4), this.posicao.y+(this.dimensao.y/1.2));
 		ctx.closePath();
 	};
 }
