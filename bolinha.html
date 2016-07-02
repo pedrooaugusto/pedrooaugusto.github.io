@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap-3.3.6/bootstrap-3.3.6/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="baseDaPagina.css" rel="stylesheet" media="screen">
+	<title>Bootstrap!</title>
+	<style type="text/css">
+		@media (min-width: 992px) 
+		{
+			div[role="main"]
+			{
+				height: 500px;
+			}
+		}
+		.container .jumbotron
+		{
+			border: none;
+			border-radius: 0cm;
+			margin-top: 5px;
+			padding: 5px;
+			background: white;
+			//text-align: left;
+		}
+    #main
+    {
+      padding: 0;
+      border: none;
+    }
+		.modal-backdrop.in
+		{
+			opacity: 0.8;
+		}
+    #canvas
+    {
+      background-color: black; 
+    } 
+    .sounds
+    {
+      display: none;
+    }
+	</style>
+</head>
+<body>
+	<div class="container">
+   		<header class="row">
+   			<nav class="col-md-12 navbar navbar-default navbar-fixed-top">
+  				<div class="container-fluid">
+    				<div class="navbar-header">
+    					 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            				<span class="sr-only">Toggle navigation</span>
+            				<span class="icon-bar"></span>
+            				<span class="icon-bar"></span>
+            				<span class="icon-bar"></span>
+          				</button>
+      					<a class="navbar-brand" href="#">Pedro, o augusto</a>
+    				</div>
+    				<div id="navbar" class="navbar-collapse collapse">
+	    				<ul class="nav navbar-nav">
+	      					<li><a href="teste.html">Home</a></li>
+	      					<li class="active"><a href="#">Bolinha</a></li>
+	      					<li><a href="jogoDaVelha.html">Jogo Da Velha</a></li> 
+	      					<li><a href="#">Jogo Da Memória</a></li>
+	      					<li><a href="#">Jogo Da Cobrinha</a></li> 
+	      					<li><a href="#">Quebra-Cabeça</a></li>
+	    				</ul>
+	    			</div>
+  				</div>
+			</nav>
+   		</header>
+   		<div class="row">
+       		<div role="main" class="col-md-12" id="main">
+            
+       		</div>
+   		</div>
+   		<footer class="row footer rodape">
+   			<div class="col-md-2 col-md-offset-1">
+   				<button type="button" class="btn btn-md btn-primary" onclick="buttonRodapePressed(1)">Download</button>
+   			</div>
+   			<div class="col-md-2 col-md-offset-2">
+   				<button type="button" class="btn btn-md btn-primary" onclick="buttonRodapePressed(2)">Source</button>
+   			</div>
+   			<div class="col-md-2 col-md-offset-2">
+   				<button type="button" class="btn btn-md btn-primary" onclick="buttonRodapePressed(3)">Wiki</button>
+   			</div>
+   		</footer>
+	</div>
+  <div id="songs">
+    <audio src="sounds/blue-beep.ogg" id="barra" class="sounds"></audio>
+    <audio src="sounds/wall-beep.ogg" id="obstaculo" class="sounds"></audio>
+    <audio src="sounds/ball-origin-beep.ogg" id="parede" class="sounds"></audio>
+    <audio src="sounds/Enemy Slain.mp3" id="singleKill" class="sounds"></audio>
+    <audio src="sounds/Double Kill Lol.mp3" id="doubleKill" class="sounds"></audio>
+    <audio src="sounds/Triple Kill Lol.mp3" id="tripleKill" class="sounds"></audio>
+    <audio src="sounds/quadrakill_lol.mp3" id="quadraKill" class="sounds"></audio>
+    <audio src="sounds/pentakill_lol.mp3" id="pentaKill" class="sounds"></audio>
+    <audio src="sounds/shut_down.mp3" id="shutDown" class="sounds"></audio>
+    <audio src="sounds/Aced Lol.mp3" id="ace" class="sounds"></audio>
+  </div>
+</body>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="bootstrap-3.3.6/bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-3.3.6/bootstrap-3.3.6/dist/js/bootbox.min.js"></script>
+    <script src="bolinha.js"></script>
+    <script type="text/javascript">
+    onload = function()
+    /*Não ouse mexer aqui. POG, Extreme Go Horse*/
+    {
+      var c = document.getElementById('main').offsetWidth;
+      var d = document.getElementById('main').offsetHeight;
+      var d = window.outerHeight*0.68;
+     // alert(c);
+      document.getElementById('main').innerHTML = "<canvas id='canvas' width="+c+" height="+d+"></canvas>"
+      initComponents(c, d);
+    }
+    function buttonRodapePressed (which) 
+    {
+    		var message, title;
+    		var buttons;
+    		switch(which)
+    		{
+    			case 1:
+    				title = "<b>Download</b>";
+    				message = "Bye Doctor!";
+    			    buttons = {};
+    			break;
+
+    			case 2:
+    				title = "<b>Source</b>";
+    				message = "Hello Doctor!";	  	  	  
+    				buttons = {};
+    			break;
+
+    			case 3:
+    				title = "<b>Wiki</b>";
+    				message = "Hello Doctor!";
+    				buttons = {};
+    		}
+    		bootbox.dialog({
+    			title: title,
+    			message: message,
+    			buttons:buttons
+    		});
+    }
+    </script>
+</html>
