@@ -71,21 +71,24 @@ function Canvas(width_canvas, height_canvas)
 				barra.posicao.x -= barra.velocidade.x;
 			}
 		},
-		mouseUp: function(e)
+		mouseUp: function(ex)
 		{
+			var e = ex.changedTouches[0];
 			if(e.clientX > botao1.posicao.x && e.clientX < botao1.posicao.x + botao1.dimensao.x && 
 				e.clientY > botao1.posicao.y && e.clientY < botao1.posicao.y + botao1.dimensao.y)
 			{
-				//canvas.keys[37] = false;
+				canvas.keys[37] = false;
 			}
 			else if(e.clientX > botao2.posicao.x && e.clientX < botao2.posicao.x + botao2.dimensao.x && 
 				e.clientY > botao2.posicao.y && e.clientY < botao2.posicao.y + botao2.dimensao.y)
 			{
-				//canvas.keys[39] = false;
+				canvas.keys[39] = false;
 			}
 		},
-		mouseDown: function(e)
+		mouseDown: function(ex)
 		{
+			var e = ex.changedTouches[0];
+			//alert(touchObj.clientX);
 			if(e.clientX > botao1.posicao.x && e.clientX < botao1.posicao.x + botao1.dimensao.x && 
 				e.clientY > botao1.posicao.y && e.clientY < botao1.posicao.y + botao1.dimensao.y)
 			{
@@ -589,11 +592,11 @@ function initComponents(w, h)
 	window.addEventListener("keyup", function (e) {
 	    	canvas.keys[e.keyCode] = false;
 	});
-	window.addEventListener("mousedown", function (e) {
+	window.addEventListener("touchstart", function (e) {
 	    	//canvas.keys[e.keyCode] = true;
 	    	canvas.eventos.mouseDown(e);
 	});
-	window.addEventListener("mouseup", function (e) {
+	window.addEventListener("touchend", function (e) {
 	    	//canvas.keys[e.keyCode] = false;
 	    	canvas.eventos.mouseUp(e);
 	});
