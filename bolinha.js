@@ -55,6 +55,8 @@ function Canvas(width_canvas, height_canvas)
 	};
 	this.eventos = 
 	{
+		startx : 0,
+    	dist : 0,
 		movimentoMouse: function()//Caso o mouse seja utilizado para mover a barra 
 		{
 			//barra.posicao.x = event.clientX - (barra.dimensao.x/2 + 27);
@@ -88,7 +90,8 @@ function Canvas(width_canvas, height_canvas)
 		mouseDown: function(ex)
 		{
 			var e = ex.changedTouches[0];
-			//alert(touchObj.clientX);
+			this.startx = parseInt(e.clientX);
+			barra.posicao.x = this.startx - barra.dimensao.x/2;
 			if(e.clientX > botao1.posicao.x && e.clientX < botao1.posicao.x + botao1.dimensao.x && 
 				e.clientY > botao1.posicao.y && e.clientY < botao1.posicao.y + botao1.dimensao.y)
 			{
@@ -103,6 +106,12 @@ function Canvas(width_canvas, height_canvas)
 				canvas.keys[39] = true;
 				//alert(33);
 			}
+		},
+		touchMove: function(ex)
+		{
+			var e = ex.changedTouches[0];
+			var dist = parseInt(e.clientX - barra.dimensao.x/2);
+			barra.posicao.x = dist;
 		}
 	};
 };
@@ -599,6 +608,10 @@ function initComponents(w, h)
 	window.addEventListener("touchend", function (e) {
 	    	//canvas.keys[e.keyCode] = false;
 	    	canvas.eventos.mouseUp(e);
+	});
+	window.addEventListener("touchmove", function (e) {
+	    	//canvas.keys[e.keyCode] = false;
+	    	canvas.eventos.touchMove(e);
 	});
 	window.addEventListener("mousemove", canvas.eventos.movimentoMouse, false);
 	for(var i = 0; i < listaDeObstaculos.length; i++)//Desenar obstaculos
