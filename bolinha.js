@@ -57,7 +57,7 @@ function Canvas(width_canvas, height_canvas)
 	{
 		movimentoMouse: function()//Caso o mouse seja utilizado para mover a barra 
 		{
-			barra.posicao.x = event.clientX - (barra.dimensao.x/2 + 27);
+			//barra.posicao.x = event.clientX - (barra.dimensao.x/2 + 27);
 			//barra.posicao.y = event.clientY - 40;
 		},
 		keyboardEntrada: function()//Caso o teclado seja utilizado para mover a barra
@@ -69,6 +69,35 @@ function Canvas(width_canvas, height_canvas)
 			if(event.keyCode == 37)
 			{
 				barra.posicao.x -= barra.velocidade.x;
+			}
+		},
+		mouseUp: function(e)
+		{
+			/*if(e.clientX > botao1.posicao.x && e.clientX < botao1.posicao.x + botao1.dimensao.x && 
+				e.clientY > botao1.posicao.y && e.clientY < botao1.posicao.y + botao1.dimensao.y)*/
+			{
+				canvas.keys[37] = false;
+			}
+			/*else if(e.clientX > botao2.posicao.x && e.clientX < botao2.posicao.x + botao2.dimensao.x && 
+				e.clientY > botao2.posicao.y && e.clientY < botao2.posicao.y + botao2.dimensao.y)*/
+			{
+				canvas.keys[39] = false;
+			}
+		},
+		mouseDown: function(e)
+		{
+			if(e.clientX > botao1.posicao.x && e.clientX < botao1.posicao.x + botao1.dimensao.x && 
+				e.clientY > botao1.posicao.y && e.clientY < botao1.posicao.y + botao1.dimensao.y)
+			{
+				//canvas.keys[37] = false;
+				canvas.keys[37] = true;
+				//alert(42);
+			}
+			else if(e.clientX > botao2.posicao.x && e.clientX < botao2.posicao.x + botao2.dimensao.x && 
+				e.clientY > botao2.posicao.y && e.clientY < botao2.posicao.y + botao2.dimensao.y)
+			{
+				//canvas.keys[39] = false;
+				canvas.keys[39] = true;
 			}
 		}
 	};
@@ -82,7 +111,7 @@ function Bola()
 	this.raio = W*0.010;
 	this.restituicao = -1;
 	this.cor = "white";
-	this.vidas = 3;
+	this.vidas = 6;
 	this.colisoes = {emColisao: true, quantas: 0, vel: {y: (W*0.016)/4, x: (W*0.016)/3}};
 	this.multKill = 0;
 	this.draw = function() 
@@ -557,6 +586,14 @@ function initComponents(w, h)
 	window.addEventListener("keyup", function (e) {
 	    	canvas.keys[e.keyCode] = false;
 	});
+	window.addEventListener("mousedown", function (e) {
+	    	//canvas.keys[e.keyCode] = true;
+	    	canvas.eventos.mouseDown(e);
+	});
+	window.addEventListener("mouseup", function (e) {
+	    	//canvas.keys[e.keyCode] = false;
+	    	canvas.eventos.mouseUp(e);
+	});
 	window.addEventListener("mousemove", canvas.eventos.movimentoMouse, false);
 	for(var i = 0; i < listaDeObstaculos.length; i++)//Desenar obstaculos
 	{
@@ -566,7 +603,7 @@ function initComponents(w, h)
 	barra.draw();
 	botao1.draw();
 	botao2.draw();
-	//gameLoop = setInterval("loop()", 1000/canvas.frames);
+	gameLoop = setInterval("loop()", 1000/canvas.frames);
 }
 function loop() 
 {	
@@ -583,6 +620,8 @@ function loop()
 	}
 	bola.draw();
 	barra.draw();
+	botao1.draw();
+	botao2.draw();
 	if(bola.vidas <= 0)
 	{	
 	   	clearTimeout(gameLoop);
@@ -656,7 +695,7 @@ function Botao(texto, lx, ly)
 {
 	this.nome = "Botão";
 	this.texto = texto;
-	this.dimensao = {x: W/7, y: H*0.2};
+	this.dimensao = {x: W/7, y: H*0.15};
 	this.posicao = {x: lx, y: ly};
 	this.cor = "rgba(31, 32, 33, 0.05)";
 	this.draw = function()
@@ -668,7 +707,7 @@ function Botao(texto, lx, ly)
 			ctx.fillRect(this.posicao.x, this.posicao.y, this.dimensao.x, this.dimensao.y);
 			ctx.shadowBlur = 0;
 			ctx.shadowColor = "blue";
-			ctx.font = W*0.1+"px Segoe UI Light";
+			ctx.font = W*0.08+"px Segoe UI Light";
 			ctx.fillStyle = "white";
 			ctx.fillText(this.texto, this.posicao.x+(this.dimensao.x/4), this.posicao.y+(this.dimensao.y/1.2));
 		ctx.closePath();
