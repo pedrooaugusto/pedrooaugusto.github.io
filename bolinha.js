@@ -76,13 +76,13 @@ function Canvas(width_canvas, height_canvas)
 		mouseUp: function(ex)
 		{
 			var e = ex.changedTouches[0];
-			if(e.clientX > botao1.posicao.x && e.clientX < botao1.posicao.x + botao1.dimensao.x && 
-				e.clientY > botao1.posicao.y && e.clientY < botao1.posicao.y + botao1.dimensao.y)
+			if(e.clientX > botao1.posicao.x && e.clientX < parseInt(botao1.posicao.x + botao1.dimensao.x) && 
+				e.clientY > botao1.posicao.y && e.clientY < parseInt(botao1.posicao.y + botao1.dimensao.y))
 			{
 				canvas.keys[37] = false;
 			}
-			else if(e.clientX > botao2.posicao.x && e.clientX < botao2.posicao.x + botao2.dimensao.x && 
-				e.clientY > botao2.posicao.y && e.clientY < botao2.posicao.y + botao2.dimensao.y)
+			else if(e.clientX > botao2.posicao.x && e.clientX < parseInt(botao2.posicao.x + botao2.dimensao.x) && 
+				e.clientY > botao2.posicao.y && e.clientY < parseInt(botao2.posicao.y + botao2.dimensao.y))
 			{
 				canvas.keys[39] = false;
 			}
@@ -91,16 +91,19 @@ function Canvas(width_canvas, height_canvas)
 		{
 			var e = ex.changedTouches[0];
 			this.startx = parseInt(e.clientX);
-			barra.posicao.x = this.startx - barra.dimensao.x/2;
-			if(e.clientX > botao1.posicao.x && e.clientX < botao1.posicao.x + botao1.dimensao.x && 
-				e.clientY > botao1.posicao.y && e.clientY < botao1.posicao.y + botao1.dimensao.y)
+			//alert(e.clientX +" > "+ botao1.posicao.x +" && "+ e.clientX +" < "+ parseInt(botao1.posicao.x + botao1.dimensao.x) +" && "+ 
+				//(e.clientY) +" > "+ botao1.posicao.y +" && "+ (e.clientY-55) +" < "+ parseInt(botao1.posicao.y + botao1.dimensao.y));
+			//barra.posicao.x = this.startx - barra.dimensao.x/2;
+			//alert(botao1.posicao.y +" lol "+ botao1.dimensao.y);
+			if(e.clientX > botao1.posicao.x && e.clientX < parseInt(botao1.posicao.x + botao1.dimensao.x) && 
+				e.clientY > botao1.posicao.y && e.clientY < parseInt(botao1.posicao.y + botao1.dimensao.y))
 			{
 				canvas.keys[39] = false;
 				canvas.keys[37] = true;
 				//alert(42);
 			}
-			else if(e.clientX > botao2.posicao.x && e.clientX < botao2.posicao.x + botao2.dimensao.x && 
-				e.clientY > botao2.posicao.y && e.clientY < botao2.posicao.y + botao2.dimensao.y)
+			else if(e.clientX > botao2.posicao.x && e.clientX < parseInt(botao2.posicao.x + botao2.dimensao.x) && 
+				e.clientY > botao2.posicao.y && e.clientY < parseInt(botao2.posicao.y + botao2.dimensao.y))
 			{
 				canvas.keys[37] = false;
 				canvas.keys[39] = true;
@@ -601,18 +604,18 @@ function initComponents(w, h)
 	window.addEventListener("keyup", function (e) {
 	    	canvas.keys[e.keyCode] = false;
 	});
-	window.addEventListener("touchstart", function (e) {
+	canvas.objeto.addEventListener("touchstart", function (e) {
 	    	//canvas.keys[e.keyCode] = true;
 	    	canvas.eventos.mouseDown(e);
 	});
-	window.addEventListener("touchend", function (e) {
+	canvas.objeto.addEventListener("touchend", function (e) {
 	    	//canvas.keys[e.keyCode] = false;
 	    	canvas.eventos.mouseUp(e);
 	});
-	window.addEventListener("touchmove", function (e) {
+	/*window.addEventListener("touchmove", function (e) {
 	    	//canvas.keys[e.keyCode] = false;
 	    	canvas.eventos.touchMove(e);
-	});
+	});*/
 	window.addEventListener("mousemove", canvas.eventos.movimentoMouse, false);
 	for(var i = 0; i < listaDeObstaculos.length; i++)//Desenar obstaculos
 	{
@@ -622,7 +625,7 @@ function initComponents(w, h)
 	barra.draw();
 	botao1.draw();
 	botao2.draw();
-	gameLoop = setInterval("loop()", 1000/canvas.frames);
+	//gameLoop = setInterval("loop()", 1000/canvas.frames);
 }
 function loop() 
 {	
