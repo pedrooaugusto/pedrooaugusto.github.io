@@ -45,7 +45,7 @@
 </head>
 <body>
 	<div class="container">
-   		<header class="row">
+   		<!--<header class="row">
    			<nav class="col-md-12 navbar navbar-default navbar-fixed-top">
   				<div class="container-fluid">
     				<div class="navbar-header">
@@ -69,7 +69,7 @@
 	    			</div>
   				</div>
 			</nav>
-   		</header>
+   		</header>-->
    		<div class="row">
        		<div role="main" class="col-md-12" id="main">
             
@@ -114,7 +114,7 @@
     {
       var c = document.getElementById('main').offsetWidth;
       var d = document.getElementById('main').offsetHeight;
-      var d = window.outerHeight*0.9;
+      var d = window.outerHeight*1;
       var mq = window.matchMedia( "(min-height: 500px)");
      // alert(mq.matches);
       document.getElementById('main').innerHTML = "<canvas id='canvas' width="+c+" height="+d+"></canvas>"
