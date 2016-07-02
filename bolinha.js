@@ -545,8 +545,8 @@ function initComponents(w, h)
 	ctx = canvas.objeto.getContext("2d");
 	bola = new Bola();
 	barra = new Barra();
-	botao1 = new Botao("←", W*0.005, H*0.82);
-	botao2 = new Botao("→", W*0.85, H*0.82);
+	botao1 = new Botao("←", W*0.005, H*0.6);
+	botao2 = new Botao("→", W*0.85, H*0.6);
 	tratarColisoes = new ColisaoComUnidades();
 	gerarObstaculos();
 	canvas.drawCoordenadas();
@@ -656,9 +656,9 @@ function Botao(texto, lx, ly)
 {
 	this.nome = "Botão";
 	this.texto = texto;
-	this.dimensao = {x: W/7, y: H*0.16};
+	this.dimensao = {x: W/7, y: H*0.2};
 	this.posicao = {x: lx, y: ly};
-	this.cor = "rgba(31, 32, 33, 0.85)";
+	this.cor = "rgba(31, 32, 33, 0.05)";
 	this.draw = function()
 	{
 		ctx.beginPath();
