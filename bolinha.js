@@ -73,15 +73,15 @@ function Canvas(width_canvas, height_canvas)
 		},
 		mouseUp: function(e)
 		{
-			/*if(e.clientX > botao1.posicao.x && e.clientX < botao1.posicao.x + botao1.dimensao.x && 
-				e.clientY > botao1.posicao.y && e.clientY < botao1.posicao.y + botao1.dimensao.y)*/
+			if(e.clientX > botao1.posicao.x && e.clientX < botao1.posicao.x + botao1.dimensao.x && 
+				e.clientY > botao1.posicao.y && e.clientY < botao1.posicao.y + botao1.dimensao.y)
 			{
-				canvas.keys[37] = false;
+				//canvas.keys[37] = false;
 			}
-			/*else if(e.clientX > botao2.posicao.x && e.clientX < botao2.posicao.x + botao2.dimensao.x && 
-				e.clientY > botao2.posicao.y && e.clientY < botao2.posicao.y + botao2.dimensao.y)*/
+			else if(e.clientX > botao2.posicao.x && e.clientX < botao2.posicao.x + botao2.dimensao.x && 
+				e.clientY > botao2.posicao.y && e.clientY < botao2.posicao.y + botao2.dimensao.y)
 			{
-				canvas.keys[39] = false;
+				//canvas.keys[39] = false;
 			}
 		},
 		mouseDown: function(e)
@@ -89,15 +89,16 @@ function Canvas(width_canvas, height_canvas)
 			if(e.clientX > botao1.posicao.x && e.clientX < botao1.posicao.x + botao1.dimensao.x && 
 				e.clientY > botao1.posicao.y && e.clientY < botao1.posicao.y + botao1.dimensao.y)
 			{
-				//canvas.keys[37] = false;
+				canvas.keys[39] = false;
 				canvas.keys[37] = true;
 				//alert(42);
 			}
 			else if(e.clientX > botao2.posicao.x && e.clientX < botao2.posicao.x + botao2.dimensao.x && 
 				e.clientY > botao2.posicao.y && e.clientY < botao2.posicao.y + botao2.dimensao.y)
 			{
-				//canvas.keys[39] = false;
+				canvas.keys[37] = false;
 				canvas.keys[39] = true;
+				//alert(33);
 			}
 		}
 	};
@@ -154,7 +155,7 @@ function Barra()
 			ctx.fillRect(this.posicao.x, this.posicao.y, this.dimensao.x, this.dimensao.y);
 			ctx.fillStyle = "lightgray";
 			ctx.font = "16px Segoe UI Light";
-			//ctx.fillText("Criado por Pedro Augusto", canvas.width - 190, canvas.height - 10);
+			ctx.fillText(canvas.keys[39]+" "+canvas.keys[37], canvas.width - 190, canvas.height - 10);
 			/*ctx.fillRect(this.posicao.x, this.posicao.y, this.dimensao.x * 0.35, this.dimensao.y);
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.posicao.x + this.dimensao.x*0.35, this.posicao.y, this.dimensao.x * 0.3,
@@ -576,6 +577,8 @@ function initComponents(w, h)
 	barra = new Barra();
 	botao1 = new Botao("←", W*0.005, H*0.6);
 	botao2 = new Botao("→", W*0.85, H*0.6);
+	canvas.keys[37] = false;
+	canvas.keys[39] = false;
 	tratarColisoes = new ColisaoComUnidades();
 	gerarObstaculos();
 	canvas.drawCoordenadas();
