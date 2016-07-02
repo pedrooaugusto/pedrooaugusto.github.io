@@ -12,7 +12,7 @@
 		{
 			div[role="main"]
 			{
-				height: 500px;
+				//height: 500px;
 			}
 		}
 		.container .jumbotron
@@ -114,8 +114,9 @@
     {
       var c = document.getElementById('main').offsetWidth;
       var d = document.getElementById('main').offsetHeight;
-      var d = window.outerHeight*0.68;
-     // alert(c);
+      var d = window.outerHeight*0.9;
+      var mq = window.matchMedia( "(min-height: 500px)");
+     // alert(mq.matches);
       document.getElementById('main').innerHTML = "<canvas id='canvas' width="+c+" height="+d+"></canvas>"
       initComponents(c, d);
     }
