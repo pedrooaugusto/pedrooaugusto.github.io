@@ -2,7 +2,7 @@ var gameLoop;
 var ctx, canvas, bola, barra, botao1, botao2, tratarColisoes, W, H;
 var listaDeObstaculos = new Array();
 var primeiraVez = true;
-var cheat = false;
+var cheat = true;
 var opcoes = 
 {
 	sons:{ligado: true, tipo: 'lol'},
@@ -59,8 +59,7 @@ function Canvas(width_canvas, height_canvas)
     	dist : 0,
 		movimentoMouse: function()//Caso o mouse seja utilizado para mover a barra 
 		{
-			//barra.posicao.x = event.clientX - (barra.dimensao.x/2 + 27);
-			//barra.posicao.y = event.clientY - 40;
+			//barra.posicao.x = event.pageX - $(event.target).offset().left - barra.dimensao.x/2;
 		},
 		keyboardEntrada: function()//Caso o teclado seja utilizado para mover a barra
 		{
@@ -76,13 +75,15 @@ function Canvas(width_canvas, height_canvas)
 		mouseUp: function(ex)
 		{
 			var e = ex.changedTouches[0];
-			if(e.clientX > botao1.posicao.x && e.clientX < parseInt(botao1.posicao.x + botao1.dimensao.x) && 
-				e.clientY > botao1.posicao.y && e.clientY < parseInt(botao1.posicao.y + botao1.dimensao.y))
+			var mouseAtualmenteX = e.pageX - $(event.target).offset().left;
+			var mouseAtualmenteY = e.pageY - $(event.target).offset().top;
+			if(mouseAtualmenteX > botao1.posicao.x && mouseAtualmenteX < parseInt(botao1.posicao.x + botao1.dimensao.x) && 
+				mouseAtualmenteY > botao1.posicao.y && mouseAtualmenteY < parseInt(botao1.posicao.y + botao1.dimensao.y))
 			{
 				canvas.keys[37] = false;
 			}
-			else if(e.clientX > botao2.posicao.x && e.clientX < parseInt(botao2.posicao.x + botao2.dimensao.x) && 
-				e.clientY > botao2.posicao.y && e.clientY < parseInt(botao2.posicao.y + botao2.dimensao.y))
+			else if(mouseAtualmenteX > botao2.posicao.x && mouseAtualmenteX < parseInt(botao2.posicao.x + botao2.dimensao.x) && 
+				mouseAtualmenteY > botao2.posicao.y && mouseAtualmenteY < parseInt(botao2.posicao.y + botao2.dimensao.y))
 			{
 				canvas.keys[39] = false;
 			}
@@ -91,19 +92,21 @@ function Canvas(width_canvas, height_canvas)
 		{
 			var e = ex.changedTouches[0];
 			this.startx = parseInt(e.clientX);
+			var mouseAtualmenteX = e.pageX - $(event.target).offset().left;
+			var mouseAtualmenteY = e.pageY - $(event.target).offset().top;
 			//alert(e.clientX +" > "+ botao1.posicao.x +" && "+ e.clientX +" < "+ parseInt(botao1.posicao.x + botao1.dimensao.x) +" && "+ 
 				//(e.clientY) +" > "+ botao1.posicao.y +" && "+ (e.clientY-55) +" < "+ parseInt(botao1.posicao.y + botao1.dimensao.y));
 			//barra.posicao.x = this.startx - barra.dimensao.x/2;
 			//alert(botao1.posicao.y +" lol "+ botao1.dimensao.y);
-			if(e.clientX > botao1.posicao.x && e.clientX < parseInt(botao1.posicao.x + botao1.dimensao.x) && 
-				e.clientY > botao1.posicao.y && e.clientY < parseInt(botao1.posicao.y + botao1.dimensao.y))
+			if(mouseAtualmenteX > botao1.posicao.x && mouseAtualmenteX < parseInt(botao1.posicao.x + botao1.dimensao.x) && 
+				mouseAtualmenteY > botao1.posicao.y && mouseAtualmenteY < parseInt(botao1.posicao.y + botao1.dimensao.y))
 			{
 				canvas.keys[39] = false;
 				canvas.keys[37] = true;
 				//alert(42);
 			}
-			else if(e.clientX > botao2.posicao.x && e.clientX < parseInt(botao2.posicao.x + botao2.dimensao.x) && 
-				e.clientY > botao2.posicao.y && e.clientY < parseInt(botao2.posicao.y + botao2.dimensao.y))
+			else if(mouseAtualmenteX > botao2.posicao.x && mouseAtualmenteX < parseInt(botao2.posicao.x + botao2.dimensao.x) && 
+				mouseAtualmenteX > botao2.posicao.y && mouseAtualmenteY < parseInt(botao2.posicao.y + botao2.dimensao.y))
 			{
 				canvas.keys[37] = false;
 				canvas.keys[39] = true;
@@ -114,7 +117,7 @@ function Canvas(width_canvas, height_canvas)
 		{
 			var e = ex.changedTouches[0];
 			var dist = parseInt(e.clientX - barra.dimensao.x/2);
-			barra.posicao.x = dist;
+			//barra.posicao.x = dist;
 		}
 	};
 };
@@ -616,7 +619,7 @@ function initComponents(w, h)
 	    	//canvas.keys[e.keyCode] = false;
 	    	canvas.eventos.touchMove(e);
 	});*/
-	window.addEventListener("mousemove", canvas.eventos.movimentoMouse, false);
+	canvas.objeto.addEventListener("mousemove", canvas.eventos.movimentoMouse, false);
 	for(var i = 0; i < listaDeObstaculos.length; i++)//Desenar obstaculos
 	{
 		listaDeObstaculos[i].draw();
@@ -625,7 +628,7 @@ function initComponents(w, h)
 	barra.draw();
 	botao1.draw();
 	botao2.draw();
-	//gameLoop = setInterval("loop()", 1000/canvas.frames);
+	gameLoop = setInterval("loop()", 1000/canvas.frames);
 }
 function loop() 
 {	
