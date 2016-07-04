@@ -1,0 +1,173 @@
+<html style="overflow:hidden;">
+
+
+<head>
+
+<title>game</title>
+<script>
+	var ondeX = 75;
+	var score = 0;
+	var ondeXBola = 77;
+	var ondeY = 0;
+	var who = 1;
+	var limitetelaY1 = 0;
+	var limitetelaY2 = 590;
+	var limitetelaX1 = 0;
+	var limitetelaX2 = 1366;
+	var velocidade = 35;
+	function run()
+	{
+		
+		var obg = document.getElementById("barra");
+		var obg1 = document.getElementById("bola");
+		var obg2 = document.getElementById("placar");
+		obg2.innerHTML = score;
+		obg.style.left = ondeX+"px";
+		obg1.style.left = ondeXBola;
+		ondeY = ondeY + 5*(1.06);
+		obg1.style.top = ondeY;
+		if(ondeY > limitetelaY2)
+		{
+			ondeY = 0;
+			ondeXBola = Math.floor(Math.random() * 1000);
+		}
+		if((ondeXBola > ondeX) && (ondeXBola < ondeX+150) && (ondeY > limitetelaY2 -3))
+		{
+			score = score + 5;
+		}
+		else if(ondeY > limitetelaY2 -3)
+		{
+			if(who==4)
+			{
+			who = 1;
+			alert("'-'");
+			score = 0;
+			for(i = 1; i < 4; i++)
+			{
+				var life = document.getElementById("a"+i);
+				life.style.display = "inline-block";
+			}
+			}
+			var life = document.getElementById("a"+who);
+			life.style.display = "none";
+			who++;
+			//alert("Errou!");
+		}
+		else
+		{
+		}
+		setTimeout("run()", 20);	
+		
+	}
+	
+	function decidir()
+	{
+		if(event.keyCode == 39)
+		{
+			avancar();
+		}
+		if(event.keyCode == 37)
+		{
+			retroceder();
+		}	
+	}
+	function avancar()
+	{
+		ondeX = ondeX + velocidade;
+		if(ondeX > limitetelaX2)
+		{
+			ondeX = limitetelaX1;
+		}
+	}
+	function retroceder()
+	{
+		ondeX=ondeX - velocidade;
+		if(ondeX < limitetelaX1)
+		{
+			ondeX = limitetelaX2;
+		}
+	}
+</script>
+<style>
+body
+{
+margin:0;
+}
+#quadro
+{
+width:100%;
+height:100%;
+background-color:black;
+}
+#barra
+{
+	width: 150px;
+	height:30px;
+	background-color:white;
+	position:absolute;
+	left:10px;
+	bottom:30px;
+}
+#bola
+{
+width: 40px;
+height: 40px;
+background-color: white;
+border-radius: 10cm;
+position:absolute;
+top:0px;
+}
+#placar
+{
+float:right;
+width: 100px;
+height: 50px;
+background-color: gray;
+color: red;
+font-size: 1cm;
+border-style:solid;
+border-width: 3px;
+border-color: gold;
+}
+#lifes
+{
+	width:75px;
+	height:30px;
+	border-style: solid;
+	border-color:white;
+}
+#lifes div
+{
+ display:inline-block;
+ width: 20px;
+ height: 25px;
+ background-color: red;
+}
+</style>
+</head>
+
+<body onload="run()" onkeydown="decidir()">
+
+<div id="quadro">
+	<div id="barra">
+	
+	</div>
+	<div id="bola">
+	
+	</div>
+	<div id="placar">
+	</div>
+	<div id="lifes">
+		<div id="a1">
+		</div>
+		<div id="a2">
+		</div>
+		<div id="a3">
+		</div>
+	</div>
+</div>
+
+</body>
+
+
+</html>

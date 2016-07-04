@@ -357,7 +357,7 @@ function ColisaoComUnidades()
 		if(this.bolaColisaoObstaculo())
 		{
 			bola.colisoes.quantas += 1;
-			if(opcoes.sons.tipo == "google")
+			if(opcoes.sons.tipo == "Google")
 			{
 				new Sons().tocarObstaculo();
 			}

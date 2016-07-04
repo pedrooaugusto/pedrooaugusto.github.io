@@ -129,9 +129,9 @@
   <div id="songs">
     <img src="Kite.jpg" alt="MR. KITE" style="display:none;" id="kite"/>
     <img src="kite2.jpg" alt="MR. KITE" style="display:none;" id="kite2"/>
-    <audio src="sounds/blue-beep.ogg" id="barra" class="sounds"></audio>
-    <audio src="sounds/wall-beep.ogg" id="obstaculo" class="sounds"></audio>
-    <audio src="sounds/ball-origin-beep.ogg" id="parede" class="sounds"></audio>
+    <audio src="sounds/paddle-beep.ogg" id="barra" class="sounds"></audio>
+    <audio src="sounds/blue-beep.ogg" id="obstaculo" class="sounds"></audio>
+    <audio src="sounds/wall-beep.ogg" id="parede" class="sounds"></audio>
     <audio src="sounds/Enemy Slain.mp3" id="singleKill" class="sounds"></audio>
     <audio src="sounds/Double Kill Lol.mp3" id="doubleKill" class="sounds"></audio>
     <audio src="sounds/Triple Kill Lol.mp3" id="tripleKill" class="sounds"></audio>
@@ -236,7 +236,23 @@
 
     			case 3:
     				title = "<b>Wiki</b>";
-    				message = "Tomorrow Never Knows...";
+            message = "<h3 style='color:royalblue; margin-top:0;'>Bolinha</h3>"
+                + "<p>Uma reprodução do clássico jogo Atari Breakout By Goolgle "
+                + "Imagens que por sua vez é uma reprodução do Atari Breakout "
+                + "By Atari.</p>"
+                + "Quando a Google lançou o <a href='https://www.google.com.br/search?hl=pt-BR&authuser=0&site=imghp&tbm=isch&source=hp&biw=1366&bih=667&q=atari+breakout&oq=Atar&gs_l=img.3.0.0l10.1504.3620.0.5335.4.4.0.0.0.0.155.509.0j4.4.0....0...1ac.1.64.img..0.4.508.NqQCFpOJ2KE' target='_blank'>esse jogo</a> no google imagens resolvi "
+                + "fazer minha própria verssão com conhecimento mínimo de js e html "
+                + "e saiu <a href='bolinhav001.html'>isso</a>. Algum tempo depois "
+                + "no curso técnico com um pouco mais de conhecimento aquilo virou isso ai."
+                + "<p>Os sons orignais foram obtidos através do google imagens "
+                + "e os de League Of Legends em um .zip que baixei na net (não achei em pt-br).</p>"
+                + "<p>O código pode estar um pouco bagunçado...</p>"
+                + "<p>Parece que no celular não é permitido dar autoplay sem que "
+                + "o usuário dispare um evento, logo sem som.</p>"
+                + "<p><a href='http://burakkanber.com/blog/modeling-physics-javascript-gravity-and-drag/'>"
+                + "Esse artigo me ensinou muitas coisas úteis sobre o canvas.</a></p>"
+                + "<p><b>Caso manje muito de fisíca e esteja disposto a ajudar desenvolva uma rotina "
+                + "melhor para a colisão, como a do Google Imagens.</b></p>";
     				buttons = {};
     		}
     		bootbox.dialog({
