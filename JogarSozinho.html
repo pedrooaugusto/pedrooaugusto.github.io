@@ -1,0 +1,171 @@
+<html>
+	<head>
+		<title>Hello</title>
+	</head>
+	<script type="text/javascript">
+		var numeroVitorias;
+		function Quadro() 
+		{
+			this.noClicks = false;
+			this.all = new Array();
+			this.rodada = -1;
+			this.winAll = [[], [], [], [], [], [], [], []];
+			this.clear = function()
+			{
+				for(var i = 0; i < this.all.length; i++)
+				{
+					this.all[i] = "0";
+				}
+				quadro.rodada+=1;
+				bot.numJogadas = 0;
+				player1.historicoMovimento = [];
+				quadro.noClicks = false;;
+				if(quadro.rodada.valor % 2 == 0)
+				{
+					/*bot.vezDoBot();
+					game.gameLoop();*/
+					game.jogador = 88;
+				}
+			};
+			this.isFull = function()
+			{
+				var cheio = true;
+				for(var i = 0; i < this.all.length; i++)
+				{
+					if(this.all[i] == "0")
+					{
+						cheio = false;
+						break;
+					}
+				}
+				return cheio;
+			};
+			this.anyVictory = function()
+			{
+				var oque = false;
+				for (var i = 0; i < quadro.winAll.length; i++) 
+				{
+					var texto = quadro.winAll[i][0] + quadro.winAll[i][1] + quadro.winAll[i][2];
+					if(texto == "ooo" || texto == "xxx")
+					{
+						oque = true;
+						//quadro.noClicks = true;
+						break;
+					}
+				}
+				return oque;
+			}
+		}
+		function Game() 
+		{
+			this.jogador = 88;
+			this.marcar = function ()
+			{
+				if(this.value.length == 0 && !quadro.noClicks)
+				{
+					if(game.jogador == 88)
+					{
+						this.value = "x";
+						game.jogador = 79;
+						game.gameLoop();
+						player1.addMovimento(this);
+						if(bot.playWithBot == true)
+						{
+							if(!quadro.isFull())
+							{
+								game.jogador = 88;
+								bot.vezDoBot();
+								game.gameLoop();
+							}
+						}
+						else
+						{
+							game.doAnimationSuaVez('#j2');
+						}
+					}
+					else
+					{
+						this.value = "o";
+						game.jogador = 88;
+						game.gameLoop();
+						game.doAnimationSuaVez('#j1');
+					}
+				}
+			};
+			this.gameLoop = function()
+			{
+				if(quadro.anyVictory())
+				{
+					if(game.jogador == 79)
+					{
+						/*Vitoria player1*/
+						alert("eoq");
+					}
+					else
+					{
+						/*Vitoria bot*/
+						alert("Ai sim");
+					}
+					return false;
+				}
+				else
+				{
+					if(quadro.isFull())
+					{
+						quadro.clear();
+					}
+				}
+			};
+
+			this.initComponents = function ()
+			{
+				quadro.all = ["0", "0", "0", "0", "0", "0", "0", "0", "0"];
+				quadro.winAll[0][0] = quadro.all[0];	quadro.winAll[3][0] = quadro.all[0];		
+				quadro.winAll[0][1] = quadro.all[1];	quadro.winAll[3][1] = quadro.all[3];
+				quadro.winAll[0][2] = quadro.all[2];	quadro.winAll[3][2] = quadro.all[6];
+
+				quadro.winAll[1][0] = quadro.all[3];	quadro.winAll[4][0] = quadro.all[1];
+				quadro.winAll[1][1] = quadro.all[4];	quadro.winAll[4][1] = quadro.all[4];
+				quadro.winAll[1][2] = quadro.all[5];	quadro.winAll[4][2] = quadro.all[7];
+
+				quadro.winAll[2][0] = quadro.all[6];	quadro.winAll[5][0] = quadro.all[2];
+				quadro.winAll[2][1] = quadro.all[7];	quadro.winAll[5][1] = quadro.all[5];
+				quadro.winAll[2][2] = quadro.all[8];	quadro.winAll[5][2] = quadro.all[8];
+
+				quadro.winAll[6][0] = quadro.all[0];	quadro.winAll[7][0] = quadro.all[2];
+				quadro.winAll[6][1] = quadro.all[4];	quadro.winAll[7][1] = quadro.all[4];
+				quadro.winAll[6][2] = quadro.all[8];	quadro.winAll[7][2] = quadro.all[6];
+			};
+		}
+		function start()
+		{
+			while(numeroVitorias != 200)
+			{
+				if(game.rodada % 2 == 0)
+				{
+					if(game.jogador == 88)
+					{
+						player1.vezDoJogador();
+						game.gameLoop();
+						game.jogador = 79;
+					}
+					else
+					{
+						bot.vezDoBot();
+						game.gameLoop();
+						game.jogador = 88;	
+					}
+				}
+				else
+				{
+
+				}
+			}
+		}
+	</script>
+	<body>
+		<div id="historico">
+			
+		</div>
+	</body>
+</html>

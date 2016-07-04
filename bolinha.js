@@ -1,12 +1,13 @@
 var gameLoop;
-var ctx, canvas, bola, barra, botao1, botao2, tratarColisoes, W, H;
+var ctx, canvas, bola, barra, botao1, botao2, pauseButton, tratarColisoes, W, H, GAME_STATE;
 var listaDeObstaculos = new Array();
 var primeiraVez = true;
 var cheat = true;
-var opcoes = 
+var opcoes =
 {
-	sons:{ligado: true, tipo: 'lol'},
-	disposicaoObstaculo: 'Normal'
+	sons:{ligado: true, tipo: 'Google'},
+	disposicaoObstaculo: 'Normal',
+	botoes: false
 }
 function Canvas(width_canvas, height_canvas)
 {
@@ -41,14 +42,14 @@ function Canvas(width_canvas, height_canvas)
 	    {
 	       if (barra.velocidade.x < barra.velocidade.limite) 
 	       {
-	            barra.velocidade.x+=((W*0.15)/6)/3;
+	            barra.velocidade.x+=barra.velocidade.limite/3;
 	        }
 	    }
 	    if (canvas.keys[37])
 		{
 		    if (barra.velocidade.x > -barra.velocidade.limite) 
 		    {
-		        barra.velocidade.x-=((W*0.15)/6)/3;
+		        barra.velocidade.x-=barra.velocidade.limite/3;
 		    }
 		}
        	barra.velocidade.x *= 0.8;
@@ -75,63 +76,114 @@ function Canvas(width_canvas, height_canvas)
 		mouseUp: function(ex)
 		{
 			var e = ex.changedTouches[0];
-			var mouseAtualmenteX = e.pageX - $(event.target).offset().left;
-			var mouseAtualmenteY = e.pageY - $(event.target).offset().top;
-			if(mouseAtualmenteX > botao1.posicao.x && mouseAtualmenteX < parseInt(botao1.posicao.x + botao1.dimensao.x) && 
-				mouseAtualmenteY > botao1.posicao.y && mouseAtualmenteY < parseInt(botao1.posicao.y + botao1.dimensao.y))
+			var mouseAtualmenteX = e.pageX - $(ex.target).offset().left;
+			var mouseAtualmenteY = e.pageY - $(ex.target).offset().top;
+			if(opcoes.botoes && mouseAtualmenteX > botao1.posicao.x && mouseAtualmenteX <
+			 	parseInt(botao1.posicao.x + botao1.dimensao.x) && mouseAtualmenteY > 
+			 	botao1.posicao.y && mouseAtualmenteY < parseInt(botao1.posicao.y + botao1.dimensao.y))
 			{
 				canvas.keys[37] = false;
 			}
-			else if(mouseAtualmenteX > botao2.posicao.x && mouseAtualmenteX < parseInt(botao2.posicao.x + botao2.dimensao.x) && 
-				mouseAtualmenteY > botao2.posicao.y && mouseAtualmenteY < parseInt(botao2.posicao.y + botao2.dimensao.y))
+			else if(opcoes.botoes && mouseAtualmenteX > botao2.posicao.x && mouseAtualmenteX <
+			 		parseInt(botao2.posicao.x + botao2.dimensao.x) && mouseAtualmenteY > 
+			 		botao2.posicao.y && mouseAtualmenteY < parseInt(botao2.posicao.y + botao2.dimensao.y))
 			{
 				canvas.keys[39] = false;
+			}
+		},
+		clickada: function(ex)
+		{
+			var mouseAtualmenteX = ex.pageX - $(ex.target).offset().left;	
+			var mouseAtualmenteY = ex.pageY - $(ex.target).offset().top;
+			if(mouseAtualmenteX > pauseButton.posicao.x && mouseAtualmenteX <
+			 	parseInt(pauseButton.posicao.x + pauseButton.dimensao.x) && mouseAtualmenteY >
+			 	pauseButton.posicao.y && mouseAtualmenteY < parseInt(pauseButton.posicao.y + 
+			 		pauseButton.dimensao.y))
+			{
+				if(gameLoop != null && GAME_STATE == 'RUN')
+				{
+					pauseButton.texto = "Continuar";
+					pauseButton.draw();
+					clearTimeout(gameLoop);
+					gameLoop = null;
+					GAME_STATE = 'PAUSE';
+				}
+				else if(GAME_STATE == 'PAUSE')
+				{
+					pauseButton.texto = "PAUSE";
+					gameLoop = setInterval("loop()", 1000/canvas.frames);
+					GAME_STATE = 'RUN';
+				}
+			}
+			else if(gameLoop == null && GAME_STATE == 'LOSER')
+			{
+				if(mouseAtualmenteX > (W/2 - (W*0.7)/2) && mouseAtualmenteX <
+			 		parseInt((W/2 - (W*0.7)/2) + W*0.7) && mouseAtualmenteY >
+			 		H*0.25 && mouseAtualmenteY < parseInt(H*0.25 + 
+			 		H*0.11))
+			 	{
+			 		bola.vidas = 3;
+			 		gerarObstaculos();
+					gameLoop = setInterval("loop()", 1000/canvas.frames);
+					GAME_STATE = 'RUN';
+			 	}
+			}
+			else if(gameLoop == null && GAME_STATE == 'WIN')
+			{
+				//W*0.03, H*0.4, W*0.3, H*0.08
+				if(mouseAtualmenteX > W*0.03 && mouseAtualmenteX <
+			 		parseInt(W*0.03 + W*0.3) && mouseAtualmenteY >
+			 		H*0.4 && mouseAtualmenteY < parseInt(H*0.4 + 
+			 		H*0.08))
+				{
+					window.open("https://www.youtube.com/watch?v=1-CMOMYdIlI","_blank")
+				}
 			}
 		},
 		mouseDown: function(ex)
 		{
 			var e = ex.changedTouches[0];
-			this.startx = parseInt(e.clientX);
-			var mouseAtualmenteX = e.pageX - $(event.target).offset().left;
-			var mouseAtualmenteY = e.pageY - $(event.target).offset().top;
-			//alert(e.clientX +" > "+ botao1.posicao.x +" && "+ e.clientX +" < "+ parseInt(botao1.posicao.x + botao1.dimensao.x) +" && "+ 
-				//(e.clientY) +" > "+ botao1.posicao.y +" && "+ (e.clientY-55) +" < "+ parseInt(botao1.posicao.y + botao1.dimensao.y));
-			//barra.posicao.x = this.startx - barra.dimensao.x/2;
-			//alert(botao1.posicao.y +" lol "+ botao1.dimensao.y);
-			if(mouseAtualmenteX > botao1.posicao.x && mouseAtualmenteX < parseInt(botao1.posicao.x + botao1.dimensao.x) && 
-				mouseAtualmenteY > botao1.posicao.y && mouseAtualmenteY < parseInt(botao1.posicao.y + botao1.dimensao.y))
+			var mouseAtualmenteX = e.pageX - $(ex.target).offset().left;
+			var mouseAtualmenteY = e.pageY - $(ex.target).offset().top;
+			this.startx = mouseAtualmenteX;
+			if(!opcoes.botoes){barra.posicao.x = this.startx - barra.dimensao.x/2};
+			if(opcoes.botoes && mouseAtualmenteX > botao1.posicao.x && mouseAtualmenteX <
+			 	parseInt(botao1.posicao.x + botao1.dimensao.x) && mouseAtualmenteY >
+			 	botao1.posicao.y && mouseAtualmenteY < parseInt(botao1.posicao.y + botao1.dimensao.y))
 			{
 				canvas.keys[39] = false;
 				canvas.keys[37] = true;
-				//alert(42);
 			}
-			else if(mouseAtualmenteX > botao2.posicao.x && mouseAtualmenteX < parseInt(botao2.posicao.x + botao2.dimensao.x) && 
-				mouseAtualmenteX > botao2.posicao.y && mouseAtualmenteY < parseInt(botao2.posicao.y + botao2.dimensao.y))
+			else if(opcoes.botoes && mouseAtualmenteX > botao2.posicao.x && mouseAtualmenteX <
+			 		parseInt(botao2.posicao.x + botao2.dimensao.x) && mouseAtualmenteY >
+			 		botao2.posicao.y && mouseAtualmenteY < parseInt(botao2.posicao.y + botao2.dimensao.y))
 			{
 				canvas.keys[37] = false;
 				canvas.keys[39] = true;
-				//alert(33);
 			}
 		},
 		touchMove: function(ex)
 		{
-			var e = ex.changedTouches[0];
-			var dist = parseInt(e.clientX - barra.dimensao.x/2);
-			//barra.posicao.x = dist;
+			if(!opcoes.botoes){
+				var e = ex.changedTouches[0];
+				var mouseAtualmenteX = e.pageX - $(ex.target).offset().left;
+				var dist = parseInt(mouseAtualmenteX - barra.dimensao.x/2);
+				barra.posicao.x = dist;
+			}
 		}
 	};
 };
 function Bola()
 {
 	this.nome = "Bola";
-	this.velocidade = {x: 0, y: (W*0.016)/4, xC: (W*0.016)/1.6, yC: ((W*0.016)/1.8)};
-	this.dimensao = {x: W*0.016, y: W*0.016};
-	this.posicao = {x: W/2, y: H*0.6};
-	this.raio = W*0.010;
+	this.velocidade = {x: 0, y: (H*0.023)/3.5, xC: (H*0.023)/1.6, yC: ((H*0.023)/1.6)};
+	this.dimensao = {x: H*0.023, y: H*0.023};
+	this.posicao = {x: W/2, y: H*0.4};
+	this.raio = H*0.016;
 	this.restituicao = -1;
 	this.cor = "white";
-	this.vidas = 6;
-	this.colisoes = {emColisao: true, quantas: 0, vel: {y: (W*0.016)/4, x: (W*0.016)/3}};
+	this.vidas = 4;
+	this.colisoes = {emColisao: true, quantas: 0, vel: {y: (H*0.023)/3.5, x: (H*0.023)/2.5}};
 	this.multKill = 0;
 	this.draw = function() 
 	{
@@ -142,8 +194,8 @@ function Bola()
 			ctx.arc(this.posicao.x + this.dimensao.x*0.5, this.posicao.y + this.dimensao.x*0.5,
 				this.raio, 0, Math.PI*2, true);
 			ctx.fill();
-	    	/*ctx.fillStyle = "green";
-	    	ctx.fillRect(bola.posicao.x, bola.posicao.y, bola.dimensao.x, bola.dimensao.y);*/
+	    	ctx.fillStyle = "green";
+	    	//ctx.fillRect(bola.posicao.x, bola.posicao.y, bola.dimensao.x, bola.dimensao.y);
 	    ctx.closePath();
 	    ctx.beginPath();
 	    	ctx.fillStyle = "white";
@@ -158,9 +210,9 @@ function Bola()
 function Barra() 
 {
 	this.nome = "Barra";
-	this.velocidade = {x: 0, y: 0, limite: (W*0.15)/6};
-	this.dimensao = {x: W*0.15, y: H*0.03};
-	this.posicao = {x: 0, y:H*0.9};
+	this.velocidade = {x: 0, y: 0, limite: (W*0.23)/6};
+	this.dimensao = {x: W*0.23, y: H*0.02};
+	this.posicao = {x: 0, y:H*0.75};
 	this.draw = function () 
 	{
 		ctx.beginPath();
@@ -173,7 +225,7 @@ function Barra()
 			ctx.fillRect(this.posicao.x, this.posicao.y, this.dimensao.x, this.dimensao.y);
 			ctx.fillStyle = "lightgray";
 			ctx.font = "16px Segoe UI Light";
-			ctx.fillText(canvas.keys[39]+" "+canvas.keys[37], canvas.width - 190, canvas.height - 10);
+			//ctx.fillText(canvas.keys[39]+" "+canvas.keys[37], canvas.width - 190, canvas.height - 10);
 			/*ctx.fillRect(this.posicao.x, this.posicao.y, this.dimensao.x * 0.35, this.dimensao.y);
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.posicao.x + this.dimensao.x*0.35, this.posicao.y, this.dimensao.x * 0.3,
@@ -216,13 +268,14 @@ function Obstaculo()
 };
 function gerarObstaculos()
 {
+	listaDeObstaculos = [];
 	if(opcoes.disposicaoObstaculo == "Normal")
 	{
-        var widthObstaculo = new Obstaculo().getCalculatedDimension(W*0.15, W*0.95);
-        var heightObstaculo = new Obstaculo().getCalculatedDimension(H*0.035, H*0.95);
+        var widthObstaculo = new Obstaculo().getCalculatedDimension(W*0.17, W*0.95);
+        var heightObstaculo = new Obstaculo().getCalculatedDimension(H*0.025, H*0.95);
         //alert(widthObstaculo);
         var linhas = Math.floor(W/widthObstaculo);
-        var colunas = Math.floor((H*0.25)/(heightObstaculo));
+        var colunas = Math.floor((H*0.2)/(heightObstaculo));
         //alert(linhas+" "+colunas);
         var espacamento = ((W*0.05)/(linhas+1));
         var espacamento2 = ((H*0.05)/(colunas+1));
@@ -237,7 +290,7 @@ function gerarObstaculos()
                 var x = (i * widthObstaculo)+(espacamento*(i+1));
                 var y = (j * heightObstaculo)+(espacamento2*(j+1));
         		obs.posicao.x = x;
-        		obs.posicao.y = y+H*0.15;
+        		obs.posicao.y = y+H*0.1;
         		obs.dimensao.x = widthObstaculo;//120
         		obs.dimensao.y = heightObstaculo;
         		obs.cor = "rgb("+r+", "+g+", "+b+")";
@@ -247,8 +300,8 @@ function gerarObstaculos()
     }
     else
     {
-        var heightObstaculo = new Obstaculo().getCalculatedDimension(H*0.035, H*0.95);
-        var colunas = Math.floor((H*0.25)/(heightObstaculo));
+        var heightObstaculo = new Obstaculo().getCalculatedDimension(H*0.025, H*0.95);
+        var colunas = Math.floor((H*0.2)/(heightObstaculo));
         var espacamento = ((W*0.003));
     	for(var i = 0; i < colunas; i++)
     	{
@@ -260,10 +313,10 @@ function gerarObstaculos()
     			var b = Math.floor(Math.random() * 255);
     			var obs = new Obstaculo();
     			obs.posicao.x = total + espacamento;
-        		obs.posicao.y = (i*heightObstaculo+(espacamento*(i+1)));//Chutes
+        		obs.posicao.y = H*0.1+(i*heightObstaculo+(espacamento*(i+1)));//Chutes
         		var w = Math.floor(Math.random() * W*0.3 + 60);
         		w = (total + w + espacamento >= W - espacamento ? ((W - total) - espacamento) : w);
-        		obs.dimensao.x = w - 5;
+        		obs.dimensao.x = w - espacamento;
         		obs.dimensao.y = heightObstaculo;
         		obs.cor = "rgb("+r+", "+g+", "+b+")";
         		listaDeObstaculos.push(obs);
@@ -414,11 +467,11 @@ function ColisaoComUnidades()
 	};
 	this.bolaColisaoBarra = function ()
 	{
-		if(this.colidiu(barra, bola, true, 0.80))
+		if(this.colidiu(barra, bola, true, 0.75))
 		{
 			bola.velocidade.y *= bola.restituicao;
 			bola.velocidade.x = this.parteDaBola(barra);
-			bola.posicao.y = barra.posicao.y - bola.raio*2;
+			bola.posicao.y = barra.posicao.y - bola.raio;
 			multKill = 0;
 			return true;
       		//bola.posicao.y = barra.posicao.y - bola.raio*2;
@@ -593,14 +646,19 @@ function initComponents(w, h)
 	ctx = canvas.objeto.getContext("2d");
 	bola = new Bola();
 	barra = new Barra();
-	botao1 = new Botao("←", W*0.005, H*0.6);
-	botao2 = new Botao("→", W*0.85, H*0.6);
+	botao1 = new Botao("←", W*0.01, H*0.83);
+	botao2 = new Botao("→", W*0.79, H*0.83);
+	GAME_STATE = 'RUN';
+	pauseButton = new Botao("PAUSE", W/2 - (W*0.3)/2, H*0.91);
+	pauseButton.dimensao.x = W*0.3;
+	pauseButton.dimensao.y = H*0.07;
+	pauseButton.tamText = 0.05;
+	pauseButton.cor = "rgba(224, 4, 14, 1)";
 	canvas.keys[37] = false;
 	canvas.keys[39] = false;
 	tratarColisoes = new ColisaoComUnidades();
 	gerarObstaculos();
 	canvas.drawCoordenadas();
-	//window.addEventListener("keydown", canvas.eventos.keyboardEntrada, false);
 	window.addEventListener("keydown", function (e) {
 	    	canvas.keys[e.keyCode] = true;
 	});
@@ -608,17 +666,18 @@ function initComponents(w, h)
 	    	canvas.keys[e.keyCode] = false;
 	});
 	canvas.objeto.addEventListener("touchstart", function (e) {
-	    	//canvas.keys[e.keyCode] = true;
 	    	canvas.eventos.mouseDown(e);
 	});
 	canvas.objeto.addEventListener("touchend", function (e) {
-	    	//canvas.keys[e.keyCode] = false;
 	    	canvas.eventos.mouseUp(e);
 	});
-	/*window.addEventListener("touchmove", function (e) {
-	    	//canvas.keys[e.keyCode] = false;
+	canvas.objeto.addEventListener("mousedown", function(e){
+		//alert('11');
+		canvas.eventos.clickada(e);
+	});
+	canvas.objeto.addEventListener("touchmove", function (e) {
 	    	canvas.eventos.touchMove(e);
-	});*/
+	});
 	canvas.objeto.addEventListener("mousemove", canvas.eventos.movimentoMouse, false);
 	for(var i = 0; i < listaDeObstaculos.length; i++)//Desenar obstaculos
 	{
@@ -628,6 +687,7 @@ function initComponents(w, h)
 	barra.draw();
 	botao1.draw();
 	botao2.draw();
+	pauseButton.draw();
 	gameLoop = setInterval("loop()", 1000/canvas.frames);
 }
 function loop() 
@@ -645,17 +705,23 @@ function loop()
 	}
 	bola.draw();
 	barra.draw();
-	botao1.draw();
-	botao2.draw();
+	if (opcoes.botoes){
+		botao1.draw();
+		botao2.draw();	
+	};
+	pauseButton.draw();
 	if(bola.vidas <= 0)
 	{	
 	   	clearTimeout(gameLoop);
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		drawTARDIS();
+		gameLoop = null;
+		GAME_STATE = 'LOSER';
 	}
 	if(listaDeObstaculos.length == 0)
 	{
 	   	clearTimeout(gameLoop);
+	   	gameLoop = null;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		new Sons().tocarAce();
 		vencedor();
@@ -663,78 +729,69 @@ function loop()
 }
 function drawTARDIS()//Tédio...
 {
+	canvas.limparTela();
 	ctx.beginPath();
-
+	ctx.fillStyle = "green";
+	ctx.fillRect(W/2 - (W*0.7)/2, H*0.25, W*0.7, H*0.11);
+	ctx.font = W*0.07+"px Segoe UI Light";
 	ctx.fillStyle = "white";
-	ctx.rect(((W/2)-(W*0.03)/2), H/5.5, W*0.03, W*0.032);
-	ctx.fill();
-	ctx.fillStyle = "royalblue";
-	ctx.fillRect(canvas.width/2 - (W/9)/2, canvas.height/3.9, W/9, H/49);
-	ctx.fillRect(canvas.width/2 - (W/8)/2, canvas.height/3.6, W/8, H/49);
-	ctx.fillRect(canvas.width/2 - (W/6.5)/2, canvas.height/3.3, W/6.5, H/49);
-	ctx.fillRect(canvas.width/2 - (W/6.5)/2, canvas.height/3, W/6.5, H/2.6);
-	ctx.fillStyle = "black";
-	ctx.fillRect(canvas.width/2 - (W/6.8)/2, canvas.height/3.2, W/6.8, H/24.75);
-	ctx.fillStyle = "lightgray";
-	ctx.fillRect(canvas.width/2 - (W/6.8)/2, canvas.height/2.75, W/23.5, H/10);
-	ctx.strokeStyle ="#383838";
-	ctx.lineWidth= 0.7;
-	ctx.moveTo(canvas.width/2 - (W/6.8)/2, canvas.height*0.4);
-	ctx.lineTo(canvas.width/2 - (W/6.8)/4.5, canvas.height*0.4);
-	ctx.moveTo(canvas.width/2 - W/16, canvas.height*0.365);
-	ctx.lineTo(canvas.width/2 - W/16, canvas.height*0.463);
-	ctx.moveTo(canvas.width/2 - W/23, canvas.height*0.365);
-	ctx.lineTo(canvas.width/2 - W/23, canvas.height*0.463);
-	ctx.stroke();
-	ctx.fillRect(canvas.width/2 + (W/6.8)/5, canvas.height/2.75, W/23.5, H/10);
-	ctx.moveTo(canvas.width/2 + (W/6.8)/5, canvas.height*0.4);
-	ctx.lineTo(canvas.width/2 + (W/6.8)/2.05, canvas.height*0.4);
-	ctx.moveTo(canvas.width/2 + W/16, canvas.height*0.365);
-	ctx.lineTo(canvas.width/2 + W/16, canvas.height*0.463);
-	ctx.moveTo(canvas.width/2 + W/23, canvas.height*0.365);
-	ctx.lineTo(canvas.width/2 + W/23, canvas.height*0.463);
-	ctx.stroke();
-	ctx.strokeStyle = "black";
-	ctx.fillStyle = "royalblue";
-	ctx.fillRect(canvas.width/2 - (W/5.85)/2, canvas.height/1.4, W/5.85, H/49.5);
-	ctx.fillRect(canvas.width/2 - (W/4.68)/2, canvas.height/1.36, W/4.68, H/49.5);
-	ctx.moveTo(canvas.width/2, canvas.height/3.2);
-	ctx.lineTo(canvas.width/2, canvas.height/4 + 240);
-	ctx.stroke();
-	ctx.fillStyle = "white";
-	ctx.font = W*0.012+"px Segoe UI Light";
-	ctx.fillText("GAME OVER", canvas.width/2 - (W/15)/2, canvas.height/2.9);
-	ctx.closePath();
-	ctx.beginPath();
-	ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
-	ctx.arc(canvas.width/2 + (W*0.005)*3, canvas.height/2 + (W*0.005)*5, W*0.005, 0, Math.PI*2, true);
-	ctx.fill();
-	ctx.fillStyle = "red";
-	ctx.fillRect(canvas.width/8, canvas.height/4, W/5, H/12);
-	ctx.font = W*0.025+"px Segoe UI Light";
-	ctx.fillStyle = "white";
-	ctx.fillText("RETRY", canvas.width/5.2, canvas.height/3.2);
+	ctx.shadowBlur = 3;
+	ctx.shadowColor = "white";
+	ctx.fillText("RETRY", W*0.4, H*0.33);
+	ctx.font = W*0.1+"px Segoe UI Light";
+	ctx.fillStyle = "gold";
+	ctx.shadowBlur = 3;
+	ctx.shadowColor = "white";
+	ctx.fillText("GAME OVER", canvas.width/4.2, canvas.height/5);
 	ctx.closePath();
 }
 function Botao(texto, lx, ly)
 {
 	this.nome = "Botão";
 	this.texto = texto;
-	this.dimensao = {x: W/7, y: H*0.15};
+	this.dimensao = {x: W*0.2, y: H*0.15};
 	this.posicao = {x: lx, y: ly};
-	this.cor = "rgba(31, 32, 33, 0.05)";
+	this.tamText = 0.1;
+	this.cor = "rgba(141, 143, 144, 0.1)";
 	this.draw = function()
 	{
-		ctx.beginPath();
-			ctx.shadowBlur = 0.5;
-			ctx.shadowColor = "white";
-			ctx.fillStyle = this.cor;
-			ctx.fillRect(this.posicao.x, this.posicao.y, this.dimensao.x, this.dimensao.y);
-			ctx.shadowBlur = 0;
-			ctx.shadowColor = "blue";
-			ctx.font = W*0.08+"px Segoe UI Light";
-			ctx.fillStyle = "white";
-			ctx.fillText(this.texto, this.posicao.x+(this.dimensao.x/4), this.posicao.y+(this.dimensao.y/1.2));
-		ctx.closePath();
+			ctx.beginPath();
+				ctx.shadowBlur = 3;
+				ctx.shadowColor = "lightgray";
+				ctx.fillStyle = this.cor;
+				ctx.fillRect(this.posicao.x, this.posicao.y, this.dimensao.x, this.dimensao.y);
+				ctx.shadowBlur = 0;
+				ctx.shadowColor = "blue";
+				var cc = this.posicao.x+(this.dimensao.x/3.7);
+				if(this.texto != "PAUSE")
+					cc = this.posicao.x+(this.dimensao.x/6.5);
+				ctx.font = W*this.tamText+"px Segoe UI Light";
+				ctx.fillStyle = "white";
+				ctx.fillText(this.texto, cc, this.posicao.y+(this.dimensao.y/1.3));
+			ctx.closePath();
 	};
+}
+function vencedor()
+{
+	GAME_STATE = 'WIN';
+	alert("Você acaba de ser convidado para ver o maravilhoso\nMr. Kite");
+	canvas.limparTela();
+	ctx.beginPath();
+		var img = document.getElementById("kite2");
+		//img.src = 'sgt.png';
+		ctx.drawImage(img, W*0.105, H*0.49, W*0.8, H*0.5);
+		ctx.fillStyle = "white";
+		ctx.font = "20px Segoe UI Light";
+		ctx.fillText("The celebrated Mr. K ", W*0.03, H*0.075);
+		ctx.fillText("Performs his feat on Saturday", W*0.03, H*0.135);
+		ctx.fillText("At Bishop's Gate.", W*0.03, H*0.195);
+		ctx.fillText("The Hendersons will dance and sing", W*0.03, H*0.255);
+		ctx.fillText("As Mr. Kite flies through the ring.", W*0.03, H*0.315);
+		ctx.fillStyle = "yellow";
+		ctx.fillText(" -'Don't be late!'", W*0.03, H*0.375);
+		ctx.fillStyle = "rgb(31, 29, 29)";
+		ctx.fillRect(W*0.03, H*0.4, W*0.3, H*0.08);
+		ctx.fillStyle = "white";
+		ctx.fillText("PLAY", W*0.105, H*0.46);
+	ctx.closePath();
 }
