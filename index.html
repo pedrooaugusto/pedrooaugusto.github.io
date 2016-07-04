@@ -1,9 +1,183 @@
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Pedro Augusto</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap-3.3.6/bootstrap-3.3.6/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="baseDaPagina.css" rel="stylesheet" media="screen">
+	<title>Bootstrap!</title>
+	<style type="text/css">
+		@media (min-width: 992px) 
+		{
+			div[role="main"]
+			{
+				height: 500px;
+			}
+		}
+		.container .jumbotron
+		{
+			border: none;
+			border-radius: 0cm;
+			margin-top: 5px;
+			padding: 5px;
+			background: white;
+			//text-align: left;
+		}
+		.painelBoasVindas
+		{
+			background: red;
+		}
+		span.tab
+		{
+    		padding-left: 15px; /* Or desired space*/
+		}
+		span.tab2
+		{
+			padding-left: 25px;
+		}
+		span.tab3
+		{
+			padding-left: 35px;
+		}
+		span.tab4
+		{
+			padding-left: 45px;
+		}
+		span.n
+		{
+			color: #4e0c0c;
+			font-weight: 600;
+		}
+		span.t
+		{
+			color: #361780;
+			font-weight: 600;
+		}
+		.modal-backdrop.in
+		{
+			opacity: 0.8;
+		}
+	</style>
 </head>
 <body>
-	<h1><center>REDIRECT...</center></h1>
-	<h1><center><a href="teste.html">Clique aqui</a></center></h1>
+	<div class="container">
+   		<header class="row">
+   			<nav class="col-md-12 navbar navbar-default navbar-fixed-top">
+  				<div class="container-fluid">
+    				<div class="navbar-header">
+    					 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" 		aria-controls="navbar">
+            				<span class="sr-only">Toggle navigation</span>
+            				<span class="icon-bar"></span>
+            				<span class="icon-bar"></span>
+            				<span class="icon-bar"></span>
+          				</button>
+      					<a class="navbar-brand" href="#">Pedro, o augusto</a>
+    				</div>
+    				<div id="navbar" class="navbar-collapse collapse">
+	    				<ul class="nav navbar-nav">
+	      					<li class="active"><a href="#">Home</a></li>
+	      					<li><a href="bolinha/bolinha.html">Bolinha</a></li>
+	      					<li><a href="jogo da velha/jogoDaVelha.html">Jogo Da Velha</a></li> 
+	      					<li><a href="#">Jogo Da Memória</a></li>
+	      					<li><a href="#">Jogo Da Cobrinha</a></li> 
+	      					<li><a href="#">Quebra-Cabeça</a></li>
+	    				</ul>
+	    			</div>
+  				</div>
+			</nav>
+   		</header>
+   		<div class="row">
+       		<div role="main" class="col-md-12">
+       			<div class="col-md-8 col-md-offset-2 jumbotron">
+       				<img src="alluka.jpg" width="200" height="200">
+       				<h3>Pedro Augusto</h3>
+       				<p class="lead">'Blog' de um cara maneiro que tava entediado mas precisa aprender o mínimo de
+       				bootstrap e github, pois não da pra usar position:absolute e dropbox pra sempre, né?
+       				Aqui encontra-se alguns projetos interessantes, mas talvez não tão utéis, relacionados a programação
+       				que eu e meu amigo, stackOverJoão, fizemos ao longo do ensino médio.
+       				</p>
+       				<p style="color:rgb(22, 73, 154)">Enjoy!</p>
+      			</div>
+       		</div>
+   		</div>
+   		<footer class="row footer rodape">
+   			<div class="col-md-2 col-md-offset-1">
+   				<button type="button" class="btn btn-md btn-primary" onclick="buttonRodapePressed(1)">Download</button>
+   			</div>
+   			<div class="col-md-2 col-md-offset-2">
+   				<button type="button" class="btn btn-md btn-primary" onclick="buttonRodapePressed(2)">Source</button>
+   			</div>
+   			<div class="col-md-2 col-md-offset-2">
+   				<button type="button" class="btn btn-md btn-primary" onclick="buttonRodapePressed(3)">Wiki</button>
+   			</div>
+   		</footer>
+	</div>
 </body>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="bootstrap-3.3.6/bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-3.3.6/bootstrap-3.3.6/dist/js/bootbox.min.js"></script>
+    <script type="text/javascript">
+    	function buttonRodapePressed (which) 
+    	{
+    		var message, title;
+    		var buttons;
+    		switch(which)
+    		{
+    			case 1:
+    				title = "<b>Download</b>";
+    				message = "Em resposta a várias petições iniciais que recebemos referentes à "+ 
+    						   "Lei de Direitos Autorais do Milênio Digital dos EUA (DMCA), removemos "+
+    						   "o arquivo desta página. Se desejar, leia as petições iniciais da DMCA "+
+    						   "que causaram as remoções em pedrooaugusto.github.io";
+    			    buttons = {};
+    			break;
+
+    			case 2:
+    				title = "<b>Source</b>";
+    				message = "<span class='n'>public class</span> <span class='t'>Pedro</span> <span class='n'>extends "+
+    				          "</span><span class='t'>Human</span> <span class='n'>implements</span> <span class='t'>"+
+    				          "Nice</span>, <span class='t'>Funny</span>, <span class='t'>NERD</span>, <span class='t'>"+
+    				          "Procrastinator</span><br>"+
+    						  "{<br>"+
+    						  "<span class='tab'><span class='n'>public static</span> <span class='t'>void</span> <b>main</b>("+
+    						  "<span class='t'>String</span>[] args){<br></span>"+
+    						  "<span class='tab2'><span class='t'>Pedro</span> eu = <span class='n'>new</span> <span "+
+    						  "class='t'>Pedro()</span>;</span><br>"+
+						  	  "<span class='tab2'><span class='n'>while</span>(!<span class='t'>false</span> && "+
+						  	  "eu.<b>isAlive</b>())<br></span>"+
+					  	  	  "<span class='tab2'>{<br></span>"+
+					  	  	  "<span class='tab3'><span class='n'>try</span><br></span>"+
+					  	  	  "<span class='tab3'>{<br></span>"+
+					  	  	  "<span class='tab4'>eu.<b>doSomething</b>();<br></span>"+
+					  	  	  "<span class='tab3'>}<span class='n'>catch</span>(<span class='t'>OtherPeopleException"+
+					  	  	  "</span> ex){<br></span>"+
+					  	  	  "<span class='tab4'>ex.<b>tryAgain</b>();<br></span>"+
+					  	  	  "<span class='tab3'>}<br></span>"+
+					  	  	  "<span class='tab2'>}<br></span>"+
+					  	  	  "<span class='tab2'>eu.<b>RIP</b>();<span style='color:green;'>//and now my watch has ended</span><br></span>"+
+					  	  	  "<span class='tab'>}<br></span>"+
+					  	  	  "}";	  	  	  
+    				buttons = {};
+    			break;
+
+    			case 3:
+    				title = "<b>Wiki</b>";
+    				message = "<h4><span style='color:orange'>Pedro Augusto</span></h4>"+
+    						  "<h4>pedro42augusto@gmail.com</h4>"+
+    						  "<p>Não tem muito pra ler aqui u.u.<br>"+
+    						  "Mas um dia eu irei fazer um texto grande sobre mim e colocarei aqui...</p>";
+    				buttons = {};
+    		}
+    		bootbox.dialog({
+    			title: title,
+    			message: message,
+    			buttons:buttons
+    		});
+    	}
+    </script>
 </html>

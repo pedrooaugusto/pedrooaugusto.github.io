@@ -1,0 +1,104 @@
+ <html lang="pt">
+ <head>
+	 <title>Jogo da velha 1.0 pv(IPA)</title>
+	 <script>
+	 function ha()
+       {
+	    var espaco = [1,2,3,4,5,6,7,8,9,10];
+		for(var numg = 1; numg < 10; numg++)
+		{
+		    
+       		espaco[numg] = document.getElementById("q"+numg); 
+		
+		}
+		var cont = 1;
+		var valorI = 0;
+		var valorII = 3;
+		var valorIII = 6;		
+		var acertou = [1,2,3,4,5,6,7];
+		for(var contador = 1; contador < 7; contador++)
+		{   
+			if (contador < 4)
+			{		
+				acertou[contador] = espaco[cont].value + espaco[cont+valorII].value + espaco[cont+valorIII].value;
+			    cont = cont + 1;
+			}
+			else
+			{	
+				if (contador == 4) { cont = 1; }
+				valorI = 3;
+				valorII = 1;
+				valorIII = 2;					
+				acertou[contador] = espaco[cont].value + espaco[cont+valorII].value + espaco[cont+valorIII].value;
+				cont = cont + 3;
+			}	
+		}
+		acertou[7] = espaco[1].value + espaco[5].value + espaco[9].value; 
+        acertou[8] = espaco[3].value + espaco[5].value + espaco[7].value;
+		if (tracarLinha(acertou))
+		{
+			alert("venceu");
+		}
+		else
+		{
+			setTimeout("ha()", 1000);
+			
+		} 
+      
+	 }
+	 
+	function tracarLinha(vetor)
+	{
+		var contadorR = 0;
+		while(contadorR < 9)
+		{
+			if (vetor[contadorR] == "xxx" || vetor[contadorR] == "ooo")
+				{
+					return true;
+					contadorR = 9;
+				}	
+			contadorR = contadorR + 1;
+		}	
+	}
+	 
+	 </script>
+	 <style>
+	input 
+	{ 
+	border-style: solid;
+	border-width: 0.3cm;
+	border-color: black;
+	width: 5cm; 
+	height: 5cm;
+	font-size: 4cm;
+	text-align: center;
+	color:red;
+	}
+	.tiraDeCima
+	{
+	border-top:none;
+	}
+	.tiraDoLadoLeft
+	{
+	border-left:none;
+	}
+	 </style>
+ </head>
+<body onload="ha();">
+<form name="form1">
+<center>
+<input type="text"  id="q1"  class="tiraDeCima" style="border-left:none;">
+<input type="text"  id="q2"  class="tiraDeCima">
+<input type="text"  id="q3"  class="tiraDeCima" style="border-right:none;">
+<br>
+<input type="text"  id="q4"  class="tiraDoLadoLeft" >
+<input type="text"  id="q5">
+<input type="text"  id="q6" style="border-right:none;" >
+<br>
+<input type="text"  id="q7"  class="tiraDoLadoLeft" style="border-bottom: none;">
+<input type="text"  id="q8" style="border-bottom:none;">
+<input type="text"  id="q9" style="border-bottom:none; border-right:none;"  >
+</center>
+</form>	
+	 </body>
+ </html>

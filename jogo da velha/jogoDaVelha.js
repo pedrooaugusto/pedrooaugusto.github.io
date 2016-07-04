@@ -91,8 +91,9 @@ function Game()
 				player1.pontos.valor +=1;
 				player1.pontos.obj.innerText = player1.pontos.valor;
 				game.doAnimationWin();
-				bootbox.alert("<span style='font-size:20px;'>PQP!<br>Envia esse lixo pra mim:"+
-					"<br>"+bot.historicoMovimento+"<br>"+player1.historicoMovimento+"</span>");
+				if(bot.playWithBot){
+				bootbox.alert("<span style='font-size:20px;'>Oh!<br>Envie isto pra mim:"+
+					"<br>"+bot.historicoMovimento+"<br>"+player1.historicoMovimento+"</span>");}
 			}
 			else
 			{
