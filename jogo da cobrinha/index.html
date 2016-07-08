@@ -97,11 +97,17 @@
     <script src="../bootstrap-3.3.6/bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
     <script src="../bootstrap-3.3.6/bootstrap-3.3.6/dist/js/bootbox.min.js"></script>
     <script src="snake.js"></script>
+    <script>
+      if(window.outerHeight > window.outerWidth)
+        currentValores = valoresMobile;
+      else
+      	currentValores = valoresPC; 
+    </script>
     <script type="text/javascript">
     	onload = function()
     	{
     		var c = document.getElementById('main').offsetWidth;
-      		var d = window.outerHeight*0.68;
+      		var d = window.outerHeight*(window.outerHeight > window.outerWidth ? 0.9 : 0.68);
       		document.getElementById('main').innerHTML = "<canvas id='canvas' width="+c+" height="+d+"></canvas>";
       		initComponents(c, d);
     	}

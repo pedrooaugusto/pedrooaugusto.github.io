@@ -45,10 +45,44 @@ var valoresPC = {
 };
 var valoresMobile = {
 	cobra:{
-		dimensao: {x: 0, y: 0}
+		dimensao: {x: 0.05, y: 0.05}
+	},
+	partes:{
+		dimensao:{x: 0.02, y: 0.02}
+	},
+	moeda:{
+		dimensao:{x: 0.03, y:0.03},
+		raio: 0.015,
+		movimento:{
+			trig: {sinDivide: 20, cosDivide: 15},
+			amplitude: 15,
+			top: 10
+		}
+	},
+	animation:{
+		loseAlert:{
+			box:{
+				dimensao: {x: 0.7, y: 0.1},
+				posicao: {x: 0.7/2, y: 0.2}			
+			},
+			texto:{
+				posicao: {x: 0, y: 0.2+(0.6*0.1)},
+				font: 0.05
+			}
+		}
+	},
+	header:{
+		dimensao:{x: 1, y: 0.1},
+		pontos:{
+			posicao:{x: 0, y: 0},
+			font: 0.05
+		},
+		info:{
+			posicao:{x: 0, y: 0}
+		}
 	}
 }
-var currentValores = valoresPC;
+var currentValores;
 function Cobra()
 /*
 	O objeto cobra
@@ -361,9 +395,12 @@ function Header()
 			ctx.font = currentValores.header.pontos.font*WIDTH+"px Segoe UI Light";
 			ctx.shadowBlur = 0;
 			ctx.fillStyle = "white";
-			ctx.fillText("Pontos: "+(cobra.partes.length), 0.1*WIDTH,
-				this.dimensao.y*0.7);
-			ctx.fillText(tempoMoeda.getInfo(), 0.2*WIDTH, this.dimensao.y*0.7);
+			/*ctx.fillText("Pontos: "+(cobra.partes.length), 0.1*WIDTH,
+				this.dimensao.y*0.7);*/
+			var texto = "Pontos: "+cobra.partes.length+"   "+
+				tempoMoeda.getInfo();
+			var tam = ctx.measureText(texto).width;
+			ctx.fillText(texto, WIDTH/2 - tam/2, this.dimensao.y*0.7);
 		ctx.closePath();
 	}
 }
