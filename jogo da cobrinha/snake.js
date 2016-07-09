@@ -3,7 +3,7 @@
 
 //ctx == context; onde eu desenho as coisas
 var canvas, gameLoop, cobra, ctx, moeda, header, colisao, 
-	tempoMoeda, animation, HEIGHT, WIDTH;
+	tempoMoeda, animation, controles, HEIGHT, WIDTH;
 var valoresPC = {
 	cobra:{
 		dimensao: {x: 0.03, y: 0.03}
@@ -41,6 +41,13 @@ var valoresPC = {
 		info:{
 			posicao:{x: 0, y: 0}
 		}
+	},
+	controles:{
+		dimensao:{x: 0.05, y: 0.05},
+		up:{x: 0.5 - (0.05*0.5), y: 0.6},
+		down:{x: 0.5 - (0.05*0.5), y: 0.83},
+		left:{x: (0.5 - (0.05*0.5)) - 0.05, y: (0.6 + (1-0.6)/2) - 0.09},
+		right:{x: 1 - ((0.5 - (0.05*0.5))), y: (0.6 + (1-0.6)/2) - 0.09},
 	}
 };
 var valoresMobile = {
@@ -80,6 +87,13 @@ var valoresMobile = {
 		info:{
 			posicao:{x: 0, y: 0}
 		}
+	},
+	controles:{
+		dimensao:{x: 0.16, y: 0.16},
+		up:{x: 0.5 - (0.16*0.5), y: 0.6},
+		down:{x: 0.5 - (0.16*0.5), y: 1 - 0.16},
+		left:{x: (0.5 - (0.16*0.5)) - 0.16, y: (0.6 + (1-0.6)/2) - 0.09},
+		right:{x: (0.5 - (0.16*0.5)) + 0.16, y: (0.6 + (1-0.6)/2) - 0.09},
 	}
 }
 var currentValores;
@@ -395,8 +409,6 @@ function Header()
 			ctx.font = currentValores.header.pontos.font*WIDTH+"px Segoe UI Light";
 			ctx.shadowBlur = 0;
 			ctx.fillStyle = "white";
-			/*ctx.fillText("Pontos: "+(cobra.partes.length), 0.1*WIDTH,
-				this.dimensao.y*0.7);*/
 			var texto = "Pontos: "+cobra.partes.length+"   "+
 				tempoMoeda.getInfo();
 			var tam = ctx.measureText(texto).width;
@@ -430,14 +442,7 @@ function loop()
 	cobra.draw();
 	moeda.draw();
 	header.draw();
-	ctx.fillStyle = "white";
-	var n0 = (canvas.height > canvas.width ? "500%" : "200%");
-	ctx.font = n0+" Segoe UI Light";
-	//ctx.fillText(exibirCoordenadas(moeda), 80, 290);
-	ctx.shadowBlur = 0;
-	//ctx.fillText("Pontos: "+(cobra.partes.length), canvas.width*0.1, canvas.height * 0.08);
-	//ctx.fillText(ctx.measureText("OLA").width, 300, 200);
-	//tempoMoeda.runnable();
+	controles.draw();
 }
 function tempoParaPegarMoeda() 
 {
@@ -459,9 +464,6 @@ function tempoParaPegarMoeda()
 	}
 	this.getInfo = function()
 	{
-		/*ctx.font = "200% Segoe UI Light";
-		ctx.fillText("Left: "+this.segundos.segundos+"sec. to lose: "+cobra.perdeSeMorrer.atual+"uni.",
-			canvas.width*0.4, canvas.height * 0.08);*/		
 		return "Left: "+this.segundos.segundos+"sec. to lose: "+cobra.perdeSeMorrer.atual+"uni.";
 	}
 	this.comecar = function()
@@ -493,6 +495,7 @@ function initComponents(w, h)
 	header = new Header();
 	colisao = new tratarColisoes();
 	animation = new Animation();
+	controles = new Controles();
 	var parte1 = new Partes();
 	parte1.posicao.x = 210;
 	parte1.posicao.y = 60;
@@ -522,8 +525,73 @@ function initComponents(w, h)
 	});
 	cobra.draw();
 	header.draw();
+	controles.draw();
 	tempoMoeda.comecar();
 	gameLoop = setInterval("loop()", 1000/canvas.frames);
+}
+function Botao(x, y, width, height, texto, onclickAction)
+/*
+	Representa os botões na tela do jogador
+	para se mover quando n houver teclado
+	para se mover
+*/
+{
+	this.nome = "Botão";
+	this.texto = texto;
+	this.dimensao = {x: width, y: height};
+	this.posicao = {x: x, y: y};
+	this.onclickAction = onclickAction;
+	this.tamText = 0.1;
+	this.cor = "rgba(141, 143, 144, 0.1)";
+	var myself = this;
+	canvas.objeto.addEventListener("mousedown", function(ex){
+		myself.click(ex);
+	});
+	this.draw = function()
+	{
+			ctx.beginPath();
+				ctx.shadowBlur = 3;
+				ctx.shadowColor = "lightgray";
+				ctx.fillStyle = this.cor;
+				ctx.fillRect(this.posicao.x, this.posicao.y, this.dimensao.x, this.dimensao.y);
+				ctx.shadowBlur = 0;
+				ctx.shadowColor = "blue";
+				ctx.font = "20px Segoe UI Light";
+				ctx.fillStyle = "white";
+				var textX = (this.posicao.x)+(this.dimensao.x/2 - ctx.measureText(this.texto).width/2) ;// - (ctx.measureText(this.texto).width/2);
+				ctx.fillText(this.texto, textX, this.posicao.y+(this.dimensao.y/1.6));
+			ctx.closePath();
+	};
+	this.click = function(ex)
+	{
+		var mouseAtualmenteX = ex.pageX - $(ex.target).offset().left;	
+		var mouseAtualmenteY = ex.pageY - $(ex.target).offset().top;
+		if(mouseAtualmenteX > this.posicao.x && mouseAtualmenteX <
+		 	parseInt(this.posicao.x + this.dimensao.x) && mouseAtualmenteY >
+		 	this.posicao.y && mouseAtualmenteY < parseInt(this.posicao.y + 
+			this.dimensao.y))
+				this.onclickAction();
+	}
+}
+function Controles()
+{
+	this.w = currentValores.controles.dimensao.x*WIDTH;
+	this.h = currentValores.controles.dimensao.y*WIDTH;
+	this.up = new Botao(currentValores.controles.up.x*WIDTH, currentValores.controles.up.y*HEIGHT,
+		this.w, this.h, "Up", function(){cobra.turn.choose(38)});
+	this.down = new Botao(currentValores.controles.down.x*WIDTH, currentValores.controles.down.y*HEIGHT,
+		this.w, this.h, "Do", function(){cobra.turn.choose(40)});
+	this.left = new Botao(currentValores.controles.left.x*WIDTH, currentValores.controles.left.y*HEIGHT,
+		this.w, this.h, "Le", function(){cobra.turn.choose(37)});
+	this.right = new Botao(currentValores.controles.right.x*WIDTH, currentValores.controles.right.y*HEIGHT,
+		this.w, this.h, "Ri", function(){cobra.turn.choose(39)});
+	this.draw = function()
+	{
+		this.up.draw();
+		this.down.draw();
+		this.left.draw();
+		this.right.draw();
+	}
 }
 function tratarColisoes()
 /*
