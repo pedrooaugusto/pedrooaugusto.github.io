@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -119,19 +120,78 @@
     		{
           		case 1:
             		title = "<b>Download</b>";
-            		message  = "Konichiwa";
+            		message  = "<table class='table table-striped download'>"
+	                  + "    <thead class='thead-inverse'>"
+	                  + "      <tr>"
+	                  + "        <th>Tecnologia</th>"
+	                  + "        <th>Drive</th>"
+	                  + "        <th>Github</th>"
+	                  + "      </tr>"
+	                  + "    </thead>"
+	                  + "    <tbody>"
+	                  + "      <tr>"
+	                  + "        <td>HTML + JS</td>"
+	                  + "        <td><a href='#'>Download</a></td>"
+	                  + "        <td><a href='#'>Download</a></td>"
+	                  + "      </tr>"
+	                  + "      <tr>"
+	                  + "        <td>Java</td>"
+	                  + "        <td><a href='#'>Download</a></td>"
+	                  + "        <td><a href='#'>Download</a></td>"
+	                  + "      </tr>"
+	                  + "      <tr>"
+	                  + "        <td>Android</td>"
+	                  + "        <td><a href='#'>Download</a></td>"
+	                  + "        <td><a href='#'>Download</a></td>"
+	                  + "      </tr>"
+	                  + "    </tbody>"
+	                  + "  </table>"
+	                  + "  <p><b>*Devido ao passar dos anos alguns podem divergir entre si.</b></p>";
             		buttons = {};
           		break;
-          		case 2:
-            		title = "<b>Source</b>";
-            		message  = "Hello";
-          			buttons = {};
-        		break;
+	            case 2:
+	            	title = "<b>Source</b>";
+	            	message  = "<table class='table table-striped download'>"
+	                  + "    <thead class='thead-inverse'>"
+	                  + "      <tr>"
+	                  + "        <th>Tecnologia</th>"
+	                  + "        <th>Drive (.zip)</th>"
+	                  + "        <th>Github</th>"
+	                  + "      </tr>"
+	                  + "    </thead>"
+	                  + "    <tbody>"
+	                  + "      <tr>"
+	                  + "        <td>HTML + JS</td>"
+	                  + "        <td><a href='#'>Download</a></td>"
+	                  + "        <td><a href='#'>Acessar</a></td>"
+	                  + "      </tr>"
+	                  + "      <tr>"
+	                  + "        <td>Java</td>"
+	                  + "        <td><a href='#'>Download</a></td>"
+	                  + "        <td><a href='#'>Acessar</a></td>"
+	                  + "      </tr>"
+	                  + "      <tr>"
+	                  + "        <td>Android</td>"
+	                  + "        <td><a href='#'>Download</a></td>"
+	                  + "        <td><a href='#'>Acessar</a></td>"
+	                  + "      </tr>"
+	                  + "    </tbody>"
+	                  + "  </table>"
+	                  + "  <p><b>*Devido ao passar dos anos alguns podem divergir entre si.</b></p>";
+	          		buttons = {};
+	        	break;
     			case 3:
     				title = "<b>Wiki</b>";
-            		message = "Ola";
-            		buttons = {};
-        		break;
+        			message = "<h3 style='color:royalblue; margin-top:0;'>"
+	                + "Jogo Da Cobrinha</h3>"
+	                + "<p>Esse aqui foi o último a ser feito... e o menos terminado</p>"
+	                + "<p>A chave foi transformar a cobra em um vetor "
+	                + "em um 'vetor onde cada elemento copia a posição "
+	                + "do anterior' e...</p>"
+	                + "<p>Algumas imagens:</p>"
+	                + "<img src='img1.jpg' width='200' height='200'> "
+	                + "<img src='img2.jpg' width='200' height='200'>";
+		    		buttons = {};
     		}
     		bootbox.dialog({
     			title: title,

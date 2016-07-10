@@ -2,9 +2,12 @@
 //Inicializando as variáeis globais
 
 //ctx == context; onde eu desenho as coisas
-var canvas, gameLoop, cobra, ctx, moeda, header, colisao, 
+var canvas, gameLoop, cobra, ctx, moeda, retry, header, colisao, 
 	tempoMoeda, animation, controles, HEIGHT, WIDTH;
+var info = "Movimente-se usando as setas ou os botões!";
 var valoresPC = {
+	tipo: "PC",
+	info: 20,
 	cobra:{
 		dimensao: {x: 0.03, y: 0.03}
 	},
@@ -17,7 +20,10 @@ var valoresPC = {
 		movimento:{
 			trig: {sinDivide: 20, cosDivide: 15},
 			amplitude: 20,
-			top: 10
+			top: 10,
+			alguns: [[30, 20, 35, 15], [20, 40, 45, 14],
+				[60, 30, 50, 15], [70, 80, 50, 15], 
+				[60, 80, 60, 20]]
 		}
 	},
 	animation:{
@@ -51,19 +57,24 @@ var valoresPC = {
 	}
 };
 var valoresMobile = {
+	tipo: "Mobile",
+	info: 14,
 	cobra:{
-		dimensao: {x: 0.05, y: 0.05}
+		dimensao: {x: 0.06, y: 0.06}
 	},
 	partes:{
-		dimensao:{x: 0.02, y: 0.02}
+		dimensao:{x: 0.025, y: 0.025}
 	},
 	moeda:{
-		dimensao:{x: 0.03, y:0.03},
-		raio: 0.015,
+		dimensao:{x: 0.04, y:0.04},
+		raio: 0.02,
 		movimento:{
 			trig: {sinDivide: 20, cosDivide: 15},
-			amplitude: 15,
-			top: 10
+			amplitude: 12,
+			top: 10,
+			alguns: [[30, 30, 12, 10], [20, 40, 15, 12],
+				[60, 10, 11, 11], [50, 80, 9, 15], 
+				[20, 80, 15, 10]]
 		}
 	},
 	animation:{
@@ -107,8 +118,8 @@ function Cobra()
 {
 	this.nome = "Cobra";
 	this.partes = new Array();
-	this.posicao = {x: WIDTH*0.2, y: HEIGHT*0.3};
 	this.dimensao = {x: currentValores.cobra.dimensao.x*WIDTH, y: currentValores.cobra.dimensao.y*WIDTH};
+	this.posicao = {x: this.dimensao.x, y: (HEIGHT*currentValores.header.dimensao.y)+this.dimensao.y*5};
 	this.perdeSeMorrer = {//Cuida de quantas unit a cobra perde se o tempo acabar
 		atual : -1, att: function(){this.atual = Math.floor((cobra.partes.length)/2);}
 	};
@@ -147,6 +158,7 @@ function Cobra()
 			this.partes[i].enabled = true;
 		}
 		this.perdeSeMorrer.att();
+		//moeda.changeMovement();
 	};
 	this.move = function()//Move-se cabeça e depois a calda 
 	{
@@ -379,7 +391,24 @@ function Moeda()//O 'negocio' que a cobra precisa 'comer' para ficar grande
 		this.posicao.x = coisas.x;
 		this.posicao.y = coisas.y;
 		this.consta = coisas.top;
-	}
+	};
+	this.changeMovement = function()
+	{
+		/*var seno, coseno, top, amplitude;//
+		seno = Math.floor(Math.random()*170)+10;
+		coseno = Math.floor(Math.random()*170)+10;
+		top = 16 + Math.floor(Math.random() * ((26 - 16) + 1));
+		if(currentValores.tipo == "PC")
+			amplitude = 26 + Math.floor(Math.random() * ((26 - 36) + 1));
+		else
+			amplitude = 9 + Math.floor(Math.random() * ((12 - 9) + 1));*/
+		var n = (cobra.partes.length/4) - 1;
+		n = (n < 0 ? 0 : Math.floor(n));
+		this.trig.sinDivide = currentValores.moeda.movimento.alguns[n][0];
+		this.trig.cosDivide = currentValores.moeda.movimento.alguns[n][1];;
+		this.amplitude = currentValores.moeda.movimento.alguns[n][2];;
+		currentValores.moeda.movimento.top =currentValores.moeda.movimento.alguns[n][3];;
+	};
 	this.draw = function()
 	{
 		this.someAnimation();
@@ -443,6 +472,11 @@ function loop()
 	moeda.draw();
 	header.draw();
 	controles.draw();
+	ctx.font = currentValores.info+"px Segoe UI Light";
+	ctx.fillStyle = "white";
+	ctx.fillText(info, WIDTH*0.99 - ctx.measureText(info).width, HEIGHT*0.99);
+	if(gameLoop == null)
+		gameOver();
 }
 function tempoParaPegarMoeda() 
 {
@@ -459,6 +493,7 @@ function tempoParaPegarMoeda()
 		{
 			this.segundos.segundos = this.segundos.padrao;
 			moeda.generate();
+			moeda.changeMovement();
 			animation.youLoseStart();
 		}
 	}
@@ -523,12 +558,29 @@ function initComponents(w, h)
 			break;	
 		}
 	});
+	//Retry button
+		var texto = "RETRY";
+		ctx.font = "bold 25px Segoe UI";
+		retry = new Botao(WIDTH*0.425, HEIGHT*0.6, 
+			WIDTH*0.15, HEIGHT*0.08, texto, function(){
+				if(gameLoop == null)
+					initComponents(WIDTH, HEIGHT);
+			});
+	//End RETRY
 	cobra.draw();
 	header.draw();
 	controles.draw();
 	tempoMoeda.comecar();
 	gameLoop = setInterval("loop()", 1000/canvas.frames);
 }
+ function gcd(a, b) {
+        return !b ? a : gcd(b, a % b);
+    }
+
+    function lcm(a, b) {
+        return (a * b) / gcd(a, b);   
+    }
+
 function Botao(x, y, width, height, texto, onclickAction)
 /*
 	Representa os botões na tela do jogador
@@ -545,7 +597,7 @@ function Botao(x, y, width, height, texto, onclickAction)
 	this.cor = "rgba(141, 143, 144, 0.1)";
 	var myself = this;
 	canvas.objeto.addEventListener("mousedown", function(ex){
-		myself.click(ex);
+			myself.click(ex);
 	});
 	this.draw = function()
 	{
@@ -571,7 +623,7 @@ function Botao(x, y, width, height, texto, onclickAction)
 		 	this.posicao.y && mouseAtualmenteY < parseInt(this.posicao.y + 
 			this.dimensao.y))
 				this.onclickAction();
-	}
+	}			
 }
 function Controles()
 {
@@ -629,7 +681,10 @@ function tratarColisoes()
 			moeda.generate();
 			tempoMoeda.recomecar();
 			if((cobra.partes.length) % 4 == 0)
+			{
 				cobra.perdeSeMorrer.att();
+				moeda.changeMovement();
+			}
 			if(cobra.partes.length > 15)
 			{
 				moeda.trig.sinDivide = 20;
@@ -653,6 +708,7 @@ function tratarColisoes()
 				if(this.colidiu(cobra, cobra.partes[i], false, 0))
 				{
 					clearTimeout(gameLoop);
+					gameLoop = null;
 					return true;
 				}
 			}
@@ -660,9 +716,11 @@ function tratarColisoes()
 	};
 	this.limitesTelaX = function()
 	{
-		if(cobra.posicao.x > canvas.width - 30)
+		if(cobra.posicao.x > canvas.width)
 		{
-			cobra.posicao.x = 0;
+			//cobra.posicao.x = 0;
+			clearTimeout(gameLoop);
+			gameLoop = null;
 			return true;
 		}
 	}
@@ -671,7 +729,9 @@ function tratarColisoes()
 	{
 		if(cobra.posicao.x < 0)
 		{
-			cobra.posicao.x = canvas.width - 30;
+			//cobra.posicao.x = canvas.width - cobra.dimensao.x;
+			clearTimeout(gameLoop);
+			gameLoop = null;
 			return true;
 		}
 	}
@@ -680,16 +740,20 @@ function tratarColisoes()
 	{
 		if(cobra.posicao.y > canvas.height)
 		{
-			cobra.posicao.y = HEIGHT*currentValores.header.dimensao.y;
+			//cobra.posicao.y = HEIGHT*currentValores.header.dimensao.y;
+			clearTimeout(gameLoop);
+			gameLoop = null;
 			return true;
 		}
 	}
 
 	this.limitesTelaY2 = function()
 	{
-		if(cobra.posicao.y+20 < HEIGHT*currentValores.header.dimensao.y)
+		if(cobra.posicao.y < HEIGHT*currentValores.header.dimensao.y)
 		{
-			cobra.posicao.y = HEIGHT*0.935;
+			//cobra.posicao.y = HEIGHT - cobra.dimensao.y;
+			clearTimeout(gameLoop);
+			gameLoop = null;
 			return true;
 		}
 	}
@@ -728,6 +792,22 @@ function tratarColisoes()
 		}
 		return true;
 	};
+}
+function gameOver()
+{
+	clearTimeout(tempoMoeda.loop);
+	canvas.limparTela();
+	ctx.fillStyle = "#101010";
+	ctx.fillRect(0, 0, WIDTH, HEIGHT);
+	ctx.font = "bold 32px Segoe UI";
+	ctx.fillStyle = "white";
+	var texto = "PONTOS: "+cobra.partes.length;
+	ctx.fillText("GAME OVER", WIDTH*0.5 - ctx.measureText("GAME OVER").width/2, HEIGHT*0.5);
+	ctx.font = "bold 25px Segoe UI";
+	ctx.fillText(texto, WIDTH*0.5 - ctx.measureText(texto).width/2, HEIGHT*0.3);
+	retry.draw();
+	/*var texto2 = "RETRY";
+	ctx.fillText(texto2, WIDTH*0.5 - ctx.measureText(texto2).width/2, HEIGHT*0.7);*/
 }
 function Canvas()
 {
