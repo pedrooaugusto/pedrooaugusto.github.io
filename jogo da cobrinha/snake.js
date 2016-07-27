@@ -832,6 +832,7 @@ function Canvas()
 			{
 				if([37, 38, 39, 40].indexOf(e.keyCode) != -1)
 				{
+					e.preventDefault();
 					cobra.turn.choose(e.keyCode);
 					canvas.keys[e.keyCode] = true;
 				}

@@ -85,6 +85,14 @@
 	</style>
 </head>
 <body>
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.7&appId=1760179647585077";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 	<div class="container">
    		<header class="row">
    			<nav class="col-md-12 navbar navbar-default navbar-fixed-top">
@@ -170,6 +178,18 @@
    				<button type="button" class="btn btn-md btn-primary" onclick="buttonRodapePressed(3)">Wiki</button>
    			</div>
    		</footer>
+      <div class="row" style="margin-top:10px; border:none;">
+
+        <div class="fb-like col-md-12 noPading" 
+          data-href="https://pedrooaugusto.github.io/jogo%20da%20memoria/index.html" 
+          data-layout="standard" data-action="like" 
+          data-size="large" data-show-faces="true" data-share="true"></div>
+         
+        <div class="fb-comments col-md-12 noPading" 
+          data-href="https://pedrooaugusto.github.io/jogo%20da%20memoria/index.html" 
+          data-numposts="3"></div>
+
+      </div>
 	</div>
 </body>
     <!-- Bootstrap core JavaScript
