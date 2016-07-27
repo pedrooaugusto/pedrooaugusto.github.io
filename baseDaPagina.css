@@ -4,7 +4,7 @@
 			//padding-right: 15px;
 			//padding-left: 15px;
 			//background-color: red;
-		}
+		}	
 		[class*="col-"], footer, aside, section, div[role="main"] 
 		{
 			 /*padding-top: 15px;
@@ -68,8 +68,24 @@
 			font-weight: bold;
 			font-size: 15px;
 		}
-		
+		.noPading
+		{
+			padding: 0;
+			border: none;
+		}
 		.modal-backdrop.in
 		{
 			opacity: 0.8;
 		}
+		@media (min-width: 992px) 
+    	{ 	
+    		li>iframe
+      		{
+        		margin-top: 15px;
+        		margin-left: 8px;
+      		}
+    	}
+    	row
+    	{
+    		padding: 0;
+    	}

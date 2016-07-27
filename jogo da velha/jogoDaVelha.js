@@ -1,4 +1,4 @@
-var player1, player2;
+﻿var player1, player2;
 function Game() 
 {
 	this.jogador = 88;
@@ -546,7 +546,7 @@ function menu()
                 + "<div class='col-md-11 col-md-offset-1 noBorder'>"
                 + "<label onclick='game.showTwoPlayer()'>"
                 + "<input type='radio' name='modeGame' value='SinglePlayer' id='2p'> "
-                + "Multplayer"
+                + "Multiplayer"
                 + "</label>"
                 + "</div>"
                 + "<div class='col-md-6 col-xs-6 noBorder'>"

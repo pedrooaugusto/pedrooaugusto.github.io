@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap-3.3.6/bootstrap-3.3.6/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="baseDaPagina.css" rel="stylesheet" media="screen">
-	<title>Bootstrap!</title>
+	<title>Home</title>
 	<style type="text/css">
 		@media (min-width: 992px) 
 		{
@@ -61,12 +61,21 @@
 	</style>
 </head>
 <body>
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1760179647585077";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 	<div class="container">
+
    		<header class="row">
    			<nav class="col-md-12 navbar navbar-default navbar-fixed-top">
   				<div class="container-fluid">
     				<div class="navbar-header">
-    					 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" 		aria-controls="navbar">
+    					 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             				<span class="sr-only">Toggle navigation</span>
             				<span class="icon-bar"></span>
             				<span class="icon-bar"></span>
@@ -82,6 +91,14 @@
 	      					<li><a href="jogo da memoria/index.html">Jogo Da Memória</a></li>
 	      					<li><a href="jogo da cobrinha/index.html">Jogo Da Cobrinha</a></li> 
 	      					<li><a href="quebra cabeça/index.html">Quebra-Cabeça</a></li>
+                  <li>
+                    <!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/pedrooaugusto/o-augusto-project" data-icon="octicon-star" data-count-href="/pedrooaugusto/o-augusto-project/stargazers" data-count-api="/repos/pedrooaugusto/o-augusto-project#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star pedrooaugusto/o-augusto-project on GitHub">Star</a>
+                  </li>
+                  <li>
+                    <!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/pedrooaugusto" data-count-href="/pedrooaugusto/followers" data-count-api="/users/pedrooaugusto#followers" data-count-aria-label="# followers on GitHub" aria-label="Follow @pedrooaugusto on GitHub">Follow @pedrooaugusto</a>
+                  </li>
 	    				</ul>
 	    			</div>
   				</div>
@@ -92,10 +109,10 @@
        			<div class="col-md-8 col-md-offset-2 jumbotron">
        				<img src="alluka.jpg" width="200" height="200">
        				<h3>Pedro Augusto</h3>
-       				<p class="lead">'Blog' de um cara maneiro que tava entediado mas precisa aprender o mínimo de
-       				bootstrap e github, pois não da pra usar position:absolute e dropbox pra sempre, né?
-       				Aqui encontra-se alguns projetos interessantes, mas talvez não tão utéis, relacionados a programação
-       				que eu e meu amigo, stackOverJoão, fizemos ao longo do ensino médio.
+       				<p class="lead">
+                Repositório criado com o intuito de devolver a web uma pequena parcela de todo o conhecimento que ela me deu.
+                Neste site eu 'irei' estar compartilhando alguns projetos interessantes que desenvolvi para praticar um pouco de programação ou por necessidade mesmo.<br>Caso ache justo deixe uma estrela
+                e me siga no github.
        				</p>
        				<p style="color:rgb(22, 73, 154)">Enjoy!</p>
       			</div>
@@ -112,6 +129,12 @@
    				<button type="button" class="btn btn-md btn-primary" onclick="buttonRodapePressed(3)">Wiki</button>
    			</div>
    		</footer>
+      <div class="row" style="margin-top:10px; border:none;">
+        <div class="fb-comments col-md-12 noPading" 
+          data-href="https://developers.facebook.com/docs/plugins/comments#configurator"
+          data-numposts="3">
+        </div>
+      </div>
 	</div>
 </body>
     <!-- Bootstrap core JavaScript
@@ -121,6 +144,7 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="bootstrap-3.3.6/bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
     <script src="bootstrap-3.3.6/bootstrap-3.3.6/dist/js/bootbox.min.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script type="text/javascript">
     	function buttonRodapePressed (which) 
     	{
@@ -153,10 +177,10 @@
 					  	  	  "<span class='tab2'>{<br></span>"+
 					  	  	  "<span class='tab3'><span class='n'>try</span><br></span>"+
 					  	  	  "<span class='tab3'>{<br></span>"+
-					  	  	  "<span class='tab4'>eu.<b>doSomething</b>();<br></span>"+
-					  	  	  "<span class='tab3'>}<span class='n'>catch</span>(<span class='t'>OtherPeopleException"+
+					  	  	  "<span class='tab4'>eu.<b>learnSometing</b>();<br></span>"+
+					  	  	  "<span class='tab3'>}<span class='n'>catch</span>(<span class='t'>BoringException"+
 					  	  	  "</span> ex){<br></span>"+
-					  	  	  "<span class='tab4'>ex.<b>tryAgain</b>();<br></span>"+
+					  	  	  "<span class='tab4'>ex.<b>watchDoctorWho</b>();<br></span>"+
 					  	  	  "<span class='tab3'>}<br></span>"+
 					  	  	  "<span class='tab2'>}<br></span>"+
 					  	  	  "<span class='tab2'>eu.<b>RIP</b>();<span style='color:green;'>//and now my watch has ended</span><br></span>"+
@@ -169,8 +193,9 @@
     				title = "<b>Wiki</b>";
     				message = "<h4><span style='color:orange'>Pedro Augusto</span></h4>"+
     						  "<h4>pedro42augusto@gmail.com</h4>"+
-    						  "<p>Não tem muito pra ler aqui u.u.<br>"+
-    						  "Mas um dia eu irei fazer um texto grande sobre mim e colocarei aqui...</p>";
+    						  "<p>I'm doctor, i'm timelord, i'm 18 years old, i'm from the planet January's River...<br>"+
+    						  "Cursando último ano de técnico em informática mora no Rio e adora aprender algo novo "+
+                  "sobre quase tudo...</p>";
     				buttons = {};
     		}
     		bootbox.dialog({
