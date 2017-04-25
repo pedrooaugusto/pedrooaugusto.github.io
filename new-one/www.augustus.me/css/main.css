@@ -1,0 +1,826 @@
+/*
+	O site vai ser divido nas seguintes seções:
+		1.landing-section;
+		2.about-section;
+		3.resume-section;
+		4.blog-section;
+		5.contact-section;
+		6.footer-section;
+	Cada uma dessas sections vai ocupar no mínimo 1vh
+	de altura;
+
+	Todas as margins e paddings de row e col padrões
+	do bootstrap serão aniquiladas;
+
+	Todas as section ficaram alinhadas com o menu;
+	
+	Sempre que possível o conteúdo ficará no  meio da
+	section;
+
+	Toda section vai ter um título e uma breve descri-
+	ção sobre do que se trata aquela section;
+
+	O conteúdo de toda section precisa distar no mínimo
+	80px{altura do header} do topo, senão o menu esconde
+	a descrição e o titulo da section;
+	
+	Entre uma section e outra deve ter um espaço vazio
+	para que elas n fiquem muito grudadas;
+
+	Se possível cada section terá um cor diferente;
+
+	Estrutura básica de cada section:
+
+	<section id="example" class="example">//Setar o bg, a padding e o tamanho
+		<div class="wrapper">//Tentar colocar ao máximo no centro e/ou desgrudar o conteudo do menu
+			<div class="container">
+				...
+			</div>
+		</div>
+	</div>
+*/
+html{
+	font-size: 1px;
+}
+*{
+	padding: 0px;
+	margin: 0px;
+}
+.container .row{
+	margin: 0;
+}
+[class*="col-"]{
+	padding-left: 0px;
+	padding-right: 0px; 
+}
+.green-color
+{
+	color: #30ba3d;
+}
+body{
+	background-color: #f4f5f6;
+}
+.title-section{
+	font-family: 'Roboto';
+	font-size: 35px;
+	font-weight: 500;
+	color: #2d2d2d;
+	padding-top: 20px;
+}
+.descri-section{
+	font-family: 'Roboto';
+	font-size: 17px;
+	color: #2d2d2d;
+	font-weight: 400;
+}
+/* Things about menu navgation bar */
+.navigation-menu
+{
+	background: white;
+	height: 80px;	
+	width: 100%;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    position: fixed;
+    z-index: 999;
+}
+.navigation-menu nav.primary-nav
+{
+	background-color: white;
+	height: 80px;
+    line-height: 80px;
+    box-shadow: none;
+}
+nav.primary-nav .brand-logo
+{
+	color: #828181;
+	font-family: 'Comfortaa';
+	font-size: 	25rem;
+}
+nav.primary-nav ul.side-nav li>a
+{
+	color: #828181;
+	font-family: 'Roboto';
+	font-weight: 600;
+	font-size: 13rem;
+	-webkit-transition-duration: 0.2s;
+	-o-transition-duration: 0.2s;
+	transition-duration: 0.2s;
+}
+ul.side-nav li:hover, 
+ul.side-nav li:focus,
+ul.side-nav li>a:hover,
+ul.side-nav li>a:focus,
+nav.primary-nav .brand-logo:hover
+{
+	color: #828181;
+	background-color: transparent;
+	text-decoration: none;
+}
+nav.primary-nav a.button-collapse 
+{
+	color: #727272;
+    float: left;
+    left: 0;
+    line-height: 80px;
+    height: 80px;
+    position: absolute;
+    z-index: 99;
+}
+nav.primary-nav a.button-collapse i
+{
+	font-size: 35rem;
+	line-height: 80px;
+}
+
+/* Things about landing section */
+section.landing
+{
+	padding-top: 80px; 
+	z-index: 997;
+}
+.bg-image-filter
+{
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
+}
+.landing-wrapper1
+{
+	background-size: 100% 100%;
+	background-position: center;
+	background-image: url("../img/emile-perron-190221.jpg");
+}
+.landing-wrapper1 .container
+{
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items:center;
+	min-height: calc(90vh - 80px);
+}
+h1.landing-big-text, 
+h5.landing-small-text,
+.landing-button-hare-me
+{
+	font-family: 'Roboto';
+	color: white;
+	text-align: center;
+}
+.landing-button-hare-me
+{
+	margin-top: 10px;
+	display: none;
+}
+.landing-button-hare-me a.btn
+{
+	background-color:#5fc75f; 
+}
+.landing-button-hare-me a.btn:hover{
+	background-color: #5fc75f;
+	color: white;
+}
+.landing-about-more
+{
+	display: block;
+	margin-top: -25px;
+	text-align: center;
+	height: calc(10vh + 25px);
+}
+.landing-about-more>a
+{
+	margin-bottom: 0px;
+}
+.fa-3
+{
+	font-size: 30px !important;
+	color: rgba(0, 0, 0, 0.8) !important;
+	font-weight: 800;
+}
+/* Things about about-me section */
+section.about-me
+{
+	padding-top: 80px;
+}
+.about-wrapper .container
+{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+	min-height: calc(100vh - 80px);
+}
+.green-background
+{
+	background: #5fc75f;
+	width: 100%;
+	height: 30%;
+	position: absolute;
+}
+.card-about
+{
+	background-color: white;
+	box-shadow: 1px 1px 3px 1px gray;
+	border-radius: 4px;
+}
+.card-body
+{
+	padding: 10px;
+	padding-top: 20px;
+}
+.card-body .image>div
+{
+	margin:auto;
+	border-radius: 5cm;
+	background-image: url("../img/20161119_092646.jpg");
+	width: 130px;
+	height: 130px;
+	background-size: cover;
+	background-position-y: -40px; 
+}
+.card-body .name
+{
+	text-align: center;
+	font-size: 22px;
+	font-family: 'Roboto';
+	margin-top: 10px;
+}
+.card-body .personal-info
+{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: center;
+}
+.card-body .personal-info .value
+{
+	text-align: center;
+	font-size: 16px;
+	font-family: 'Roboto';
+	margin-top: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	border-bottom: solid 1px #ddd;
+}
+.card-body .social-media i
+{
+	font-size: 25rem;
+}
+.card-body .social-media i:last-child
+{
+	margin-left: 10px; 
+}
+.card-body .content
+{
+	background-color: whitesmoke;
+	padding: 15px;
+	border-radius: 5px;
+	border: solid 1px lightgray;
+}
+.card-body .title
+{
+	font-size: 22px;
+	font-family: 'Roboto';
+}
+.card-about .info
+{
+	margin-top: 10px;
+	font-size: 16px;
+	font-family: 'Roboto';
+}
+.card-about .info .quote-1
+{
+	font-size: 18px;
+	text-align: right;
+	font-style:italic;
+}
+.card-about .card-footer
+{
+	background-color: #4caf50;
+	margin-top: auto;
+	padding: 5px;
+	font-family: 'Roboto';
+	font-size: 18px;
+	color: white;
+	text-align: center;
+	border-bottom-left-radius:4px;
+	border-bottom-right-radius:4px;
+}
+
+/* Things about resume section */
+section.resume{
+	padding-top: 80px;
+}
+.resume-skills{
+	background-image: url("../img/nick-turner-2570.jpg");
+	background-size: 100% 100%;
+	position: relative;
+}
+.resume-skills .resume-skills-bg-opacity
+{
+	width: 100%;
+	left:0;
+	background: none repeat scroll 0 0 rgba(255, 255, 255, 0.8);
+}
+.skill-chart{
+	//background-color: red;
+	margin-top: 20px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.slide-buttons{
+	height: 460px;
+	display: flex;
+	flex-flow: column;
+	vertical-align: middle;
+	justify-content: center;
+}
+.slide-buttons div a{
+	background-color: green;
+	height: 47px;
+	width: 47px;
+	margin-bottom: 5px;
+}
+.slide-buttons div a i{
+	line-height: 47px;
+	font-size: 26rem;
+}
+.skill-wrapper{
+	//padding: 5px;
+	//background-color: yellow;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+	height: 460px;
+	//width: 50%;
+}
+.skill-wrapper>div{
+	//background-color: blue;
+	height: 100%;
+	display: flex;
+	flex-flow: column;
+	justify-content: flex-end;
+	vertical-align: center;
+	align-items: center;
+}
+.skill-title, .skill-height-value{
+	font-family: 'Roboto';
+	font-size: 18px;
+	color: green;
+	padding: 5px;
+}
+.skill-circle{
+	height: 5px;
+	width: 5px;
+	border-radius: 1cm;
+	background-color: green;
+}
+.skill-kct{
+	height: 60px;
+	width: 1px;
+	background-color: green;
+}
+.skill-height{
+	height: 280px;
+	width: 60px;
+	background-color: green;
+}
+.resume-education{
+	padding-bottom: 20px;
+}
+.education-items-container{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.item-edu-wrapper{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: baseline;
+}
+.edu-item{
+	height: auto;
+	width: 90%;
+	box-shadow: 0px 3px 10px 0px #908e8e;
+	position: relative;
+}
+.edu-item .front{
+	background-color: white;
+}
+.edu-item .back{
+	position: absolute;
+	background-color: white;
+	bottom: 0;
+	height: 0%;
+	width: 100%;
+}
+.edu-item .back div{
+	display: none;
+}
+.edu-item-title{
+	padding: 10px;
+	padding-left: 20px;
+	font-family: 'Roboto';
+	font-size: 20px;
+}
+.edu-item-footer{
+	padding: 10px;
+}
+.edu-item-curso-name{
+	font-family: 'Roboto';
+	font-size: 20px;
+	color: green;	
+}
+.edu-item-inst-name{
+	font-family: 'Roboto';
+	font-size: 16px;
+	font-weight: 400;
+	padding-top: 5px;
+	font-weight: 500;
+	color: #545454;	
+}
+.edu-item-back-header{
+	padding: 10px;
+	padding-left: 10px;
+	font-family: 'Roboto';
+	font-size: 20px;
+	color: green;
+}
+.edu-item-back-header div{
+	color: black;
+}
+.edu-item-back-info{
+	padding: 10px;
+	padding-left: 10px;
+	font-family: 'Roboto';
+	font-size: 16px;
+}
+hr{
+	margin: 0px;
+}
+/* Portifolio things */
+section.portfolio{
+	padding-top: 80px;
+}
+.brand-bg{
+	background: #61b969;
+	margin-bottom: 25px;
+}
+.portfolio-top .title {
+    color: #fff;
+    margin-bottom: 15px;
+}
+.portfolio-category li{
+	display: list-item;
+	float: left;
+	margin-right: 20px;
+	height: 30px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.portfolio-category li:hover{
+	box-shadow: inset 0 -4px 0px white;
+}
+.portfolio-category li div{
+	font-family: 'Roboto';
+	color: white;
+	font-size: 16px;
+	font-weight: 400;
+	text-decoration: none;
+	cursor: pointer;
+	background: none !important; 
+}
+.active-effect{
+	box-shadow: inset 0px -4px 0px white;
+}
+#gallery-content>div{
+	width: 32%;
+	height: 280px;
+	background: rgb(2, 7, 4);
+	margin-bottom: 10px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+	margin-right:  10px;
+	overflow: hidden;
+	cursor: pointer;
+}
+.disc{
+	width: 100%;
+	height: 100%;
+	background-size: 100% 100%;
+	-webkit-transition: all 0.3s;
+	margin: auto;
+	opacity: 1;
+}
+.header{
+	width: 100%;
+	height: 0%;
+	background-color: rgb(141, 112, 234);
+	position: absolute;
+	bottom: 0px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	flex-flow: column;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+}
+.item-name{
+	//background: blue;
+	padding-top: 2px;
+	padding-left: 15px;
+	font-size: 22px;
+	font-family: 'Roboto';
+	color: white;
+}
+.item-badges{
+	bottom: 0px;
+	margin-top: auto;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	flex-flow: row;
+	padding-left: 15px;
+	margin-bottom: 5px;
+}
+.item-badges>div{
+	padding: 2px;
+	padding-left: 15px;
+	padding-right: 5px;
+	border-radius: 0px;
+	font-size: 12px;
+	font-family: 'Roboto';
+	font-weight: 500;
+	color: white;
+	width: auto;
+	margin-right: 5px;
+	border: solid 1px white;
+}
+.modal{
+	padding: 0px !important;
+	background-color: #eee;
+	border-radius: 0px;
+	max-height: 90%;
+	bottom: 2.5%;
+	top: 0% !important; 
+	max-width: 100%; 
+}
+.bg1, .bg2{
+	width: 100%;
+	z-index: 300;
+	position: relative;
+}
+.bg1{
+	height: 40%;
+	background: rgb(236, 35, 35);
+}
+.bg2{
+	height: 60%;
+}
+.item-go>img{
+	cursor: move;
+}
+.modal-info{
+	//background-color: rgba(247, 247, 247, 1);
+	background-color: white;
+	box-shadow: 1px 1px 3px darkgray;
+	border-radius: 2px;
+	position: absolute;
+	padding: 10px;
+	z-index: 400;
+	width: 85%;
+	height: 95%;
+	top: 2.5%;
+	left: 7.5%;
+	display: flex;
+	flex-flow: column;
+}
+.modal-image{
+	width: 100%;
+	text-align: center;
+}
+.imgs-modal-1, .imgs-modal-2{
+	height: 300px;
+}
+.modal-title{
+	margin-top: 10px;
+	font-size: 22px;
+	font-family: 'Roboto';
+}
+.modal-text{
+	//padding: 5px;
+	margin-top: 5px;
+	font-size: 15px;
+	font-family: 'Roboto';	
+	color: black;
+}
+.modal-techs{
+	margin-top: 8px;
+	display: flex;
+}
+.modal-techs>div{
+	margin-right: 8px;
+	background: #f5f5f5;
+	color: black;
+	border-radius: 1px;
+	padding: 2px;
+	padding-left: 3px;
+	padding-right: 3px;
+	font-family: 'Roboto';
+	font-size: 14px;
+	font-weight: 500;
+	border: solid 1px lightgray;
+}
+.hr{
+	width: 100%;
+	min-height: 1px;
+	background: #ccc;
+	margin-top: 10px;
+}
+.modal-buttons{
+	margin-top: 10px;
+	display: flex;
+	flex-flow: row;
+}
+.modal-buttons a{
+	margin-right: 10px;
+	font-size: 15px;
+	font-weight: 500;
+	box-shadow: none;
+}
+.modal-buttons a:hover{
+	box-shadow: none;
+}
+
+.modal-gallery-buttons{
+	padding-top: 5px;
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+}
+.modal-gallery-buttons a{
+	background-color: white;
+}
+.modal-gallery-buttons a:first-child{
+	margin-right: 15px;
+}
+.modal-gallery-buttons a>i{
+	font-size: 25px;
+	color: black;
+	font-weight: bold;
+}
+/* Blog stuff */
+section.blog{
+	padding-top: 80px;
+}
+.blog-wrapper{
+	margin-bottom: 60px;
+}
+
+.blog-posts-container{
+	padding-top: 10px;
+}
+.blog-post{
+	background-color: white;
+	box-shadow: 2px 2px 3px 1px #bbb7b7;
+	padding: 10px;
+}
+.blog-post-title{
+	color: #098609;
+	margin-top: 5px;
+	font-family: 'Roboto';
+	font-size: 22px;
+}
+.blog-post-info{
+	margin-top: 5px;
+	font-family: 'Roboto';
+	font-size: 16px;
+}
+.blog-post-hr{
+	height: 1px;
+	background-color: lightgray;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.blog-post-button{
+	text-decoration: none;
+	font-size: 18px;
+	font-weight: 400;
+	color: #098609;
+	font-family: 'Roboto';
+	background-color: white;
+	padding: 5px;
+	cursor: pointer;
+	margin-left: auto;
+	-webkit-transition-duration:  0.2s;
+	-o-transition-duration:  0.2s;
+	transition-duration:  0.2s;
+}
+.blog-post-button:hover{
+	text-decoration: none;
+	background-color: #2a9a2a;
+	color: white; 
+	padding-right: 20px;
+}
+/* Contact sutff */
+.contact{
+	background-color: #292929;
+	min-height: 50vh;
+	width: 100%;
+	padding-top: 80px;
+	padding-bottom: 40px;
+}
+.contact-title{
+	font-family: 'Roboto';
+	font-size: 30px;
+	font-weight: 400;
+	color: #919191;
+}
+.contact-description{
+	font-family: 'Roboto';
+	margin-top: 15px;
+	font-size: 18px;
+	font-weight: 300;	
+	color: #919191;
+}
+
+.contact-submit-button i{
+	font-size: 17px;
+}
+.contact-submit-button{
+	background-color: #585858;
+	font-size: 17px;
+	margin-top: 10px;
+	min-height: 36px;
+	height: auto;
+	font-weight: bold;
+	border-radius: 0px;
+}
+.input-field{
+	margin: 0px;
+	margin-bottom: 20px;
+}
+.input-field i.prefix{
+	font-size: 20px;
+	width: auto;
+	color: #919191;
+}
+.input-field .prefix ~ label {
+    margin-left: 30px;
+    font-size: 14px;
+}
+.input-field label{
+	top: 5rem;
+}
+.input-field .prefix ~ input, 
+.input-field .prefix ~ textarea {
+	font-family: 'Roboto';
+	font-weight: 300;
+	color: white;
+	padding-top: 5px;
+	padding-right: 5px; 
+	font-size: 16px;
+	height: auto;
+    margin-left: 30px;
+    width: 92%;
+    width: calc(100% - 30px);
+}
+.input-field .prefix ~ textarea{
+	overflow-y: visible;
+	padding: 0px;
+	font-size: 16px;
+	min-height: 60px;
+	height: 60px;
+	padding-top: 12px;
+	padding-bottom: 24px;
+}
+.contact-submit-button:hover{
+	color: white;
+}
+.footer{
+	background-color: white;
+	text-align: center;
+}
+.footer-wrapper{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-family: 'Roboto';
+	font-size: 16px;
+	color: black;
+}
