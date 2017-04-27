@@ -170,6 +170,8 @@ $(document).ready(() => {
 		let text = $(this).attr('modal-text');
 		$(".imgs-modal-1").attr('src', 'img/'+imgs[0]);
 		$(".imgs-modal-2").attr('src', 'img/'+imgs[1]);
+		$(".imgs-modal-1").css({'width':'auto', 'max-width': '100%'});
+		$(".imgs-modal-2").css({'width':'auto', 'max-width': '100%'});
 		$('.modal-techs').html("");
 		tags.forEach(function(a, b, c){
 			$('.modal-techs').append("<div>"+a+"</div>");
