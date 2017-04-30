@@ -178,7 +178,7 @@ $(document).ready(() => {
 		});
 		$(".modal-btn-access").attr('href', buttons[0]);
 		$(".modal-btn-github").attr('href', buttons[1]);
-		$('.modal-text').text(text);
+		$('.modal-text').html(text);
 		$('.modal-title').text(title);
 	});
 

@@ -292,7 +292,7 @@
 			margin-right: 3px;
 		}
 		.modal-title{
-			font-size: 26px;
+			font-size: 24px;
 			padding-left: 5px;
 			padding-right: 5px;
 			font-weight: 400;
@@ -301,12 +301,12 @@
 			//color: royalblue;
 		}
 		.modal-text{
-			color: #484747;
+			color: black;
 			margin-top: 15px;
 			font-size: 16px;
 			padding-left: 5px;
 			padding-right: 5px;
-			font-weight: 400;
+			//font-weight: 400;
 		}
 		.modal-techs{
 			padding-left: 5px;
@@ -605,20 +605,20 @@
 			margin-right: 3px;
 		}
 		.modal-title{
-			font-size: 30px;
+			font-size: 24px;
 			padding-left: 5px;
 			padding-right: 5px;
 			font-weight: 400;
 			margin-top: 15px;
-			color: #484747;
+			color: black;
 		}
 		.modal-text{
-			color: #484747;
+			color: black;
 			margin-top: 15px;
-			font-size: 20px;
+			font-size: 16px;
 			padding-left: 5px;
 			padding-right: 5px;
-			font-weight: 300;
+			//font-weight: 300;
 		}
 		.modal-techs{
 			padding-left: 5px;
@@ -781,8 +781,8 @@
 			height: 350px;
 		}
 		.modal-text{
-			font-size: 18px;
-			font-weight: 300;
+			font-size: 16px;
+			//font-weight: 300;
 		}
 		.modal-techs div{
 			letter-spacing: 0.08em;

@@ -595,6 +595,7 @@ section.portfolio{
 }
 .item-go>img{
 	cursor: move;
+	margin: auto auto;
 }
 .modal-info{
 	//background-color: rgba(247, 247, 247, 1);
