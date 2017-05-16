@@ -1,0 +1,75 @@
+html{
+	font-size: 10px;
+}
+body{
+	background-color: #f9f9f9;
+}
+header.header{
+	width: 100%;
+	background-color: #886ded;
+	box-shadow: 0px 3px 4px 0px #b1b1b1;
+}
+.title-component{
+	padding-bottom: 10px;
+	padding-top: 10px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	flex-flow: column;
+}
+.title-component .title, .title-component .info{
+	color: white;
+	font-family: 'Comfortaa';
+	text-align: center;
+}
+.title-component .title{
+	font-size: 3.15rem;
+}
+.title-component .info{
+	font-size: 2rem;
+	font-family: 'Roboto';
+	text-align: right;
+	width: 75%;
+	font-weight: 300;
+}
+section.application{
+	padding-top: 40px;
+}
+.app-container{
+	background-color: white;
+	min-height: 80vh;
+	border: solid 1px #eee;
+	border-radius: 5px;
+	box-shadow: 2px 2px 3px #ccc;
+}
+section.description{
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+.title-desc{
+	font-size: 2.8rem;
+	margin-bottom: 10px;
+}
+.description-container{
+	padding: 10px;
+	background-color: white;
+	border: solid 1px #eee;
+	border-radius: 5px;
+	box-shadow: 2px 2px 3px #ccc;
+}
+.footer{
+	background-color: black;
+	padding-bottom: 15px;
+	padding-top: 15px;
+}
+.description-container p{
+	font-size: 1.65rem;
+}
+.git-link{
+	font-size: 1.8rem;
+}
+.git-link i{
+	font-size: 2rem;
+}

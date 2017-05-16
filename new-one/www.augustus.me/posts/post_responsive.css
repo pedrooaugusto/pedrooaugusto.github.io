@@ -1,0 +1,74 @@
+@media only screen and (min-width : 320px) {
+	.container {
+    	width: auto;
+	}
+	.title-component{
+		padding-bottom: 10px;
+		padding-top: 10px;
+	}
+	.title-component .title{
+		font-size: 2.3rem;
+	}
+	.title-component .info{
+		font-size: 1.3rem;
+		width: auto;
+		text-align: center;
+	}
+	.app-container{
+		min-height: 50vh;
+	}
+	.title-desc{
+		font-size: 2rem;
+	}
+	.description-container p{
+		font-size: 1.6rem;
+	}
+	.git-link{
+		font-size: 1.8rem;
+	}
+	.git-link i{
+		font-size: 2rem;
+	}
+}
+@media only screen and (min-width : 768px){
+	.container{
+		width: auto;
+	}
+	.title-component{
+		padding-bottom: 25px;
+		padding-top: 25px;
+	}
+	.title-component .title{
+		font-size: 30px;
+	}
+	.title-component .info{
+		font-size: 18px;
+		width: auto;
+		text-align: center;
+	}
+	.app-container{
+		min-height: 50vh;
+	}
+	.title-desc{
+		font-size: 22px;
+	}
+	.description-container p{
+		font-size: 16px;
+	}
+	.git-link{
+		font-size: 20px;
+	}
+	.git-link i{
+		font-size: 20px;
+	}
+}
+@media only screen and (max-width : 992px) {
+	.container{
+		width: auto;
+	}
+}
+@media only screen and (min-width : 1200px) {
+	.container{
+		width: 1170px;
+	}
+}
