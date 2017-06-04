@@ -1,959 +1,209 @@
-	/*
-		Esta folha de estilos vai ser divida entre
-		as seguintes tamanho de tela (width):
-		
-		1. >= 320px = {smarthphone, iPhone 5, Galaxy 5}
-		2. >= 480px = {smartphone, iphone 6, Nexus 5}
-		3. >= 768px = {tablet, ipad}
-		4. >= 992px = {tablet, ipad pro, ipad{horizontal}}
-		5. >= 1200px = {PC, Notebook, iPad pro{horizontal}}
-	*/
-	
-	/* Custom, iPhone Retina */ 
-    @media only screen and (min-width : 320px){
-    	/* Global things */
-    	.title-section{
-			font-family: 'Roboto';
-			font-size: 36px;
-			font-weight: 400;
-			color: #2d2d2d;
-			padding-top: 25px;
-		}
-		.descri-section{
-			font-family: 'Roboto';
-			font-size: 17px;
-			color: #2d2d2d;
-			font-weight: 400;
-		}
-    	/* NAV BAR STUFF */
-    	.navigation-menu,
-    	.navigation-menu nav.primary-nav,
-    	nav.primary-nav a.button-collapse
-		{
-			height: 60px;
-		}
-		.navigation-menu nav.primary-nav,
-    	nav.primary-nav a.button-collapse,
-    	nav.primary-nav a.button-collapse i
-    	{
-    		line-height: 60px;
-    	}
-    	ul.side-nav li i
-    	{
-			display: inline-block;
-			font-size: 15px;
-	    	line-height: 60px;
-	    	width: 40px;
-		}
-		ul.side-nav li{
-			border-bottom: solid 1px #f0f0f0;
-			margin-left: 0px;
-			line-height: 60px;
-		}
-		nav.primary-nav .brand-logo
-		{
-			display: none;
-		}
-		li.mobile-profile
-		{
-			background-image: url("../img/bg-menu-lateral.jpg");
-			background-size: cover;
-			min-height: 160px;
-			position: relative;
-		}
-		li.mobile-profile .profile-inner
-		{
-			width: 100%;
-			height: 100%;
-			left:0;
-			background: none repeat scroll 0 0 rgba(60, 70, 80, 0.7);
-			position: absolute;
-		}
-		li.mobile-profile .profile-content
-		{
-			display: flex;
-			flex-flow: column;
-			line-height: 20px;
-			margin-top: 20px;
-		}
-		li.mobile-profile .profile-img
-		{
-			height: 80px;
-			display: flex;
-			flex-flow: column;
-			padding-left: 20px;
-			padding-bottom: 8px;
-		}
-		li.mobile-profile .profile-img>.img
-		{	
-			background-image: url("../img/profile-pic.jpg");
-			background-size: cover;
-			background-position: center -20px;
-			width: 70px;
-			height: 100%;
-			border-radius: 3cm;
-		}
-		li.mobile-profile .profile-name,
-		li.mobile-profile .profile-description
-		{
-			font-family: 'Roboto';
-			padding-left: 20px;
-		}
-		ul.side-nav li.mobile-profile:hover, 
-		ul.side-nav li.mobile-profile:focus,
-		ul.side-nav li.mobile-profile>a:hover,
-		ul.side-nav li.mobile-profile>a:focus
-		{
-			color: white;
-		}
-		li.mobile-profile .profile-name
-		{
-			font-weight: 500;
-			font-size: 18px;
-		}
-		li.mobile-profile .profile-description
-		{
-			margin-top: 5px;
-			font-weight: 400;
-			font-size: 15px;
-		}
-
-		/* landing page stuff */
-		section.landing
-		{
-			padding-top: 60px;
-		}
-		.landing-wrapper1 .container
-		{
-			min-height: calc(80vh - 60px);
-		}
-		h1.landing-big-text
-		{
-			font-size: 35rem;
-		}
-		h5.landing-small-text{
-			font-size: 15rem;
-		}
-		.landing-about-more
-		{
-			margin-top: -30px;
-			height: calc(20vh + 30px);
-		}
-		.landing-about-more .btn-large {
-			width: 60px;
-			height: 60px;
-		}
-		.landing-about-more .btn-large i{
-			line-height: 60px;
-			font-size: 30px;
-		}
-		/* About me stuff */
-		section.about-me
-		{
-			padding-top: 60px;
-		}
-		.card-about
-		{
-			background-color: inherit;
-			box-shadow: none;
-			border-radius: 0px;
-		}
-		.card-body
-		{
-			padding: 0px;
-			padding-top: 15px;
-		}
-		.card-body .content
-		{
-			width: 100%;
-			padding: 0px;
-			padding-top: 5px;
-			border-radius: 0px;
-			border: none;
-		}
-		.card-body .personal-info
-		{
-			justify-content: inherit;
-		}
-		.section-2
-		{
-			margin-top: 25px;
-		}
-		.card-body .personal-info .value
-		{
-			margin-left: 8px;
-			margin-right: 8px; 
-		}
-		.card-about .card-footer
-		{
-			border-radius: 0;
-		}
-		/* Resume stuff */
-		section.resume{
-			padding-top: 60px;
-		}
-		.resume-skills{
-			background: white;
-		}
-		.skill-wrapper, .slide-buttons{
-			height: 420px;
-		}
-		.slide-buttons{
-			height: auto;
-			display: -webkit-flex;
-			display: -moz-flex;
-			display: -ms-flex;
-			display: -o-flex;
-			display: flex;
-			flex-flow: row;
-			padding-bottom: 20px;
-		}
-		.slide-buttons div
-		{
-			width: 50%;
-			display: flex;
-			padding-top: 15px;
-			flex-flow: row;
-			justify-content: space-around;
-			align-items: center;
-		}
-		.slide-buttons div a{
-			height: 50px;
-			width: 50px;
-		}
-		.slide-buttons div a:nth-child(1){
-			order: 2;
-		}
-		.edu-item{
-			width: 100%;
-			margin-bottom: 20px;
-		}
-		.edu-item-image img{
-			height: 225px;
-		}
-		
-		/* Portfolio stuff */
-		section.portfolio{
-			padding-top: 60px;
-		}
-		.portfolio-top .title {
-    		margin-bottom: 10px;
-		}
-		.portfolio-category li div{
-			font-size: 15px;
-		}
-		#gallery-content>div{
-			width: 100%;
-			height: 280px;
-			margin-right: 0px;
-			margin-left: 0px;
-		}
-		/* Portfolio Stuff Modal */
-		.modal{
-			width: 100%;
-			min-height: 100%;
-			bottom: 0%;
-			overflow-y: scroll;
-			overflow-x: hidden;
-		}
-		.modal-info{
-			padding: 5px;
-			width: 100%;
-			left: 0%;
-			min-height: 100%;
-			height: auto;
-			//height: 100%;
-			top: 0%;
-		}
-		.imgs-modal-1, .imgs-modal-2{
-			height: 300px;
-		}
-		.modal-gallery-buttons{
-			margin-top: 8px;
-		}
-		.modal-buttons{
-			margin-top: 15px;
-			padding-left: 5px;
-			padding-right: 5px;
-		}
-		.modal-buttons a{
-			line-height: auto;
-			height: auto;
-			padding: 5px;
-			padding-left: 10px;
-			padding-right: 10px;
-			font-size: 16px;
-		}
-		.hr{
-			display: none;
-		}
-		.modal-title i{
-			font-size: 22px;
-			margin-right: 3px;
-		}
-		.modal-title{
-			font-size: 24px;
-			padding-left: 5px;
-			padding-right: 5px;
-			font-weight: 400;
-			margin-top: 15px;
-			color: #484747;
-			//color: royalblue;
-		}
-		.modal-text{
-			color: black;
-			margin-top: 15px;
-			font-size: 16px;
-			padding-left: 5px;
-			padding-right: 5px;
-			//font-weight: 400;
-		}
-		.modal-techs{
-			padding-left: 5px;
-			padding-right: 5px;
-			margin-top: 10px;
-			display: flex;
-		}
-		.modal-techs>div{
-			padding: 4px;
-			padding-left: 6px;
-			padding-right: 6px;
-			font-size: 13px;
-			font-weight: 500;
-			background-color: #f5f5f5;
-			border: solid 1px lightgray;
-		}
-		/* Blog stuff */
-		section.blog{
-			padding-top: 60px;
-		}
-		.blog-posts-container{
-			display: block;
-		}
-		.blog-post:nth-child(2){
-			margin-left: 0px;
-			margin-top: 30px;
-		}
-    }
-
-    /* Extra Small Devices, Phones */ 
-    @media only screen and (min-width : 480px) {
-
-    }
-
-    /* Small Devices, Tablets */
-    @media only screen and (min-width : 768px) {
-    	/* Global things */
-    	.title-section{
-			font-family: 'Roboto';
-			font-size: 35px;
-			font-weight: 500;
-			color: #2d2d2d;
-			padding-top: 20px;
-		}
-		.descri-section{
-			font-family: 'Roboto';
-			font-size: 17px;
-			color: #2d2d2d;
-			font-weight: 400;
-		}
-    	/* NAV BAR STUFF */
-    	.navigation-menu,
-    	.navigation-menu nav.primary-nav,
-    	nav.primary-nav a.button-collapse
-		{
-			height: 80px;
-		}
-		.navigation-menu nav.primary-nav,
-    	nav.primary-nav a.button-collapse,
-    	nav.primary-nav a.button-collapse i
-    	{
-    		line-height: 80px;
-    	}
-    	nav.primary-nav ul.side-nav li>a
-		{
-			font-size: 16rem;
-		}
-    	ul.side-nav li i
-    	{
-			display: inline-block;
-			font-size: 16rem;
-	    	line-height: 80px;
-	    	width: 50px;
-		}
-		ul.side-nav li{
-			border-bottom: solid 1px #f0f0f0;
-			margin-left: 0px;
-			line-height: 80px;
-		}
-		li.mobile-profile
-		{
-			min-height: 240px;
-		}
-		li.mobile-profile .profile-img
-		{
-			height: 120px;
-			width: 120px;
-		}
-		li.mobile-profile .profile-img>.img
-		{	
-			background-position: center -35px;
-			width: 120px;
-		}
-		li.mobile-profile .profile-name
-		{
-			font-weight: 500;
-			font-size: 28rem;
-			padding-left: 15px;
-			text-align: left;
-			padding-top: 10px;
-			padding-bottom: 10px;
-		}
-		li.mobile-profile .profile-description
-		{
-			font-size: 20rem;
-			text-align: left;
-			padding-left: 15px;
-		}
-
-		/* Landing page stuff */
-		section.landing
-		{
-			padding-top: 80px;
-		}
-		.landing-wrapper1 .container
-		{
-			min-height: calc(90vh - 80px);
-		}
-		h1.landing-big-text
-		{
-			font-size: 52px;
-		}
-		h5.landing-small-text{
-			font-size: 22px;
-		}
-		.landing-about-more
-		{
-			margin-top: -25px;
-			height: calc(10vh + 25px);
-		}
-		.landing-about-more .btn-large {
-			width: 65px;
-			height: 65px;
-		}
-		.landing-about-more .btn-large i{
-			line-height: 65px;
-			font-size: 32.5px;
-		}
-		/* About me stuff */
-		section.about-me
-		{
-			padding-top: 80px;
-		}
-		.card-body .section-2 .content
-		{
-			margin-bottom: 15px; 
-		}
-		.card-about
-		{
-			background-color: inherit;
-			box-shadow: none;
-			border-radius: 0px;
-		}
-		.card-body
-		{
-			padding: 0px;
-			padding-top: 15px;
-		}
-		.card-body .content
-		{
-			background-color: white;
-			width: 100%;
-			padding: 15px;
-			border-radius: 5px;
-			border: none;
-			box-shadow: 1px 1px 2px gray;
-		}
-		.card-body .personal-info
-		{
-			justify-content: inherit;
-		}
-		.section-2
-		{
-			margin-top: 25px;
-		}
-		.card-body .personal-info .value
-		{
-			margin-left: 0px;
-			margin-right: 0px; 
-		}
-		.card-about .card-footer
-		{
-			border-radius: 5px;
-			box-shadow: 1px 1px 2px gray;
-		}
-		/* Resume stuff */
-		section.resume{
-			padding-top: 80px;
-		}
-		.resume-skills{
-			background-image: url("../img/bg-skill.jpg");
-			background-size: 100% 100%;
-		}
-		.resume-skills .resume-skills-bg-opacity
-		{
-			background: none repeat scroll 0 0 rgba(255, 255, 255, 0.8);
-		}
-		.slide-buttons div a{
-			margin-bottom: 5px;
-		}
-		.skill-chart
-		{
-			padding-top: 0px;
-		}
-		.skill-wrapper, .slide-buttons
-		{
-			height: 400px;
-		}
-		.slide-buttons{
-			display: -webkit-flex;
-			display: -moz-flex;
-			display: -ms-flex;
-			display: -o-flex;
-			display: flex;
-			flex-flow: row;
-			padding-bottom: 0px;
-		}
-		.slide-buttons div
-		{
-			width: auto;
-			display: flex;
-			flex-flow: column;
-			padding-top: 0px;
-			justify-content: inherit;
-		}
-		.item-edu-wrapper{
-			justify-content: center;
-		}
-		.edu-item{
-			width: 80%;
-			margin-bottom: 20px;
-		}
-		.edu-item-image img{
-			height: 300px;
-		}
-		/* Portfolio stuff */
-		section.portfolio{
-			padding-top: 80px;
-		}
-		.portfolio-top .title {
-    		margin-bottom: 20px;
-		}
-		.portfolio-category li div{
-			font-size: 15px;
-		}
-		#gallery-content>div{
-			width: 100%;
-			height: 400px;
-			margin-right:  0px;
-			margin-left: 0px;
-		}
-		#gallery-content>div img{
-			height: 400px;
-		}
-		/* Portfolio Stuff modal */
-		.modal{
-			min-height: 80%;
-			width: 90%;
-			height: 90%;
-			bottom: 0%;
-			//overflow: scroll;
-		}
-		.modal-info{
-			padding: 10px;
-			width: 90%;
-			left: 5%;
-			min-height: 90%;
-			height: auto;
-			//height: 90%;
-			top: 5%;
-		}
-		.imgs-modal-1, .imgs-modal-2{
-			height: 400px;
-		}
-		.modal-gallery-buttons{
-			margin-top: 8px;
-		}
-		.modal-buttons{
-			margin-top: 20px;
-			padding-left: 5px;
-			padding-right: 5px;
-		}
-		.modal-buttons a{
-			line-height: auto;
-			height: auto;
-			padding: 5px;
-			padding-left: 10px;
-			padding-right: 10px;
-			font-size: 18px;
-		}
-		.hr{
-			display: none;
-		}
-		.modal-title i{
-			font-size: 22px;
-			margin-right: 3px;
-		}
-		.modal-title{
-			font-size: 24px;
-			padding-left: 5px;
-			padding-right: 5px;
-			font-weight: 400;
-			margin-top: 15px;
-			color: black;
-		}
-		.modal-text{
-			color: black;
-			margin-top: 15px;
-			font-size: 16px;
-			padding-left: 5px;
-			padding-right: 5px;
-			//font-weight: 300;
-		}
-		.modal-techs{
-			padding-left: 5px;
-			padding-right: 5px;
-			margin-top: 15px;
-			display: flex;
-		}
-		.modal-techs>div{
-			padding: 4px;
-			padding-left: 6px;
-			padding-right: 6px;
-			font-size: 13px;
-			font-weight: 500;
-			background-color: #f5f5f5;
-			border: solid 1px lightgray;
-		}
-
-		/* Blog stuff */
-		section.blog{
-			padding-top: 80px;
-		}
-		.blog-post-image img{
-			height: 300px;
-		}
-    }
-
-    /* Medium Devices, Desktops */
-    @media only screen and (min-width : 992px) {
-    	/* NAV BAR STUFF */
-    	.navigation-menu,
-    	.navigation-menu nav.primary-nav,
-    	nav.primary-nav a.button-collapse
-		{
-			height: 80px;
-		}
-		.navigation-menu nav.primary-nav,
-    	nav.primary-nav a.button-collapse,
-    	nav.primary-nav a.button-collapse i
-    	{
-    		line-height: 80px;
-    	}
-    	nav.primary-nav ul.side-nav li i
-    	{
-			display: none;
-		}
-		nav.primary-nav ul.side-nav li
-		{
-			border-bottom: none;
-		    margin-left: 0px;
-		    line-height: 80px;
-		}
-		nav.primary-nav ul.side-nav li>a
-		{
-			font-size: 13rem;
-		}
-    	li.mobile-profile{
-			display: none;
-		}
-		nav.primary-nav .brand-logo
-		{
-			display: block;
-		}
-		ul.side-nav li a:hover,
-		.current
-		{
-			box-shadow: inset 0px -4px 0px #29a529;;
-		}
-		/* About me stuff */
-		section.about-me
-		{
-			padding-top: 80px;
-		}
-		.card-body .section-2 .content
-		{
-			margin-bottom: 0px; 
-		}
-		.card-about
-		{
-			background-color: white;
-			box-shadow: 1px 1px 3px 0px #2d2d2d;
-			border-radius: 4px;
-		}
-		.card-about .info
-		{
-			max-height: 350px;
-			padding-right: 10px;
-			overflow-y: scroll;
-		}
-		.card-body
-		{
-			padding: 10px;
-			padding-top: 20px;
-		}
-		.card-body .content
-		{
-			width: 100%;
-			padding: 15px;
-			border-radius: 0px;
-			border: none;
-			box-shadow: none;
-		}
-		.card-body .personal-info
-		{
-			justify-content: inherit;
-		}
-		.section-2
-		{
-			margin-top: 0px;
-		}
-		.card-body .personal-info .value
-		{
-			margin-left: 0px;
-			margin-right: 0px; 
-		}
-		.card-about .card-footer
-		{
-			border-radius: 0px;
-			border-bottom-right-radius: 4px;
-			border-bottom-left-radius: 4px;
-			box-shadow: none;
-		}
-		/* Resume stuff */
-		.item-edu-wrapper{
-			justify-content: baseline;
-		}
-		.edu-item{
-			width: 90%;
-			margin-bottom: 0px;
-		}
-		.edu-item-image img{
-			height: 250px;
-		}
-		/* Portfolio item */
-		#gallery-content>div{
-			width: 32%;
-			height: 280px;
-			margin-right: 5px;
-			margin-left: 5px;
-		}
-		#gallery-content>div img{
-			height: 280px;
-		}
-		/* Portfolio Stuff modal */
-		.modal{
-			min-height: 80%;
-			width: 60%;
-			height: 90%;
-			bottom: 0%; 
-		}
-		.modal-info{
-			padding: 10px;
-			width: 80%;
-			left: 10%;
-			min-height: 100%;
-			padding-bottom: 20px;
-			height: auto;
-			top: 2.5%;
-		}
-		.imgs-modal-1, .imgs-modal-2{
-			height: 350px;
-		}
-		.modal-text{
-			font-size: 16px;
-			//font-weight: 300;
-		}
-		.modal-techs div{
-			letter-spacing: 0.08em;
-			font-size: 16px;
-			font-weight: 400;
-		}
-		/* Blog stuff */
-		.blog-posts-container{
-			display: block;
-		}
-		.blog-post-image img{
-			height: 200px;
-		}
-		.blog-post:nth-child(2){
-			margin-left: 25px;
-			margin-top: 0px;
-		}
-    }
-
-    /* Large Devices, Wide Screens */
-    @medfia only screen and (min-width : 1200px) {
-    	/* NAV BAR STUFF */
-    	#navgation-menu{
-    		height: 80px;
-    	}
-    	nav{
-    		height: 80px;
-    		line-height: 80px;
-    	}
-    	nav ul li a{
-    		font-size: 14px;
-    	}
-    	.mobile-profile{
-			display: none;
-		}
-		.primary-nav .brand-logo{
-			display: block;
-		}
-		.side-nav li {
-		    border-bottom: none;
-		    margin-left: 0px;
-		    line-height: 80px;
-		}
-		.side-nav li i{
-			display: none;
-		}
-		.side-nav li a:hover{
-			box-shadow: inset 0px -4px 0px #29a529;;
-		}
-		/* Landing page stuff */
-		h1.landing-big-text{
-			font-size: 52px;
-		}
-		h5.landing-small-text{
-			font-size: 20px;
-		}
-		.landing-button-hare-me{
-			text-align: center; 
-			padding-top: 15px;
-		}
-		.landing-button-hare-me a.btn{
-			font-size: 22px;
-			height: 45px;
-			line-height: 45px;
-		}
-		.landing-button-hare-me a.btn i{
-			font-size: 18px;
-		}
-		.landing-about-more .btn-large {
-			width: 55.5px;
-			height: 55.5px;
-    		top: -30px;
-    		margin-bottom: 0px;
-		}
-		.landing-about-more .btn-large i{
-			line-height: 55.5px;
-			font-size: 35px;
-		}
-		/* About me stuff */
-		.about-wrapper{
-			position: relative;
-			background: white;
-			box-shadow: 1px 2px 1px 0px #dcd9d9;
-			border-left: solid 1px lightgray;
-			border-top: solid 1px lightgray;
-		}
-		/* Resume stuff */
-		.skill-data-title{
-			font-weight: 400;
-			font-size: 30px;
-		}
-		.skill-data-info{
-			font-size: 18px;
-			font-weight: 400;
-		}
-		.skill-height{
-			width: 60px;
-		}
-		.skill-title, .skill-height-value{
-			font-size: 22px;
-			padding: 0px;
-		}
-		.education-description{
-			font-size: 18px;
-			font-weight: 400;
-		}
-		.education-title{
-			font-size:30px;
-			font-weight: 400;
-		}
-		.edu-item-image img{
-			height: 250px;
-		}
-		.edu-item-title{
-			font-size: 20px;
-		}
-		.edu-item-curso-name{
-			font-size: 20px;
-		}
-		.edu-item-curso-name i{
-			font-size: 20px;
-		}
-		.edu-item-inst-name{
-			font-size: 18px;
-		}
-		.edu-item-back-header{
-			font-size: 20px;
-		}
-		.edu-item-back-info{
-			font-size: 18px;
-		}
-		/* Portfolio Stuff */
-		#gallery-content{
-			padding-left: auto;
-		}
-		#gallery-content>div{
-			width: 30%;
-			height: 280px;
-			margin-right: 3px;
-			margin-left: 3px;
-		}
-		#gallery-content>div img{
-			height: 280px;
-		}
-		.container-port{
-			width: auto;
-			margin-left: 0px;
-			margin-right: 0px;
-		}
-		.portfolio-top .title {
-		    padding-top: 20px;
-		    margin-bottom: 25px;
-		    font-size: 30px;
-		    font-weight: 400;
-		}
-		.portfolio-category li{
-			min-height: 20px;
-		}
-		.portfolio-category li div{
-			font-size: 16px;
-		}
-
-		/* Blog stuff */
-		.blog-posts-container{
-			display: block;
-		}
-		.blog-post-image img{
-			height: 200px;
-		}
-		.blog-post:nth-child(2){
-			margin-left: 50px;
-			margin-top: 0px;
-		}
-    }
+@media only screen and (min-width:320px){.title-section{font-family:'Roboto';font-size:36px;font-weight:400;color:#2d2d2d;padding-top:25px;}
+.descri-section{font-family:'Roboto';font-size:17px;color:#2d2d2d;font-weight:400;}
+.navigation-menu,
+.navigation-menu nav.primary-nav,
+nav.primary-nav a.button-collapse{height:60px;}
+.navigation-menu nav.primary-nav,
+nav.primary-nav a.button-collapse,
+nav.primary-nav a.button-collapse i{line-height:60px;}
+ul.side-nav li i{display:inline-block;font-size:15px;line-height:60px;width:40px;}
+ul.side-nav li{border-bottom:solid 1px #f0f0f0;margin-left:0px;line-height:60px;}
+nav.primary-nav .brand-logo{display:none;}
+li.mobile-profile{background-image:url("../img/bg-menu-lateral.jpg");background-size:cover;min-height:160px;position:relative;}
+li.mobile-profile .profile-inner{width:100%;height:100%;left:0;background:none repeat scroll 0 0 rgba(60, 70, 80, 0.7);position:absolute;}
+li.mobile-profile .profile-content{display:flex;flex-flow:column;line-height:20px;margin-top:20px;}
+li.mobile-profile .profile-img{height:80px;display:flex;flex-flow:column;padding-left:20px;padding-bottom:8px;}
+li.mobile-profile .profile-img>.img{background-image:url("../img/profile-pic.jpg");background-size:cover;background-position:center -20px;width:70px;height:100%;border-radius:3cm;}
+li.mobile-profile .profile-name,
+li.mobile-profile .profile-description{font-family:'Roboto';padding-left:20px;}
+ul.side-nav li.mobile-profile:hover,
+ul.side-nav li.mobile-profile:focus,
+ul.side-nav li.mobile-profile>a:hover,
+ul.side-nav li.mobile-profile>a:focus{color:white;}
+li.mobile-profile .profile-name{font-weight:500;font-size:18px;}
+li.mobile-profile .profile-description{margin-top:5px;font-weight:400;font-size:15px;}
+section.landing{padding-top:60px;}
+.landing-wrapper1 .container{min-height:calc(80vh - 60px);}
+h1.landing-big-text{font-size:35rem;}
+h5.landing-small-text{font-size:15rem;}
+.landing-about-more{margin-top:-30px;height:calc(20vh + 30px);}
+.landing-about-more .btn-large{width:60px;height:60px;}
+.landing-about-more .btn-large i{line-height:60px;font-size:30px;}
+section.about-me{padding-top:60px;}
+.card-about{background-color:inherit;box-shadow:none;border-radius:0px;}
+.card-body{padding:0px;padding-top:15px;}
+.card-body .content{width:100%;padding:0px;padding-top:5px;border-radius:0px;border:none;}
+.card-body .personal-info{justify-content:inherit;}
+.section-2{margin-top:25px;}
+.card-body .personal-info .value{margin-left:8px;margin-right:8px;}
+.card-about .card-footer{border-radius:0;}
+section.resume{padding-top:60px;}
+.resume-skills{background:white;}
+.skill-wrapper, .slide-buttons{height:420px;}
+.slide-buttons{height:auto;display:-webkit-flex;display:-moz-flex;display:-ms-flex;display:-o-flex;display:flex;flex-flow:row;padding-bottom:20px;}
+.slide-buttons div{width:50%;display:flex;padding-top:15px;flex-flow:row;justify-content:space-around;align-items:center;}
+.slide-buttons div a{height:50px;width:50px;}
+.slide-buttons div a:nth-child(1){order:2;}
+.edu-item{width:100%;margin-bottom:20px;}
+.edu-item-image img{height:225px;}
+section.portfolio{padding-top:60px;}
+.portfolio-top .title{margin-bottom:10px;}
+.portfolio-category li div{font-size:15px;}
+#gallery-content>div{width:100%;height:280px;margin-right:0px;margin-left:0px;}
+.modal{width:100%;min-height:100%;bottom:0%;overflow-y:scroll;overflow-x:hidden;}
+.modal-info{padding:5px;width:100%;left:0%;min-height:100%;height:auto;//height:100%;top:0%;}
+.imgs-modal-1, .imgs-modal-2{height:300px;}
+.modal-gallery-buttons{margin-top:8px;}
+.modal-buttons{margin-top:15px;padding-left:5px;padding-right:5px;}
+.modal-buttons a{line-height:auto;height:auto;padding:5px;padding-left:10px;padding-right:10px;font-size:16px;}
+.hr{display:none;}
+.modal-title i{font-size:22px;margin-right:3px;}
+.modal-title{font-size:24px;padding-left:5px;padding-right:5px;font-weight:400;margin-top:15px;color:#484747;//color:royalblue;}
+.modal-text{color:black;margin-top:15px;font-size:16px;padding-left:5px;padding-right:5px;//font-weight:400;}
+.modal-techs{padding-left:5px;padding-right:5px;margin-top:10px;display:flex;}
+.modal-techs>div{padding:4px;padding-left:6px;padding-right:6px;font-size:13px;font-weight:500;background-color:#f5f5f5;border:solid 1px lightgray;}
+section.blog{padding-top:60px;}
+.blog-posts-container{display:block;}
+.blog-post:nth-child(2){margin-left:0px;margin-top:30px;}
+}
+@media only screen and (min-width:480px){}
+@media only screen and (min-width:768px){.title-section{font-family:'Roboto';font-size:35px;font-weight:500;color:#2d2d2d;padding-top:20px;}
+.descri-section{font-family:'Roboto';font-size:17px;color:#2d2d2d;font-weight:400;}
+.navigation-menu,
+.navigation-menu nav.primary-nav,
+nav.primary-nav a.button-collapse{height:80px;}
+.navigation-menu nav.primary-nav,
+nav.primary-nav a.button-collapse,
+nav.primary-nav a.button-collapse i{line-height:80px;}
+nav.primary-nav ul.side-nav li>a{font-size:16rem;}
+ul.side-nav li i{display:inline-block;font-size:16rem;line-height:80px;width:50px;}
+ul.side-nav li{border-bottom:solid 1px #f0f0f0;margin-left:0px;line-height:80px;}
+li.mobile-profile{min-height:240px;}
+li.mobile-profile .profile-img{height:120px;width:120px;}
+li.mobile-profile .profile-img>.img{background-position:center -35px;width:120px;}
+li.mobile-profile .profile-name{font-weight:500;font-size:28rem;padding-left:15px;text-align:left;padding-top:10px;padding-bottom:10px;}
+li.mobile-profile .profile-description{font-size:20rem;text-align:left;padding-left:15px;}
+section.landing{padding-top:80px;}
+.landing-wrapper1 .container{min-height:calc(90vh - 80px);}
+h1.landing-big-text{font-size:52px;}
+h5.landing-small-text{font-size:22px;}
+.landing-about-more{margin-top:-25px;height:calc(10vh + 25px);}
+.landing-about-more .btn-large{width:65px;height:65px;}
+.landing-about-more .btn-large i{line-height:65px;font-size:32.5px;}
+section.about-me{padding-top:80px;}
+.card-body .section-2 .content{margin-bottom:15px;}
+.card-about{background-color:inherit;box-shadow:none;border-radius:0px;}
+.card-body{padding:0px;padding-top:15px;}
+.card-body .content{background-color:white;width:100%;padding:15px;border-radius:5px;border:none;box-shadow:1px 1px 2px gray;}
+.card-body .personal-info{justify-content:inherit;}
+.section-2{margin-top:25px;}
+.card-body .personal-info .value{margin-left:0px;margin-right:0px;}
+.card-about .card-footer{border-radius:5px;box-shadow:1px 1px 2px gray;}
+section.resume{padding-top:80px;}
+.resume-skills{background-image:url("../img/bg-skill.jpg");background-size:100% 100%;}
+.resume-skills .resume-skills-bg-opacity{background:none repeat scroll 0 0 rgba(255, 255, 255, 0.8);}
+.slide-buttons div a{margin-bottom:5px;}
+.skill-chart{padding-top:0px;}
+.skill-wrapper, .slide-buttons{height:400px;}
+.slide-buttons{display:-webkit-flex;display:-moz-flex;display:-ms-flex;display:-o-flex;display:flex;flex-flow:row;padding-bottom:0px;}
+.slide-buttons div{width:auto;display:flex;flex-flow:column;padding-top:0px;justify-content:inherit;}
+.item-edu-wrapper{justify-content:center;}
+.edu-item{width:80%;margin-bottom:20px;}
+.edu-item-image img{height:300px;}
+section.portfolio{padding-top:80px;}
+.portfolio-top .title{margin-bottom:20px;}
+.portfolio-category li div{font-size:15px;}
+#gallery-content>div{width:100%;height:400px;margin-right:0px;margin-left:0px;}
+#gallery-content>div img{height:400px;}
+.modal{min-height:80%;width:90%;height:90%;bottom:0%;//overflow:scroll;}
+.modal-info{padding:10px;width:90%;left:5%;min-height:90%;height:auto;//height:90%;top:5%;}
+.imgs-modal-1, .imgs-modal-2{height:400px;}
+.modal-gallery-buttons{margin-top:8px;}
+.modal-buttons{margin-top:20px;padding-left:5px;padding-right:5px;}
+.modal-buttons a{line-height:auto;height:auto;padding:5px;padding-left:10px;padding-right:10px;font-size:18px;}
+.hr{display:none;}
+.modal-title i{font-size:22px;margin-right:3px;}
+.modal-title{font-size:24px;padding-left:5px;padding-right:5px;font-weight:400;margin-top:15px;color:black;}
+.modal-text{color:black;margin-top:15px;font-size:16px;padding-left:5px;padding-right:5px;//font-weight:300;}
+.modal-techs{padding-left:5px;padding-right:5px;margin-top:15px;display:flex;}
+.modal-techs>div{padding:4px;padding-left:6px;padding-right:6px;font-size:13px;font-weight:500;background-color:#f5f5f5;border:solid 1px lightgray;}
+section.blog{padding-top:80px;}
+.blog-post-image img{height:300px;}
+}
+@media only screen and (min-width:992px){.navigation-menu,
+.navigation-menu nav.primary-nav,
+nav.primary-nav a.button-collapse{height:80px;}
+.navigation-menu nav.primary-nav,
+nav.primary-nav a.button-collapse,
+nav.primary-nav a.button-collapse i{line-height:80px;}
+nav.primary-nav ul.side-nav li i{display:none;}
+nav.primary-nav ul.side-nav li{border-bottom:none;margin-left:0px;line-height:80px;}
+nav.primary-nav ul.side-nav li>a{font-size:13rem;}
+li.mobile-profile{display:none;}
+nav.primary-nav .brand-logo{display:block;}
+ul.side-nav li a:hover,
+.current{box-shadow:inset 0px -4px 0px #29a529;;}
+section.about-me{padding-top:80px;}
+.card-body .section-2 .content{margin-bottom:0px;}
+.card-about{background-color:white;box-shadow:1px 1px 3px 0px #2d2d2d;border-radius:4px;}
+.card-about .info{max-height:350px;padding-right:10px;overflow-y:scroll;}
+.card-body{padding:10px;padding-top:20px;}
+.card-body .content{width:100%;padding:15px;border-radius:0px;border:none;box-shadow:none;}
+.card-body .personal-info{justify-content:inherit;}
+.section-2{margin-top:0px;}
+.card-body .personal-info .value{margin-left:0px;margin-right:0px;}
+.card-about .card-footer{border-radius:0px;border-bottom-right-radius:4px;border-bottom-left-radius:4px;box-shadow:none;}
+.item-edu-wrapper{justify-content:baseline;}
+.edu-item{width:90%;margin-bottom:0px;}
+.edu-item-image img{height:250px;}
+#gallery-content>div{width:32%;height:280px;margin-right:5px;margin-left:5px;}
+#gallery-content>div img{height:280px;}
+.modal{min-height:80%;width:60%;height:90%;bottom:0%;}
+.modal-info{padding:10px;width:80%;left:10%;min-height:100%;padding-bottom:20px;height:auto;top:2.5%;}
+.imgs-modal-1, .imgs-modal-2{height:350px;}
+.modal-text{font-size:16px;//font-weight:300;}
+.modal-techs div{letter-spacing:0.08em;font-size:16px;font-weight:400;}
+.blog-posts-container{display:block;}
+.blog-post-image img{height:200px;}
+.blog-post:nth-child(2){margin-left:25px;margin-top:0px;}
+}
+@medfia only screen and (min-width:1200px){#navgation-menu{height:80px;}
+nav{height:80px;line-height:80px;}
+nav ul li a{font-size:14px;}
+.mobile-profile{display:none;}
+.primary-nav .brand-logo{display:block;}
+.side-nav li{border-bottom:none;margin-left:0px;line-height:80px;}
+.side-nav li i{display:none;}
+.side-nav li a:hover{box-shadow:inset 0px -4px 0px #29a529;;}
+h1.landing-big-text{font-size:52px;}
+h5.landing-small-text{font-size:20px;}
+.landing-button-hare-me{text-align:center;padding-top:15px;}
+.landing-button-hare-me a.btn{font-size:22px;height:45px;line-height:45px;}
+.landing-button-hare-me a.btn i{font-size:18px;}
+.landing-about-more .btn-large{width:55.5px;height:55.5px;top:-30px;margin-bottom:0px;}
+.landing-about-more .btn-large i{line-height:55.5px;font-size:35px;}
+.about-wrapper{position:relative;background:white;box-shadow:1px 2px 1px 0px #dcd9d9;border-left:solid 1px lightgray;border-top:solid 1px lightgray;}
+.skill-data-title{font-weight:400;font-size:30px;}
+.skill-data-info{font-size:18px;font-weight:400;}
+.skill-height{width:60px;}
+.skill-title, .skill-height-value{font-size:22px;padding:0px;}
+.education-description{font-size:18px;font-weight:400;}
+.education-title{font-size:30px;font-weight:400;}
+.edu-item-image img{height:250px;}
+.edu-item-title{font-size:20px;}
+.edu-item-curso-name{font-size:20px;}
+.edu-item-curso-name i{font-size:20px;}
+.edu-item-inst-name{font-size:18px;}
+.edu-item-back-header{font-size:20px;}
+.edu-item-back-info{font-size:18px;}
+#gallery-content{padding-left:auto;}
+#gallery-content>div{width:30%;height:280px;margin-right:3px;margin-left:3px;}
+#gallery-content>div img{height:280px;}
+.container-port{width:auto;margin-left:0px;margin-right:0px;}
+.portfolio-top .title{padding-top:20px;margin-bottom:25px;font-size:30px;font-weight:400;}
+.portfolio-category li{min-height:20px;}
+.portfolio-category li div{font-size:16px;}
+.blog-posts-container{display:block;}
+.blog-post-image img{height:200px;}
+.blog-post:nth-child(2){margin-left:50px;margin-top:0px;}
+}
