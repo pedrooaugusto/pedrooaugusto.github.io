@@ -1,0 +1,56 @@
+.game-wrapper{
+	//background-color: red;
+	padding: 10px;
+}
+.game{
+	//background-color: blue;
+	max-height: 550px;
+	height: 550px;
+}
+.game-menu{
+	background-color: green;
+	height: 15%;
+	width: 100%;
+	padding: 5px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	flex-flow: row;
+}
+.image-url{
+	//background-color: yellow;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+}
+.image-url .wr{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	//background-color: purple;
+}
+.image-url .label-n{
+	//background-color: red;
+	height: 100%;
+	margin-right: 30px;
+	font-family: 'Roboto';
+	font-size: 2.3rem;
+	//padding: 3px;
+}
+.image-url .input-n{
+	background-color: transparent;
+	font-family: 'Roboto';
+	font-size: 2rem;
+	border: none;
+	outline: none;
+	//padding: 3px;
+	border-bottom: inset 1px white;
+}
