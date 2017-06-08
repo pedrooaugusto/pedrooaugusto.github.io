@@ -207,3 +207,10 @@ h5.landing-small-text{font-size:20px;}
 .blog-post-image img{height:200px;}
 .blog-post:nth-child(2){margin-left:50px;margin-top:0px;}
 }
+/*Internet Explorer Bugs*/
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+   .landing-wrapper1 .container{height: calc(90vh - 80px);}
+   .about-wrapper .container{display: block;}
+   .card-about{margin-top: 50px;}
+   .item-edu-wrapper{display: block;}
+}
