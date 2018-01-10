@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="mobile-web-app-capable" content="yes">
+	<title>Pedro Augusto - Snake Game</title>
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+	
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="../post_main.css">
+	<link rel="stylesheet" href="../post_responsive.css">
+	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+	<main id="main">
+		<header class="header">
+			<div class="header-wrapper">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="title-component">
+								<div class="title">Snake Game</div>
+								<div class="info">by pedro augusto</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section class="application">
+			<div class="application-wraper">
+				<div class="container app">
+					<div class="row">
+						<div class="col-md-12" id="check-sizer">
+							<div class="app-container" id="app-container">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="description">
+			<div class="description-wraper">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="description-container">
+								<a href="https://github.com/pedrooaugusto/Games/tree/master/Snake" class="git-link"><i class="fa fa-github"></i> See on github</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</body>
+<script src="/js/jquery-2.1.3.min.js"></script>
+<script src="snake.js"></script>
+<script>
+	if(window.outerHeight > window.outerWidth)
+        currentValores = valoresMobile;
+    else
+    	currentValores = valoresPC; 
+</script>
+<script type="text/javascript">
+	onload = function () {
+			let c = $('#check-sizer').width();
+			let d = 300;
+			let k = c;
+			if(c <= 340){
+				c = 300;
+				d = 480;
+			}
+			else if(c <= 380){
+				c = 340;
+				d = 550;
+			}
+			else if(c <= 420){
+				c = 390;
+				d = 590;
+			}
+			else if(c <= 768){
+				c = 700;
+				d = 500;
+			}
+			else if(c <= 1024){
+				c = 900;
+				d = 500;
+			}
+			else{
+				c = 1138;
+				d = 500;
+			}
+      	document.getElementById('app-container').innerHTML += "<canvas id='canvas' width="+k+" height="+d+"></canvas>";
+		initComponents(k, d);
+	}
+</script>
+</html>

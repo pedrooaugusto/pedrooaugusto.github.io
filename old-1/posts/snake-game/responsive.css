@@ -1,0 +1,21 @@
+@media screen and (min-width: 320px) {	
+	.app-container{
+		height: auto;
+	}
+}
+@media screen and (min-width: 375px) {
+	.app-container{
+		height: auto;
+	}
+}
+@media screen and (min-width: 400px) {
+	.app-container{
+		height: auto;
+	}
+}
+@media screen and (min-width: 768px) {
+
+}
+@media screen and (min-width: 1024px) {
+
+}

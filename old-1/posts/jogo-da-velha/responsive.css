@@ -1,0 +1,128 @@
+@media screen and (min-width: 320px) {
+	.app-container{
+		padding: 0px;
+	}
+	.game-placar{
+		width: 100%;
+		background-color: white;
+		flex-flow: column;
+	}
+	.game-vezes{
+		width: 100%;
+		width: auto;
+	}
+	.game-placar div{
+		font-size: 16px;
+		padding: 5px;
+	}
+	.next-btn{
+		font-size: 18px;
+		padding: 2px;
+	}
+	.menu-game{
+		margin-top: 10px;
+		width: 100%;
+		border-radius: 0px;
+		border: none;
+	}
+	.menu-game-wrapper{
+		background-color: white;
+	}
+	.game-real{
+		min-height: 280px;
+	}
+	.game-wrapper{
+		height: 250px;
+	}
+	.velha-row div:nth-child(2){
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	.velha-row:nth-child(2) div{
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	.velha-espaco{
+		height: 80px;
+		width: 80px;
+		font-size: 40px;
+	}
+}
+@media screen and (min-width: 375px) {
+	.game-real{
+		min-height: 310px;
+	}
+	.game-wrapper{
+		height: 280px;
+	}
+	.velha-espaco{
+		height: 90px;
+		width: 90px;
+	}	
+}
+@media screen and (min-width: 400px) {
+	.game-real{
+		min-height: 340px;
+	}
+	.game-wrapper{
+		height: 310px;
+	}
+	.velha-espaco{
+		height: 100px;
+		width: 100px;
+	}	
+}
+@media screen and (min-width: 768px) {
+	.app-container{
+		padding: 10px;
+	}
+	.game-placar{
+		padding-left: 5px;
+		padding-right: 5px;
+		width: 100%;
+		flex-flow: row;
+		background-color: white;
+	}
+	.game-placar div{
+		font-size: 20px;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.game-placar .game-vezes{
+		width: 100%;
+		width: auto;
+		padding-right: 40px;
+		padding-left: 40px;
+	}
+	.next-btn{
+		font-size: 24px;
+		padding: 5px;
+	}
+	.menu-game{
+		width: 50%;
+		border-radius: 3px;
+		border: solid 1px #eee;
+	}
+	.menu-game-wrapper{
+		background-color: #f9f9f9;
+	}
+	.game-real{
+		min-height: 400px;
+	}
+	.velha-row div:nth-child(2){
+		margin-left: 8px;
+		margin-right: 8px;
+	}
+	.velha-row:nth-child(2) div{
+		margin-top: 8px;
+		margin-bottom: 8px;
+	}
+	.game-wrapper{
+		height: 346px;
+	}
+	.velha-espaco{
+		height: 110px;
+		width: 140px;
+		font-size: 60px;
+	}
+}

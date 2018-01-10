@@ -1,0 +1,9 @@
+.app-container{
+	min-height: auto;
+	height: auto;
+	background-color: #2E1961;
+	width: 100%;
+}
+#canvas{
+	background-color: #2E1961;
+}
