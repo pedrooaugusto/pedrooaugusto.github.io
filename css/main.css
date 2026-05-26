@@ -479,11 +479,10 @@ textarea.form-control, textarea.form-control:focus {
 .my-photo div:first-child{
 margin: auto;
     border-radius: 5cm;
-    background-image: url("/images/profile-pic.jpg");
+    background-image: url("/images/new-profile-pic.jfif");
     width: 130px;
     height: 130px;
     background-size: cover;
-    background-position-y: -40px;
 }
 
 .site-title-block {
